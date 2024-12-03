@@ -1,0 +1,5 @@
+^intervalpsych\.Rproj$
+^\.Rproj\.user$
+^articles
+^data/cleaned_wide_df.rds
+^stan_notes.txt
