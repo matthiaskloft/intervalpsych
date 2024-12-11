@@ -1,9 +1,14 @@
-
-
 ### Helper Functions to check that data have valid formatting
 
 
 # helper function: run checks on simplex----------------------------------------
+#' @title Check if data is a valid simplex
+#' @description Check if data is a valid simplex
+#'
+#' @param simplex A numeric vector that is a 2-simplex (3 elements that sum to 1)
+#' or a dataframe where each of the rows is a 2-simplex
+#'
+#'
 check_simplex <- function(simplex) {
   # is numeric
   if (is.numeric(simplex) == FALSE) {
@@ -31,6 +36,12 @@ check_simplex <- function(simplex) {
 
 
 # helper function: run checks on simplex----------------------------------------
+#' @title Check if data is a valid bivariate normal vector
+#' @description Check if data is a valid bivariate normal vector
+#' @param bvn A numeric vector that is a bivariate normal vector (2 elements) or
+#' a dataframe where each of the rows is a bivariate normal vector
+#'
+#'
 check_bvn <- function(bvn) {
   # is numeric
   if (!is.numeric(bvn)) {
