@@ -1,0 +1,315 @@
+#' @title Isometric Log-Ratio (ILR) transformation for interval responses
+#' @description
+#' Transform 2-simplex data to the unbounded space so that they can be modeled by a bivariate-normal distribution.
+#' This is done via a modified multivariate logit transformation that preserves the symmetry of interval responses which are conceptualized in terms of a location and a width.
+#'
+#' @param simplex A numeric vector that is a 2-simplex (3 elements that sum to 1) or a dataframe where each of the rows is a 2-simplex
+#'
+#' @return A numeric vector with 2 unbounded elements or a dataframe where each of the rows is a numeric vector with 2 unbounded elements
+#' @export
+#'
+#' @examples
+#' simplex <- data.frame(rbind(c(.1, .2, .7), c(.4, .5, .1)))
+#' ilr(simplex)
+#'
+#'
+ilr <- function(simplex) {
+  if (!is.data.frame(simplex) & !is.matrix(simplex)) {
+    #### vector
+
+    # run checks
+    check_simplex(simplex)
+
+    # calculate ILR
+    Y <- rep(NA, 2)
+    Y[1] = sqrt(1 / 2) * log(simplex[1] / simplex[3])
+    Y[2] = sqrt(2 / 3) * log(simplex[2] / sqrt(simplex[1] * simplex[3]))
+
+    names(Y) <- c("x_loc", "x_wid")
+
+    return(Y)
+
+
+  } else{
+    ### dataframe
+
+    # coerce to matrix
+    simplex <- as.matrix(simplex)
+    # run checks
+    for (i in 1:nrow(simplex)) {
+      check_simplex(simplex[i, ])
+    }
+
+    # calculate ILR
+    Y <- apply(
+      X = simplex,
+      MARGIN = 1,
+      FUN = function(X) {
+        Y <- rep(NA, 2)
+        Y[1] = sqrt(1 / 2) * log(X[1] / X[3])
+        Y[2] = sqrt(2 / 3) * log(X[2] / sqrt(X[1] * X[3]))
+
+        return(Y)
+      },
+      simplify = FALSE
+    )
+    Y <- do.call(what = "rbind", args = Y)
+
+    return(data.frame(x_loc = Y[, 1], x_wid = Y[, 2]))
+  }
+}
+
+## test examples
+# ilr(c(.4,.2,.4))
+# ilr(c(.3,.2,.5))
+# ilr(c(.5,.2,.3))
+# ilr(c(1/3,1/3,1/3))
+# simplex <- data.frame(rbind(c(.1, .2, .7), c(.4, .5, .1)))
+# ilr(simplex)
+
+
+
+#' @title Inverse Isometric Log-Ratio (ILR) transformation for interval responses
+#' @description
+#' Transform unbounded data back to the 2-simplex space.
+#'
+#' @param bvn A numeric vector containing an unbounded interval location and width or
+#' a dataframe where each of the rows consists of such a vector.
+#'
+#' @return A numeric vector containing a 2-simplex or a dataframe where each of
+#' the rows consists of such a vector.
+#'
+#' @export
+#'
+#' @examples
+#' simplex <- data.frame(rbind(c(0, .2), c(-2, .4)))
+#' inv_ilr(simplex)
+#'
+#'
+inv_ilr <- function(bvn) {
+  if (!is.data.frame(bvn) & !is.matrix(bvn)) {
+    #### vector
+
+    # run checks
+    check_bvn(bvn)
+
+    # calculate inverse ILR
+    Y <- rep(NA, 3)
+    Y[1] <- exp(sqrt(2) * bvn[1])
+    Y[2] <- exp(sqrt(3 / 2) *  bvn[2] + bvn[1] / sqrt(2))
+    Y[3] <- 1
+    Y <- Y / sum(Y)
+
+    names(Y) <- c("x_1", "x_2", "x_3")
+
+    return(Y)
+
+  } else {
+    ### dataframe
+
+    # coerce to matrix
+    bvn <- as.matrix(bvn)
+
+    # run checks
+    for (i in 1:nrow(bvn)) {
+      check_bvn(bvn[i, ])
+    }
+
+    # calculate inverse ILR
+    Y <- apply(
+      X = bvn,
+      MARGIN = 1,
+      FUN = function(X) {
+        Y <- rep(NA, 3)
+        Y[1] <- exp(sqrt(2) * X[1])
+        Y[2] <- exp((sqrt(3 / 2) * X[2]) + (X[1] / sqrt(2)))
+        Y[3] <- 1
+        Y <- Y / sum(Y)
+
+        names(Y) <- c("x_1", "x_2", "x_3")
+
+        return(Y)
+      },
+      simplify = FALSE
+    )
+    Y <- do.call(what = "rbind", args = Y)
+
+    return(data.frame(
+      x_1 = Y[, 1],
+      x_2 = Y[, 2],
+      x_3 = Y[, 3]
+    ))
+  }
+}
+
+# # test examples
+# inv_ilr(c(0,0))
+# inv_ilr(c(1,0))
+# inv_ilr(c(0,1))
+# inv_ilr(c(-1,0))
+#
+# bvn <- data.frame(rbind(c(0, .2), c(-2, .4)))
+# a <- inv_ilr(bvn)
+#
+# sum(inv_ilr(c(0,0)))
+# sum(inv_ilr(c(1,0)))
+# sum(inv_ilr(c(0,1)))
+
+
+
+
+
+#' @title Convert from interval bounds to simplex
+#' @description Convert interval responses from interval bounds format to compostional/simplex format
+#' @param interval_bounds Data in the interval bounds format.
+#'
+#' @param min Minimum of the original response scale.
+#' @param max Maximum of the original response scale.
+#'
+#'
+#' @export
+#'
+#' @examples
+#' interval_responses <- data.frame(rbind(c(.1,.5), c(.4,.7)))
+#' itvl_to_splx(interval_responses, min = 0, max = 1)
+#'
+itvl_to_splx <- function(interval_bounds,
+                         min = NULL,
+                         max = NULL) {
+  dims <- length(dim(interval_bounds))
+
+  if (!is.data.frame(interval_bounds) &
+      !is.matrix(interval_bounds)) {
+    ### vector
+    check_interval_bounds(interval_bounds, min, max)
+
+    # compute simplex
+    if (length(interval_bounds) == 2) {
+      comp <- c(
+        x_1 = interval_bounds[1] - min,
+        x_2 = interval_bounds[2] - interval_bounds[1],
+        x_3 = max - interval_bounds[2]
+      )
+    }
+    if (length(interval_bounds)  == 3) {
+      comp <- c(
+        x_1 = interval_bounds[1] - min,
+        x_2 = interval_bounds[2] - interval_bounds[1],
+        x_3 = interval_bounds[3] - interval_bounds[2],
+        x_4 = max - interval_bounds[3]
+      )
+    }
+
+    return(comp)
+
+  } else{
+    ### dataframe / matrix
+    # coerce to matrix
+    interval_bounds <- as.matrix(interval_bounds)
+
+    # run checks
+    for (i in 1:nrow(interval_bounds)) {
+      check_interval_bounds(interval_bounds[i, ], min, max)
+    }
+
+    # compute simplex
+    # compute simplex
+    if (ncol(interval_bounds) == 2) {
+      comp <- cbind(
+        x_1 = interval_bounds[, 1] - min,
+        x_2 = interval_bounds[, 2] - interval_bounds[, 1],
+        x_3 = max - interval_bounds[, 2]
+      )
+    }
+    if (ncol(interval_bounds) == 3) {
+      comp <- cbind(
+        x_1 = interval_bounds[, 1] - min,
+        x_2 = interval_bounds[, 2] - interval_bounds[, 1],
+        x_3 = interval_bounds[, 3] - interval_bounds[, 2],
+        x_4 = max - interval_bounds[, 3]
+      )
+    }
+
+    return(comp)
+  }
+}
+
+# # tesxt examples
+# itvl_to_splx(c(.1, .5), min = 0, max = 1)
+# interval_responses <- data.frame(rbind(c(.1, .5), c(.4, .7)))
+# itvl_to_splx(interval_responses, min = 0, max = 1)
+
+
+
+
+
+#' @title Convert from simplex to interval bounds
+#' @description Convert from simplex/compostional format to interval bound format
+#' @param simplex Data in the simplex/compositional format.
+#'
+#' @param min Minimum of the original response scale.
+#' @param max Maximum of the original response scale.
+#'
+#'
+#' @export
+#'
+#' @examples
+#' responses <- data.frame(rbind(c(.1,.5,.4), c(.3,.4,.3)))
+#' splx_to_itvl(responses, min = 0, max = 1)
+#'
+#'
+splx_to_itvl <- function(simplex, min = NULL, max = NULL) {
+  # number of dimensions
+  dims <- length(dim(simplex))
+
+  if (!is.data.frame(simplex) & !is.matrix(simplex)) {
+    ### vector
+
+    # run checks
+    check_simplex(simplex)
+
+    # compute simplex
+    if (length(simplex) == 3) {
+      interval <- c(x_lo = simplex[1] + min, x_up = max - simplex[3])
+    }
+    if (length(simplex) == 4) {
+      interval <- c(
+        x_lo = simplex[1] + min,
+        x_mid = simplex[1] + simplex[2] + min,
+        x_up = max - simplex[4]
+      )
+    }
+
+    return(interval)
+
+  } else{
+    ### dataframe / matrix
+
+    # coerce to matrix
+    simplex <- as.matrix(simplex)
+
+    # run checks
+    for (i in 1:nrow(simplex)) {
+      check_simplex(simplex[i, ])
+    }
+
+    # compute simplex
+    if (ncol(simplex) == 3) {
+      interval <- cbind(x_lo = simplex[, 1] + min, x_up = max - simplex[, 3])
+    }
+    if (ncol(simplex) == 4) {
+      interval <- cbind(
+        x_lo = simplex[, 1] + min,
+        x_mid = simplex[, 1] + simplex[, 2] + min,
+        x_up = max - simplex[, 4]
+      )
+    }
+    return(interval)
+  }
+}
+
+# # test examples
+# splx_to_itvl(c(.1, .5, .4), min = 0, max = 1)
+# responses <- data.frame(rbind(c(.1,.5,.4), c(.3,.4,.3)))
+# splx_to_itvl(responses, min = 0, max = 1)
+
