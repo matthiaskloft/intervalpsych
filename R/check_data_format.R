@@ -9,15 +9,26 @@
 #' or a dataframe where each of the rows is a 2-simplex
 #'
 #'
-check_simplex <- function(simplex) {
+check_simplex <- function(simplex, n_elements = NULL) {
+
+  # check if n_elements is specified
+  if (is.null(n_elements)) {
+    stop("Please specify the number of elements in the simplex.")
+  }
+
   # is numeric
   if (is.numeric(simplex) == FALSE) {
     stop("Error: vector must be numeric!")
   }
 
   # has length 3
-  if (length(simplex) != 3) {
+  if (n_elements == 3 && length(simplex) != 3) {
     stop("Error: (row-)vector must have exactly 3 elements!")
+  }
+
+  # has length 4
+  if (n_elements == 4 && length(simplex) != 4) {
+    stop("Error: (row-)vector must have exactly 4 elements!")
   }
 
   # check that all elementssum to one, round the sum to prevent numerical issues
@@ -25,7 +36,7 @@ check_simplex <- function(simplex) {
     stop("Error: (row-)vector must sum to 1!")
   }
 
-  # all elements are non-zero
+  # all elements are non-zero and sums to one
   if (any(simplex == 0)) {
     stop(
       "Error: None of the elements in the (row-)vector must be exactly 0! Please apply padding first!"

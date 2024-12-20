@@ -17,8 +17,14 @@ ilr <- function(simplex) {
   if (!is.data.frame(simplex) & !is.matrix(simplex)) {
     #### vector
 
+    n_elements <- length(simplex)
+
+    if (n_elements != 3) {
+      stop("Simplex must have 3 elements")
+    }
+
     # run checks
-    check_simplex(simplex)
+    check_simplex(simplex, n_elements)
 
     # calculate ILR
     Y <- rep(NA, 2)
@@ -35,9 +41,17 @@ ilr <- function(simplex) {
 
     # coerce to matrix
     simplex <- as.matrix(simplex)
+
+    # get number of cols
+    n_elements <- ncol(simplex)
+
+    if (n_elements != 3) {
+      stop("Simplex must have 3 elements")
+    }
+
     # run checks
     for (i in 1:nrow(simplex)) {
-      check_simplex(simplex[i, ])
+      check_simplex(simplex[i, ], n_elements)
     }
 
     # calculate ILR
@@ -213,16 +227,15 @@ itvl_to_splx <- function(interval_bounds,
     }
 
     # compute simplex
-    # compute simplex
     if (ncol(interval_bounds) == 2) {
-      comp <- cbind(
+      comp <- data.frame(
         x_1 = interval_bounds[, 1] - min,
         x_2 = interval_bounds[, 2] - interval_bounds[, 1],
         x_3 = max - interval_bounds[, 2]
       )
     }
     if (ncol(interval_bounds) == 3) {
-      comp <- cbind(
+      comp <- data.frame(
         x_1 = interval_bounds[, 1] - min,
         x_2 = interval_bounds[, 2] - interval_bounds[, 1],
         x_3 = interval_bounds[, 3] - interval_bounds[, 2],
@@ -234,10 +247,10 @@ itvl_to_splx <- function(interval_bounds,
   }
 }
 
-# # tesxt examples
-# itvl_to_splx(c(.1, .5), min = 0, max = 1)
-# interval_responses <- data.frame(rbind(c(.1, .5), c(.4, .7)))
-# itvl_to_splx(interval_responses, min = 0, max = 1)
+# test examples
+itvl_to_splx(c(.1, .5), min = 0, max = 1)
+interval_responses <- data.frame(rbind(c(.1, .5), c(.4, .7)))
+itvl_to_splx(interval_responses, min = 0, max = 1)
 
 
 
@@ -262,11 +275,19 @@ splx_to_itvl <- function(simplex, min = NULL, max = NULL) {
   # number of dimensions
   dims <- length(dim(simplex))
 
+
   if (!is.data.frame(simplex) & !is.matrix(simplex)) {
     ### vector
 
+    n_elements <- length(simplex)
+
+    # check that n_elements is either 3 or 4
+    if (n_elements != 3 & n_elements != 4) {
+      stop("Simplex must have either 3 or 4 elements")
+    }
+
     # run checks
-    check_simplex(simplex)
+    check_simplex(simplex, n_elements)
 
     # compute simplex
     if (length(simplex) == 3) {
@@ -288,17 +309,24 @@ splx_to_itvl <- function(simplex, min = NULL, max = NULL) {
     # coerce to matrix
     simplex <- as.matrix(simplex)
 
+    n_elements <- ncol(simplex)
+
+    # check that n_elements is either 3 or 4
+    if (n_elements != 3 & n_elements != 4) {
+      stop("Simplex must have either 3 or 4 elements")
+    }
+
     # run checks
     for (i in 1:nrow(simplex)) {
-      check_simplex(simplex[i, ])
+      check_simplex(simplex[i, ], n_elements)
     }
 
     # compute simplex
     if (ncol(simplex) == 3) {
-      interval <- cbind(x_lo = simplex[, 1] + min, x_up = max - simplex[, 3])
+      interval <- data.frame(x_lo = simplex[, 1] + min, x_up = max - simplex[, 3])
     }
     if (ncol(simplex) == 4) {
-      interval <- cbind(
+      interval <- data.frame(
         x_lo = simplex[, 1] + min,
         x_mid = simplex[, 1] + simplex[, 2] + min,
         x_up = max - simplex[, 4]

@@ -4,7 +4,7 @@
 \alias{check_simplex}
 \title{Check if data is a valid simplex}
 \usage{
-check_simplex(simplex)
+check_simplex(simplex, n_elements = NULL)
 }
 \arguments{
 \item{simplex}{A numeric vector that is a 2-simplex (3 elements that sum to 1)
