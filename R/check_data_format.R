@@ -7,6 +7,7 @@
 #'
 #' @param simplex A numeric vector that is a 2-simplex (3 elements that sum to 1)
 #' or a dataframe where each of the rows is a 2-simplex
+#' @param n_elements The number of elements in the simplex (3 or 4)
 #'
 #'
 check_simplex <- function(simplex, n_elements = NULL) {

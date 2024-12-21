@@ -9,6 +9,8 @@ check_simplex(simplex, n_elements = NULL)
 \arguments{
 \item{simplex}{A numeric vector that is a 2-simplex (3 elements that sum to 1)
 or a dataframe where each of the rows is a 2-simplex}
+
+\item{n_elements}{The number of elements in the simplex (3 or 4)}
 }
 \description{
 Check if data is a valid simplex
