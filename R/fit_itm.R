@@ -12,7 +12,7 @@
 #' @param n_chains An integer specifying the number of Markov chains. Default is 4.
 #' @param n_cores An integer specifying the number of cores to use. Default is 1.
 #' @param adapt_delta A numeric value specifying the target acceptance rate. Default is 0.9.
-#' @param ... Additional arguments passed to the `rstan::sampling` function.
+#' @param ... Additional arguments passed to the \code{\link[rstan:sampling]{rstan::sampling}} function.
 #'
 #' @return A fitted Stan model object.
 #' @export
