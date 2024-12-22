@@ -32,7 +32,12 @@ check_simplex <- function(simplex, n_elements = NULL) {
     stop("Error: (row-)vector must have exactly 4 elements!")
   }
 
-  # check that all elementssum to one, round the sum to prevent numerical issues
+  # check unit scale
+  if (any(simplex < 0) | any(simplex > 1)) {
+    stop("Error: (row-)vector must be in the unit scale!")
+  }
+
+  # check that all elements sum to one, round the sum to prevent numerical issues
   if (round(sum(simplex), 6) != 1) {
     stop("Error: (row-)vector must sum to 1!")
   }
