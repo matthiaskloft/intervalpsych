@@ -11,7 +11,20 @@ A DESCRIPTION OF THE PACKAGE
 \references{
 Stan Development Team (NA). RStan: the R interface to Stan. R package version 2.35.0.9000. https://mc-stan.org
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/matthiaskloft/intervalpsych}
+  \item Report bugs at \url{https://github.com/matthiaskloft/intervalpsych/issues}
+}
+
+}
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com}
+\strong{Maintainer}: Matthias Kloft \email{kloft@uni-marburg.de} (\href{https://orcid.org/0000-0003-1845-6957}{ORCID}) [copyright holder]
+
+Authors:
+\itemize{
+  \item Björn S. Siepe \email{bjoernsiepe@gmail.com} (\href{https://orcid.org/0000-0002-9558-4648}{ORCID})
+}
 
 }
