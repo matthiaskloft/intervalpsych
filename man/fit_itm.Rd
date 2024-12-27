@@ -8,6 +8,7 @@ fit_itm(
   df_simplex,
   id_person,
   id_item,
+  item_labels = NULL,
   iter_sampling = 500,
   iter_warmup = 500,
   n_chains = 4,
@@ -23,6 +24,9 @@ fit_itm(
 
 \item{id_item}{A vector of item indices.}
 
+\item{item_labels}{A vector of item labels. Can be long format matching id_item or
+a vector of unique labels in ascending order. Default is NULL.}
+
 \item{iter_sampling}{An integer specifying the number of sampling iterations. Default is 500.}
 
 \item{iter_warmup}{An integer specifying the number of warmup iterations. Default is 500.}
@@ -33,7 +37,7 @@ fit_itm(
 
 \item{adapt_delta}{A numeric value specifying the target acceptance rate. Default is 0.9.}
 
-\item{...}{Additional arguments passed to the \code{rstan::sampling} function.}
+\item{...}{Additional arguments passed to the \code{\link[rstan:sampling]{rstan::sampling}} function.}
 }
 \value{
 A fitted Stan model object.

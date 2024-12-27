@@ -94,6 +94,6 @@ fit_itm <-
 
     class(ret_fit) <- c("itm_fit", class(ret_fit))
 
-    return(fit)
+    return(ret_fit)
 
   }

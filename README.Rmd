@@ -34,9 +34,29 @@ devtools::install_github("matthiaskloft/intervalpsych")
 
 First, we load the verbal quantifiers dataset:
 ```{r}
+library(tidyverse)
 library(intervalpsych)
 
+
 data(quantifiers)
+
+quantifiers <- quantifiers |>
+  # exclude control items
+  dplyr::filter(!name_en %in% c("always", "never", "fifty-fifty chance")) |>
+  # sample 100 respondents
+  dplyr::filter(id_person %in% sample(
+    size = 100,
+    replace = FALSE,
+    unique(quantifiers$id_person)
+  )) |>
+  # exclude missing values
+  dplyr::filter(!is.na(x_L) & !is.na(x_U)) |>
+  # recompute IDs
+  mutate(
+    id_person = factor(id_person) |> as.numeric(),
+    id_item = factor(id_item) |> as.numeric()
+  )
+
 head(quantifiers)
 ```
 
@@ -46,8 +66,7 @@ First, we need to convert the interval responses to the simplex format:
 ```{r}
 quantifiers <- cbind(
   quantifiers, 
-  itvl_to_splx(quantifiers[,c("x_L","x_U")], min = quantifiers$scale_min, max = quantifiers$scale_max)) |> 
-  na.omit()
+  itvl_to_splx(quantifiers[,c("x_L","x_U")], min = quantifiers$scale_min, max = quantifiers$scale_max))
 
 head(quantifiers[,9:13])
 ```
@@ -69,17 +88,27 @@ head(quantifiers[,9:13])
 ```
 
 ```{r}
-fit_itm <-
+fit <-
   fit_itm(
-    df_simplex = df,
+    df_simplex = quantifiers[, c("x_1", "x_2", "x_3")],
     id_person = quantifiers$id_person,
     id_item = quantifiers$id_item,
+    item_labels = quantifiers |> 
+      distinct(id_item, name_en) |> 
+      pull(name_en),
     n_chains = 2,
     n_cores = 2,
-    iter_sampling = 500,
-    iter_warmup = 500
+    iter_sampling = 300,
+    iter_warmup = 300,
+    adapt_delta = .95
   )
 ```
+
+Now we can extract the estimated cosensus intervals from the fit object:
+```{r}
+consensus <- extract_consensus(fit)
+```
+
 
 
 

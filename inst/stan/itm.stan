@@ -235,5 +235,8 @@ model{
   Tr_splx[,3] = Tr_splx_model[,3] .* 1.03 - 0.01;
   vector[J] Tr_loc_splx = Tr_splx[,1] + 0.5 .* Tr_splx[,2];
   vector[J] Tr_wid_splx = Tr_splx[,2];
+  vector[J] Tr_L = Tr_splx[,1];
+  vector[J] Tr_U = 1- Tr_splx[,3];
+
 }
 
