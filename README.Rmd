@@ -9,7 +9,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "80%"
+  out.width = "90%"
 )
 ```
 
@@ -29,100 +29,13 @@ You can install the latest version of intervalpsych from [GitHub](https://github
 devtools::install_github("matthiaskloft/intervalpsych")
 ```
 
+## Ressources
 
-# Fit the Interval Truth Model to the Verbal Quantifiers Dataset
+- Website: [https://matthiaskloft.github.io/intervalpsych/](https://matthiaskloft.github.io/intervalpsych/)
 
-First, we load the verbal quantifiers dataset:
-```{r}
-library(tidyverse)
-library(intervalpsych)
+- Vignette: [Interval Truth Model](https://matthiaskloft.github.io/intervalpsych/articles/Interval-Truth-Model.html)
 
-
-data(quantifiers)
-
-quantifiers <- quantifiers |>
-  # exclude control items
-  dplyr::filter(!name_en %in% c("always", "never", "fifty-fifty chance")) |>
-  # sample 100 respondents
-  dplyr::filter(id_person %in% sample(
-    size = 100,
-    replace = FALSE,
-    unique(quantifiers$id_person)
-  )) |>
-  # exclude missing values
-  dplyr::filter(!is.na(x_L) & !is.na(x_U)) |>
-  # recompute IDs
-  mutate(
-    id_person = factor(id_person) |> as.numeric(),
-    id_item = factor(id_item) |> as.numeric()
-  )
-
-head(quantifiers)
-```
-
-
-First, we need to convert the interval responses to the simplex format:
-
-```{r}
-quantifiers <- cbind(
-  quantifiers, 
-  itvl_to_splx(quantifiers[,c("x_L","x_U")], min = quantifiers$scale_min, max = quantifiers$scale_max))
-
-head(quantifiers[,9:13])
-```
-
-
-Let's check if we can apply the Isometric Log-Ratio transformation:
-```{r}
-try(ilr(quantifiers[,c("x_1","x_2","x_3")]))
-```
-
-It seems we have components in our simplex data that are zero. So we first have
-to deal with these zero components. We can do this by adding a padding constant:
-
-```{r}
-quantifiers[, c("x_1", "x_2", "x_3")] <- 
-  remove_zeros(quantifiers[, c("x_1", "x_2", "x_3")], padding = 0.01)
-
-head(quantifiers[,9:13])
-```
-
-```{r}
-fit <-
-  fit_itm(
-    df_simplex = quantifiers[, c("x_1", "x_2", "x_3")],
-    id_person = quantifiers$id_person,
-    id_item = quantifiers$id_item,
-    item_labels = quantifiers |> 
-      distinct(id_item, name_en) |> 
-      pull(name_en),
-    n_chains = 2,
-    n_cores = 2,
-    iter_sampling = 300,
-    iter_warmup = 300,
-    adapt_delta = .95
-  )
-```
-
-Now we can extract the estimated cosensus intervals from the fit object:
-```{r}
-consensus <- extract_consensus(fit)
-```
-
-```{r}
-plot_intervals(
-  df_interval_bounds = consensus$summary[,c("T_L_median", "T_U_median")],
-  item_labels = rownames(consensus$summary))
-```
-
-
-
-
-
-
-
-
-
+- [Open an Issue](https://github.com/matthiaskloft/intervalpsych/issues)
 
 
 

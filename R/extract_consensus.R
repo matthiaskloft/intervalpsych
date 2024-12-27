@@ -70,9 +70,11 @@ extract_consensus <-
 
     # plot intervals
     if (plot) {
+      plot <-
       plot_intervals(
         df_interval_bounds = summary[, c("T_L_median", "T_U_median")],
         item_labels = rownames(summary))
+      print(plot)
     }
 
     # output

@@ -15,6 +15,7 @@ Stan Development Team (NA). RStan: the R interface to Stan. R package version 2.
 Useful links:
 \itemize{
   \item \url{https://github.com/matthiaskloft/intervalpsych}
+  \item \url{https://matthiaskloft.github.io/intervalpsych/}
   \item Report bugs at \url{https://github.com/matthiaskloft/intervalpsych/issues}
 }
 

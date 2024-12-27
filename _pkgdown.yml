@@ -1,0 +1,10 @@
+url: ~
+template:
+  light-switch: true
+  bootstrap: 5
+  bslib:
+    bootswatch: lux
+    pkgdown-nav-height: 80px
+  theme: arrow-light
+  theme-dark: arrow-dark
+  math-rendering: mathjax

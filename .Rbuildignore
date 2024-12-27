@@ -3,3 +3,8 @@
 ^LICENSE\.md$
 ^data/quantifiers_original\.rds$
 ^README\.Rmd$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
+^vignettes/articles$
