@@ -109,6 +109,11 @@ Now we can extract the estimated cosensus intervals from the fit object:
 consensus <- extract_consensus(fit)
 ```
 
+```{r}
+plot_intervals(
+  df_interval_bounds = consensus$summary[,c("T_L_median", "T_U_median")],
+  item_labels = rownames(consensus$summary))
+```
 
 
 

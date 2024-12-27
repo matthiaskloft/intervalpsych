@@ -92,7 +92,7 @@ fit_itm <-
       item_labels = item_labels
     )
 
-    class(ret_fit) <- c("itm_fit", class(ret_fit))
+    class(ret_fit) <- c("itm_stanfit", class(ret_fit))
 
     return(ret_fit)
 

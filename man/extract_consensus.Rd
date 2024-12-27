@@ -2,38 +2,28 @@
 % Please edit documentation in R/extract_consensus.R
 \name{extract_consensus}
 \alias{extract_consensus}
-\title{Extract Consensus from Stan Fit Object}
+\title{Extract Consensus intervals from ITM Stan Fit Object}
 \usage{
-extract_consensus(itm_stanfit, print_summary = TRUE)
+extract_consensus(itm_stanfit, print_summary = TRUE, plot = TRUE)
 }
 \arguments{
 \item{itm_stanfit}{An object of class \code{itm_stanfit} containing the fitted Stan model.}
 
 \item{print_summary}{A logical value indicating whether to print a summary of the extracted parameters. Default is \code{TRUE}.}
+
+\item{plot}{A logical value indicating whether to plot the intervals. Default is \code{TRUE}.}
 }
 \value{
 A list containing:
 \item{df_rvar}{A data frame with extracted posterior samples as random variables.}
 \item{summary}{A summary data frame with median and credible intervals for the extracted parameters.}
+\item{item_labels}{A character vector of item labels.}
 }
 \description{
-This function extracts consensus parameters from a fitted Stan model object of class \code{itm_stanfit}.
+This function extracts parameter estimates for the consensus intervals from a
+fitted Interval Truth Model Stan fit object of class \code{itm_stanfit}.
 }
 \details{
-The function performs the following steps:
-\enumerate{
-\item Checks if the input object is of class \code{itm_stanfit}.
-\item Extracts posterior samples for parameters \code{Tr_loc_splx}, \code{Tr_wid_splx}, \code{Tr_L}, and \code{Tr_U} from the Stan fit object.
-\item Creates a data frame with the extracted samples.
-\item Computes a summary of the extracted parameters, including medians and 95\% credible intervals.
-\item Optionally prints the summary.
-}
-}
-\examples{
-\dontrun{
-  # Assuming `itm_stanfit` is a fitted Stan model object of class `itm_stanfit`
-  result <- extract_consensus(itm_stanfit)
-  print(result$summary)
-}
-
+This function extracts parameter estimates for the consensus intervals from a
+fitted Interval Truth Model Stan fit object of class \code{itm_stanfit}.
 }
