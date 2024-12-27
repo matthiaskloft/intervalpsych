@@ -49,7 +49,7 @@ head(quantifiers)
 ```
 
 
-First, we need to convert the interval responses to the simplex format:
+Next, we need to convert the interval responses to the simplex format:
 
 ```{r}
 quantifiers <- cbind(
