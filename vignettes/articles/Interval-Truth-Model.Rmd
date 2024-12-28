@@ -110,7 +110,7 @@ consensus$summary |>
 ```
 
 ```{r}
-plot(consensus$plot)
+consensus$plot
 ```
 
 

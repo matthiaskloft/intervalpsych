@@ -3,7 +3,7 @@ template:
   light-switch: yes
   bootstrap: 5
   bslib:
-    bootswatch: lux
+    bootswatch: litera
     pkgdown-nav-height: 80px
   theme: arrow-light
   theme-dark: arrow-dark
