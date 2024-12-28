@@ -1,0 +1,314 @@
+[
+    {
+        "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/inst/include/stan_meta_header.hpp",
+        "file_last_write": 1733251744.0,
+        "definitions": [],
+        "hidden": false
+    },
+    {
+        "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_ddrm.cc",
+        "file_last_write": 1735336359.0,
+        "definitions": [],
+        "hidden": false
+    },
+    {
+        "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_ddrm.h",
+        "file_last_write": 1734725462.0,
+        "definitions": [
+            {
+                "usr": "c:stanExports_ddrm.h@776@macro@STAN__SERVICES__COMMAND_HPP",
+                "kind": 9,
+                "parent_name": "",
+                "name": "STAN__SERVICES__COMMAND_HPP",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_ddrm.h",
+                "line": 19,
+                "column": 9,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_ddrm_namespace@S@model_ddrm",
+                "kind": 2,
+                "parent_name": "",
+                "name": "model_ddrm",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_ddrm.h",
+                "line": 98,
+                "column": 7,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_ddrm_namespace@S@model_ddrm@F@model_name#1",
+                "kind": 7,
+                "parent_name": "model_ddrm",
+                "name": "model_name",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_ddrm.h",
+                "line": 245,
+                "column": 22,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_ddrm_namespace@S@model_ddrm@F@model_compile_info#1",
+                "kind": 7,
+                "parent_name": "model_ddrm",
+                "name": "model_compile_info",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_ddrm.h",
+                "line": 248,
+                "column": 35,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_ddrm_namespace@S@model_ddrm@F@get_param_names#&I#1b#1b#1",
+                "kind": 7,
+                "parent_name": "model_ddrm",
+                "name": "get_param_names(int &, const bool, const bool)",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_ddrm.h",
+                "line": 929,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_ddrm_namespace@S@model_ddrm@F@get_dims#&I#1b#1b#1",
+                "kind": 7,
+                "parent_name": "model_ddrm",
+                "name": "get_dims(int &, const bool, const bool)",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_ddrm.h",
+                "line": 946,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_ddrm_namespace@S@model_ddrm@F@constrained_param_names#&I#b#b#1",
+                "kind": 7,
+                "parent_name": "model_ddrm",
+                "name": "constrained_param_names(int &, bool, bool)",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_ddrm.h",
+                "line": 979,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_ddrm_namespace@S@model_ddrm@F@unconstrained_param_names#&I#b#b#1",
+                "kind": 7,
+                "parent_name": "model_ddrm",
+                "name": "unconstrained_param_names(int &, bool, bool)",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_ddrm.h",
+                "line": 1047,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_ddrm_namespace@S@model_ddrm@F@get_constrained_sizedtypes#1",
+                "kind": 7,
+                "parent_name": "model_ddrm",
+                "name": "get_constrained_sizedtypes",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_ddrm.h",
+                "line": 1114,
+                "column": 22,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_ddrm_namespace@S@model_ddrm@F@get_unconstrained_sizedtypes#1",
+                "kind": 7,
+                "parent_name": "model_ddrm",
+                "name": "get_unconstrained_sizedtypes",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_ddrm.h",
+                "line": 1117,
+                "column": 22,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_ddrm_namespace@S@model_ddrm@F@transform_inits#&1$@N@stan@N@io@S@var_context#&I#*$@N@std@S@basic_ostream>#C#$@N@std@S@char_traits>#C#1",
+                "kind": 7,
+                "parent_name": "model_ddrm",
+                "name": "transform_inits(const stan::io::var_context &, int &, std::ostream *)",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_ddrm.h",
+                "line": 1171,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_ddrm_namespace@S@model_ddrm@F@transform_inits#&1$@N@stan@N@io@S@var_context#&I#S2_#*$@N@std@S@basic_ostream>#C#$@N@std@S@char_traits>#C#1",
+                "kind": 7,
+                "parent_name": "model_ddrm",
+                "name": "transform_inits(const stan::io::var_context &, int &, int &, std::ostream *)",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_ddrm.h",
+                "line": 1181,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_ddrm_namespace@S@model_ddrm@F@unconstrain_array#&1I#&I#*$@N@std@S@basic_ostream>#C#$@N@std@S@char_traits>#C#1",
+                "kind": 7,
+                "parent_name": "model_ddrm",
+                "name": "unconstrain_array(const int &, int &, std::ostream *)",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_ddrm.h",
+                "line": 1188,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_ddrm_namespace@S@model_ddrm@F@unconstrain_array#&1I#&I#*$@N@std@S@basic_ostream>#C#$@N@std@S@char_traits>#C#1",
+                "kind": 7,
+                "parent_name": "model_ddrm",
+                "name": "unconstrain_array(const int &, int &, std::ostream *)",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_ddrm.h",
+                "line": 1198,
+                "column": 3,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_itm.cc",
+        "file_last_write": 1735336360.0,
+        "definitions": [],
+        "hidden": false
+    },
+    {
+        "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_itm.h",
+        "file_last_write": 1735334969.0,
+        "definitions": [
+            {
+                "usr": "c:stanExports_itm.h@776@macro@STAN__SERVICES__COMMAND_HPP",
+                "kind": 9,
+                "parent_name": "",
+                "name": "STAN__SERVICES__COMMAND_HPP",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_itm.h",
+                "line": 19,
+                "column": 9,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_itm_namespace@S@model_itm",
+                "kind": 2,
+                "parent_name": "",
+                "name": "model_itm",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_itm.h",
+                "line": 451,
+                "column": 7,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_itm_namespace@S@model_itm@F@model_name#1",
+                "kind": 7,
+                "parent_name": "model_itm",
+                "name": "model_name",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_itm.h",
+                "line": 651,
+                "column": 22,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_itm_namespace@S@model_itm@F@model_compile_info#1",
+                "kind": 7,
+                "parent_name": "model_itm",
+                "name": "model_compile_info",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_itm.h",
+                "line": 654,
+                "column": 35,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_itm_namespace@S@model_itm@F@get_param_names#&I#1b#1b#1",
+                "kind": 7,
+                "parent_name": "model_itm",
+                "name": "get_param_names(int &, const bool, const bool)",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_itm.h",
+                "line": 1881,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_itm_namespace@S@model_itm@F@get_dims#&I#1b#1b#1",
+                "kind": 7,
+                "parent_name": "model_itm",
+                "name": "get_dims(int &, const bool, const bool)",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_itm.h",
+                "line": 1904,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_itm_namespace@S@model_itm@F@constrained_param_names#&I#b#b#1",
+                "kind": 7,
+                "parent_name": "model_itm",
+                "name": "constrained_param_names(int &, bool, bool)",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_itm.h",
+                "line": 1959,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_itm_namespace@S@model_itm@F@unconstrained_param_names#&I#b#b#1",
+                "kind": 7,
+                "parent_name": "model_itm",
+                "name": "unconstrained_param_names(int &, bool, bool)",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_itm.h",
+                "line": 2108,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_itm_namespace@S@model_itm@F@get_constrained_sizedtypes#1",
+                "kind": 7,
+                "parent_name": "model_itm",
+                "name": "get_constrained_sizedtypes",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_itm.h",
+                "line": 2252,
+                "column": 22,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_itm_namespace@S@model_itm@F@get_unconstrained_sizedtypes#1",
+                "kind": 7,
+                "parent_name": "model_itm",
+                "name": "get_unconstrained_sizedtypes",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_itm.h",
+                "line": 2255,
+                "column": 22,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_itm_namespace@S@model_itm@F@transform_inits#&1$@N@stan@N@io@S@var_context#&I#*$@N@std@S@basic_ostream>#C#$@N@std@S@char_traits>#C#1",
+                "kind": 7,
+                "parent_name": "model_itm",
+                "name": "transform_inits(const stan::io::var_context &, int &, std::ostream *)",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_itm.h",
+                "line": 2311,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_itm_namespace@S@model_itm@F@transform_inits#&1$@N@stan@N@io@S@var_context#&I#S2_#*$@N@std@S@basic_ostream>#C#$@N@std@S@char_traits>#C#1",
+                "kind": 7,
+                "parent_name": "model_itm",
+                "name": "transform_inits(const stan::io::var_context &, int &, int &, std::ostream *)",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_itm.h",
+                "line": 2321,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_itm_namespace@S@model_itm@F@unconstrain_array#&1I#&I#*$@N@std@S@basic_ostream>#C#$@N@std@S@char_traits>#C#1",
+                "kind": 7,
+                "parent_name": "model_itm",
+                "name": "unconstrain_array(const int &, int &, std::ostream *)",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_itm.h",
+                "line": 2328,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@N@model_itm_namespace@S@model_itm@F@unconstrain_array#&1I#&I#*$@N@std@S@basic_ostream>#C#$@N@std@S@char_traits>#C#1",
+                "kind": 7,
+                "parent_name": "model_itm",
+                "name": "unconstrain_array(const int &, int &, std::ostream *)",
+                "file": "C:/Users/Matze/Documents/GitHub/intervalpsych/src/stanExports_itm.h",
+                "line": 2338,
+                "column": 3,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    }
+]

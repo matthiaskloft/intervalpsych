@@ -1,0 +1,48 @@
+Package: intervalpsych
+Title: Working with Interval Data in Psychometrics
+Version: 0.0.0.9000
+Authors@R: 
+    c(person("Matthias", "Kloft",
+  email = "kloft@uni-marburg.de",
+  role = c("aut", "cre", "cph"),
+  comment = c(ORCID = "0000-0003-1845-6957")),
+  person("Björn S.", "Siepe", 
+  email = "bjoernsiepe@gmail.com", 
+  role = c("aut"),
+  comment = c(ORCID = "0000-0002-9558-4648")))
+Maintainer: Matthias Kloft <kloft@uni-marburg.de>
+Description: What the package does (one paragraph).
+License: GPL (>= 3)
+Encoding: UTF-8
+URL: https://matthiaskloft.github.io/intervalpsych/, https://github.com/matthiaskloft/intervalpsych
+BugReports: https://github.com/matthiaskloft/intervalpsych/issues
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Biarch: true
+Depends: 
+    R (>= 3.5)
+Imports: 
+    dplyr,
+    ggplot2,
+    methods,
+    posterior,
+    Rcpp (>= 0.12.0),
+    RcppParallel (>= 5.0.1),
+    rstan (>= 2.18.1),
+    rstantools (>= 2.4)
+LinkingTo: 
+    BH (>= 1.66.0),
+    Rcpp (>= 0.12.0),
+    RcppEigen (>= 0.3.3.3.0),
+    RcppParallel (>= 5.0.1),
+    rstan (>= 2.18.1),
+    StanHeaders (>= 2.18.0)
+SystemRequirements: GNU make
+LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+VignetteBuilder: knitr
+Config/Needs/website: rmarkdown

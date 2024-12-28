@@ -1,0 +1,26 @@
+{
+    "id": "9BCD81B1",
+    "path": "~/GitHub/intervalpsych/R/extract_consensus.R",
+    "project_path": "R/extract_consensus.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1735337110007.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "76,17",
+        "scrollLine": "46"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1735342765,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1735342766007,
+    "read_only": false,
+    "read_only_alternatives": []
+}

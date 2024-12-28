@@ -1,0 +1,6 @@
+"0","quantifiers <- cbind("
+"0","  quantifiers, "
+"0","  itvl_to_splx(quantifiers[,c(""x_L"",""x_U"")], min = quantifiers$scale_min, max = quantifiers$scale_max)) |> "
+"0","  na.omit()"
+"0",""
+"0","head(quantifiers[,9:13])"

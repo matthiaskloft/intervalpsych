@@ -1,0 +1,4 @@
+"0","try(ilr(quantifiers[,c(""x_1"",""x_2"",""x_3"")]))"
+"2","Error in check_simplex(simplex[i, ], n_elements) : 
+  Error: None of the elements in the (row-)vector must be exactly 0! Please apply padding first!
+"

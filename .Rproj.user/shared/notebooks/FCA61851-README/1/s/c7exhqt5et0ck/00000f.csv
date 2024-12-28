@@ -1,0 +1,13 @@
+"0","fit_itm <-"
+"0","  fit_itm("
+"0","    df_simplex = df,"
+"0","    id_person = quantifiers$id_person,"
+"0","    id_item = quantifiers$id_item,"
+"0","    n_chains = 2,"
+"0","    n_cores = 2,"
+"0","    iter_sampling = 500,"
+"0","    iter_warmup = 500"
+"0","  )"
+"2","Fehler in fit_itm(df_simplex = df, id_person = quantifiers$id_person, id_item = quantifiers$id_item,  : 
+  konnte Funktion ""fit_itm"" nicht finden
+"
