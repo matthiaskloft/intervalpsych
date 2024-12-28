@@ -1,6 +1,6 @@
 url: https://matthiaskloft.github.io/intervalpsych/
 template:
-  light-switch: true
+  light-switch: yes
   bootstrap: 5
   bslib:
     bootswatch: lux
@@ -8,3 +8,4 @@ template:
   theme: arrow-light
   theme-dark: arrow-dark
   math-rendering: mathjax
+

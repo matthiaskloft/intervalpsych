@@ -22,8 +22,9 @@
 #' @importFrom dplyr reframe
 #' @export
 extract_consensus <-
-  function(itm_stanfit, print_summary = TRUE, plot = TRUE) {
-
+  function(itm_stanfit,
+           print_summary = TRUE,
+           plot = TRUE) {
     # check: is class "itm_stanfit"?
     if (!inherits(itm_stanfit, "itm_stanfit")) {
       stop("Input must be an object of class 'itm_stanfit'")
@@ -32,10 +33,13 @@ extract_consensus <-
     # extract posterior samples
     T_loc <- rstan::extract(itm_stanfit$stan_fit, pars = "Tr_loc_splx")[[1]] |>  posterior::rvar()
     names(T_loc) <- paste0("T_loc_", 1:itm_stanfit$stan_fit@par_dims$Tr_loc_splx)
+
     T_wid <- rstan::extract(itm_stanfit$stan_fit, pars = "Tr_wid_splx")[[1]] |> posterior::rvar()
     names(T_wid) <- paste0("T_wid_", 1:itm_stanfit$stan_fit@par_dims$Tr_wid_splx)
+
     T_L <- rstan::extract(itm_stanfit$stan_fit, pars = "Tr_L")[[1]] |>  posterior::rvar()
     names(T_L) <- paste0("T_L_", 1:itm_stanfit$stan_fit@par_dims$Tr_L)
+
     T_U <- rstan::extract(itm_stanfit$stan_fit, pars = "Tr_U")[[1]] |>  posterior::rvar()
     names(T_U) <- paste0("T_U_", 1:itm_stanfit$stan_fit@par_dims$Tr_U)
 
@@ -59,7 +63,7 @@ extract_consensus <-
       )
 
     # append labels
-    if(!is.null(itm_stanfit$item_labels)) {
+    if (!is.null(itm_stanfit$item_labels)) {
       rownames(summary) <- itm_stanfit$item_labels
     }
 
@@ -68,17 +72,20 @@ extract_consensus <-
       print(summary |> round(2))
     }
 
+    # plot
+    interval_plot <-
+      plot_intervals(df_interval_bounds = summary[, c("T_L_median", "T_U_median")],
+                     item_labels = rownames(summary))
+
     # plot intervals
     if (plot) {
-      plot <-
-      plot_intervals(
-        df_interval_bounds = summary[, c("T_L_median", "T_U_median")],
-        item_labels = rownames(summary))
-      print(plot)
+      print(interval_plot)
     }
 
     # output
-    ret_out <- list(df_rvar = df_rvar, summary = summary)
+    ret_out <- list(df_rvar = df_rvar,
+                    summary = summary,
+                    plot = interval_plot)
 
     return(ret_out)
 

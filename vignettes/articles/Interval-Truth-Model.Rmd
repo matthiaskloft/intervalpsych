@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 
 library(tidyverse)
 library(intervalpsych)
+library(kableExtra)
 ```
 
 
@@ -56,7 +57,9 @@ quantifiers <- cbind(
   quantifiers, 
   itvl_to_splx(quantifiers[,c("x_L","x_U")], min = quantifiers$scale_min, max = quantifiers$scale_max))
 
-head(quantifiers[,9:13])
+head(quantifiers[,9:13]) |> 
+  kable() |> 
+  kable_styling()
 ```
 
 
@@ -72,7 +75,9 @@ to deal with these zero components. We can do this by adding a padding constant:
 quantifiers[, c("x_1", "x_2", "x_3")] <- 
   remove_zeros(quantifiers[, c("x_1", "x_2", "x_3")], padding = 0.01)
 
-head(quantifiers[,9:13])
+head(quantifiers[,9:13]) |> 
+  kable() |> 
+  kable_styling()
 ```
 
 ```{r}
@@ -92,7 +97,20 @@ fit <-
   )
 ```
 
-Now we can extract the estimated cosensus intervals from the fit object:
+Now we can extract the estimated cosensus intervals from the fit object.
+The function returns a list containing the posterior samples, a summary table and a plot of the consensus intervals stemming from the posterior medians.
 ```{r}
-consensus <- extract_consensus(fit)
+consensus <- extract_consensus(fit, print_summary = FALSE, plot = FALSE)
 ```
+
+```{r}
+consensus$summary |> 
+  kable() |> 
+  kable_styling()
+```
+
+```{r}
+plot(consensus$plot)
+```
+
+

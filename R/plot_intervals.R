@@ -43,6 +43,7 @@ plot_intervals <- function(df_interval_bounds, item_labels = NULL) {
     ggplot2::ggplot() +
     ggplot2::geom_errorbarh(
       ggplot2::aes(y = .data$item, xmin = .data$lower, xmax = .data$upper),
+      height = .5,
       linewidth = .5) +
     ggplot2::scale_x_continuous(
       limits = c(0, 1),
