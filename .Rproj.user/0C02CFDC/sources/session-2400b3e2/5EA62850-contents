@@ -1,0 +1,116 @@
+---
+title: "Interval Truth Model"
+subtitle: "Estimation of Weighted Consensus Intervals for Interval Ratings"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Interval Truth Model}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "90%"
+)
+
+library(tidyverse)
+library(intervalpsych)
+library(kableExtra)
+```
+
+
+
+We want to fit the Interval Truth Model to the Verbal Quantifiers dataset.
+
+First, we load the verbal quantifiers dataset:
+```{r}
+data(quantifiers)
+
+quantifiers <- quantifiers |>
+  # exclude control items
+  dplyr::filter(!name_en %in% c("always", "never", "fifty-fifty chance")) |>
+  # sample 100 respondents
+  dplyr::filter(id_person %in% sample(
+    size = 30,
+    replace = FALSE,
+    unique(quantifiers$id_person)
+  )) |>
+  # exclude missing values
+  dplyr::filter(!is.na(x_L) & !is.na(x_U)) |>
+  # recompute IDs
+  mutate(
+    id_person = factor(id_person) |> as.numeric(),
+    id_item = factor(id_item) |> as.numeric()
+  )
+
+head(quantifiers)
+```
+
+
+Next, we need to convert the interval responses to the simplex format:
+
+```{r}
+quantifiers <- cbind(
+  quantifiers, 
+  itvl_to_splx(quantifiers[,c("x_L","x_U")], min = quantifiers$scale_min, max = quantifiers$scale_max))
+
+head(quantifiers[,9:13]) |> 
+  kable() |> 
+  kable_styling()
+```
+
+
+Let's check if we can apply the Isometric Log-Ratio transformation:
+```{r}
+try(ilr(quantifiers[,c("x_1","x_2","x_3")]))
+```
+
+It seems we have components in our simplex data that are zero. So we first have
+to deal with these zero components. We can do this by adding a padding constant:
+
+```{r}
+quantifiers[, c("x_1", "x_2", "x_3")] <- 
+  remove_zeros(quantifiers[, c("x_1", "x_2", "x_3")], padding = 0.01)
+
+head(quantifiers[,9:13]) |> 
+  kable() |> 
+  kable_styling()
+```
+
+```{r}
+fit <-
+  fit_itm(
+    df_simplex = quantifiers[, c("x_1", "x_2", "x_3")],
+    id_person = quantifiers$id_person,
+    id_item = quantifiers$id_item,
+    item_labels = quantifiers |> 
+      distinct(id_item, name_en) |> 
+      pull(name_en),
+    n_chains = 2,
+    n_cores = 2,
+    iter_sampling = 300,
+    iter_warmup = 300,
+    adapt_delta = .95
+  )
+```
+
+Now we can extract the estimated cosensus intervals from the fit object.
+The function returns a list containing the posterior samples, a summary table and a plot of the consensus intervals stemming from the posterior medians.
+```{r}
+consensus <- extract_consensus(fit, print_summary = FALSE, plot = FALSE)
+```
+
+```{r}
+consensus$summary |> 
+  kable() |> 
+  kable_styling()
+```
+
+```{r}
+consensus$plot
+```
+
+

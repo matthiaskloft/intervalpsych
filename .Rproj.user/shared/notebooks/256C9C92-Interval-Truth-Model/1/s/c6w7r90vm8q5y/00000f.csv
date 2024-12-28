@@ -1,0 +1,23 @@
+"0","fit <-"
+"0","  fit_itm("
+"0","    df_simplex = quantifiers[, c(""x_1"", ""x_2"", ""x_3"")],"
+"0","    id_person = quantifiers$id_person,"
+"0","    id_item = quantifiers$id_item,"
+"0","    item_labels = quantifiers |> "
+"0","      distinct(id_item, name_en) |> "
+"0","      pull(name_en),"
+"0","    n_chains = 2,"
+"0","    n_cores = 2,"
+"0","    iter_sampling = 300,"
+"0","    iter_warmup = 300,"
+"0","    adapt_delta = .95"
+"0","  )"
+"2","Warnung: The largest R-hat is NA, indicating chains have not mixed.
+Running the chains for more iterations may help. See
+https://mc-stan.org/misc/warnings.html#r-hat"
+"2","Warnung: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+Running the chains for more iterations may help. See
+https://mc-stan.org/misc/warnings.html#bulk-ess"
+"2","Warnung: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+Running the chains for more iterations may help. See
+https://mc-stan.org/misc/warnings.html#tail-ess"

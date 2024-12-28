@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>body{background-color:white;}</style>
+<script src="lib/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="lib/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="lib/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="lib/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="lib/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="lib/kePrint-0.0.1/kePrint.js"></script>
+<link href="lib/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+</head>
+<body>
+<table class="table" style="color: black; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;">  </th>
+   <th style="text-align:right;"> T_L_median </th>
+   <th style="text-align:right;"> T_L_CI_025 </th>
+   <th style="text-align:right;"> T_L_CI_975 </th>
+   <th style="text-align:right;"> T_U_median </th>
+   <th style="text-align:right;"> T_U_CI_025 </th>
+   <th style="text-align:right;"> T_U_CI_975 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> now and then </td>
+   <td style="text-align:right;"> 0.1758872 </td>
+   <td style="text-align:right;"> 0.12580909 </td>
+   <td style="text-align:right;"> 0.24027560 </td>
+   <td style="text-align:right;"> 0.3979379 </td>
+   <td style="text-align:right;"> 0.33023933 </td>
+   <td style="text-align:right;"> 0.4831852 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> possibly </td>
+   <td style="text-align:right;"> 0.1811293 </td>
+   <td style="text-align:right;"> 0.13299461 </td>
+   <td style="text-align:right;"> 0.24449525 </td>
+   <td style="text-align:right;"> 0.4821477 </td>
+   <td style="text-align:right;"> 0.40938273 </td>
+   <td style="text-align:right;"> 0.5531375 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> almost always </td>
+   <td style="text-align:right;"> 0.8153607 </td>
+   <td style="text-align:right;"> 0.76951910 </td>
+   <td style="text-align:right;"> 0.85112672 </td>
+   <td style="text-align:right;"> 0.9724806 </td>
+   <td style="text-align:right;"> 0.95720719 </td>
+   <td style="text-align:right;"> 0.9832134 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> almost never </td>
+   <td style="text-align:right;"> 0.0262123 </td>
+   <td style="text-align:right;"> 0.01334263 </td>
+   <td style="text-align:right;"> 0.04169172 </td>
+   <td style="text-align:right;"> 0.1320653 </td>
+   <td style="text-align:right;"> 0.09642198 </td>
+   <td style="text-align:right;"> 0.1794036 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> occasionally </td>
+   <td style="text-align:right;"> 0.2073656 </td>
+   <td style="text-align:right;"> 0.15974661 </td>
+   <td style="text-align:right;"> 0.25522539 </td>
+   <td style="text-align:right;"> 0.4501007 </td>
+   <td style="text-align:right;"> 0.39262805 </td>
+   <td style="text-align:right;"> 0.5223236 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> frequently </td>
+   <td style="text-align:right;"> 0.6187549 </td>
+   <td style="text-align:right;"> 0.54457291 </td>
+   <td style="text-align:right;"> 0.68829833 </td>
+   <td style="text-align:right;"> 0.8956474 </td>
+   <td style="text-align:right;"> 0.85803367 </td>
+   <td style="text-align:right;"> 0.9283337 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hardly </td>
+   <td style="text-align:right;"> 0.0483895 </td>
+   <td style="text-align:right;"> 0.03184314 </td>
+   <td style="text-align:right;"> 0.07344830 </td>
+   <td style="text-align:right;"> 0.1852454 </td>
+   <td style="text-align:right;"> 0.14993525 </td>
+   <td style="text-align:right;"> 0.2274408 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> sometimes </td>
+   <td style="text-align:right;"> 0.1753607 </td>
+   <td style="text-align:right;"> 0.12651867 </td>
+   <td style="text-align:right;"> 0.23067734 </td>
+   <td style="text-align:right;"> 0.4215211 </td>
+   <td style="text-align:right;"> 0.35208017 </td>
+   <td style="text-align:right;"> 0.4924478 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> most of the time </td>
+   <td style="text-align:right;"> 0.6881436 </td>
+   <td style="text-align:right;"> 0.64417012 </td>
+   <td style="text-align:right;"> 0.73073182 </td>
+   <td style="text-align:right;"> 0.9327002 </td>
+   <td style="text-align:right;"> 0.90540616 </td>
+   <td style="text-align:right;"> 0.9539109 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> often </td>
+   <td style="text-align:right;"> 0.6453293 </td>
+   <td style="text-align:right;"> 0.58795840 </td>
+   <td style="text-align:right;"> 0.70032457 </td>
+   <td style="text-align:right;"> 0.9097297 </td>
+   <td style="text-align:right;"> 0.86891076 </td>
+   <td style="text-align:right;"> 0.9385863 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> potentially </td>
+   <td style="text-align:right;"> 0.3220805 </td>
+   <td style="text-align:right;"> 0.25330556 </td>
+   <td style="text-align:right;"> 0.39602718 </td>
+   <td style="text-align:right;"> 0.6349955 </td>
+   <td style="text-align:right;"> 0.55484613 </td>
+   <td style="text-align:right;"> 0.7133323 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> rarely </td>
+   <td style="text-align:right;"> 0.0457613 </td>
+   <td style="text-align:right;"> 0.02975760 </td>
+   <td style="text-align:right;"> 0.06742789 </td>
+   <td style="text-align:right;"> 0.1972364 </td>
+   <td style="text-align:right;"> 0.16012895 </td>
+   <td style="text-align:right;"> 0.2483521 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> constantly </td>
+   <td style="text-align:right;"> 0.7836491 </td>
+   <td style="text-align:right;"> 0.72515227 </td>
+   <td style="text-align:right;"> 0.83772898 </td>
+   <td style="text-align:right;"> 0.9642693 </td>
+   <td style="text-align:right;"> 0.94136865 </td>
+   <td style="text-align:right;"> 0.9818489 </td>
+  </tr>
+</tbody>
+</table> <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [["$","$"]]}})</script><script async src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

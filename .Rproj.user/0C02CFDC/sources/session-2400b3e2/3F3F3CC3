@@ -1,0 +1,24 @@
+{
+    "id": "3F3F3CC3",
+    "path": "~/GitHub/intervalpsych/R/check_data_format.R",
+    "project_path": "R/check_data_format.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1735379699882.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1735378951,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1735378951,
+    "read_only": false,
+    "read_only_alternatives": []
+}

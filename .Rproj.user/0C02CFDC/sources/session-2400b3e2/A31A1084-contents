@@ -1,0 +1,11 @@
+url: https://matthiaskloft.github.io/intervalpsych/
+template:
+  light-switch: yes
+  bootstrap: 5
+  bslib:
+    bootswatch: litera
+    pkgdown-nav-height: 80px
+  theme: arrow-light
+  theme-dark: arrow-dark
+  math-rendering: mathjax
+
