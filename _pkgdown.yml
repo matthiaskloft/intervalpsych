@@ -7,3 +7,38 @@ template:
   theme-dark: arrow-dark
   math-rendering: mathjax
 
+reference:
+
+- title: Transformation functions
+
+  desc: >
+    Transformation functions for interval data.
+  contents:
+  - ilr
+  - inv_ilr
+  - itvl_to_splx
+  - splx_to_itvl
+  - remove_zeros
+
+- title: Model fitting
+
+  desc: >
+    Fit models to interval responses.
+  contents:
+  - fit_itm
+  - extract_consensus
+
+- title: Example data
+
+  desc: >
+    Example data sets for interval data.
+  contents:
+  - quantifiers
+
+- title: internal
+  contents:
+  - check_bvn
+  - check_simplex
+  - intervalpsych-package
+  - plot_intervals
+  - theme_itm
