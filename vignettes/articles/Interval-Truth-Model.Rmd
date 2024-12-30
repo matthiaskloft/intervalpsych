@@ -110,6 +110,9 @@ consensus$summary |>
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Plot of the estimated consensus intervals.
+
 consensus$plot
 ```
 
