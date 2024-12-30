@@ -28,14 +28,3 @@ You can install the latest version of intervalpsych from [GitHub](https://github
 # install.packages("devtools")
 devtools::install_github("matthiaskloft/intervalpsych")
 ```
-
-## Ressources
-
-- Website: [https://matthiaskloft.github.io/intervalpsych/](https://matthiaskloft.github.io/intervalpsych/)
-
-- Vignette: [Interval Truth Model](https://matthiaskloft.github.io/intervalpsych/articles/Interval-Truth-Model.html)
-
-- [Open an Issue](https://github.com/matthiaskloft/intervalpsych/issues)
-
-
-
