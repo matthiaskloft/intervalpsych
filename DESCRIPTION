@@ -24,6 +24,7 @@ Depends:
 Imports: 
     dplyr,
     ggplot2,
+    kableExtra,
     methods,
     posterior,
     Rcpp (>= 0.12.0),
