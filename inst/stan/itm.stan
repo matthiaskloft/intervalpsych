@@ -195,6 +195,13 @@ model{
   vector[N] Y_ppc_loc_splx;
   vector[N] Y_ppc_wid_splx;
 
+  // Latent Consensus
+  vector[J] Tr_loc_splx;
+  vector[J] Tr_wid_splx;
+  vector[J] Tr_L;
+  vector[J] Tr_U;
+
+
   {
     // Posterior Predicted Values
     matrix[N,2] Y_ppc;
@@ -228,15 +235,21 @@ model{
     Y_ppc_wid_splx = Y_ppc_splx[,2];
   } // end block
 
-  // Latent truth simplex
+
+  // Latent Consensus
+  {
   matrix[J,3] Tr_splx;
   Tr_splx[,1] = Tr_splx_model[,1] .* 1.03 - 0.01;
   Tr_splx[,2] = Tr_splx_model[,2] .* 1.03 - 0.01;
   Tr_splx[,3] = Tr_splx_model[,3] .* 1.03 - 0.01;
-  vector[J] Tr_loc_splx = Tr_splx[,1] + 0.5 .* Tr_splx[,2];
-  vector[J] Tr_wid_splx = Tr_splx[,2];
-  vector[J] Tr_L = Tr_splx[,1];
-  vector[J] Tr_U = 1- Tr_splx[,3];
+
+  Tr_loc_splx = Tr_splx[,1] + 0.5 .* Tr_splx[,2];
+  Tr_wid_splx = Tr_splx[,2];
+  Tr_L = Tr_splx[,1];
+  Tr_U = 1- Tr_splx[,3];
+
+  }
+
 
 }
 

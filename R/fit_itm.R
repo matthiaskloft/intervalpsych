@@ -71,6 +71,13 @@ fit_itm <-
     default_args <- list(
       object = stanmodels$itm,
       data = stan_data,
+      pars = c("Tr_loc_beta",
+               "Tr_wid_beta",
+               "I_raw",
+               "L_corr_E",
+               "J_raw",
+               "L_corr_lambda"),
+      include = FALSE,
       chains = n_chains,
       cores = n_cores,
       iter = iter_sampling + iter_warmup,

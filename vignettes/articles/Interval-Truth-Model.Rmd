@@ -8,25 +8,27 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
+```{r include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "90%"
 )
-
-library(dplyr)
-library(intervalpsych)
-library(kableExtra)
 ```
 
+```{r setup}
+library(intervalpsych)
+```
 
 
 We want to fit the Interval Truth Model to the Verbal Quantifiers dataset.
 
 First, we load the verbal quantifiers dataset:
 ```{r}
+library(dplyr)
+library(kableExtra)
+
 data(quantifiers)
 
 quantifiers <- quantifiers |>
@@ -46,7 +48,9 @@ quantifiers <- quantifiers |>
     id_item = factor(id_item) |> as.numeric()
   )
 
-head(quantifiers)
+head(quantifiers) |> 
+  kable() |> 
+  kable_styling()
 ```
 
 

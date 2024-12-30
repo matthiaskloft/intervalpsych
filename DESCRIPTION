@@ -24,7 +24,6 @@ Depends:
 Imports: 
     dplyr,
     ggplot2,
-    kableExtra,
     methods,
     posterior,
     Rcpp (>= 0.12.0),
@@ -41,6 +40,7 @@ LinkingTo:
 SystemRequirements: GNU make
 LazyData: true
 Suggests: 
+    kableExtra,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)
