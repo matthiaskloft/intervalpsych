@@ -11,12 +11,8 @@ Authors@R:
   role = c("aut"),
   comment = c(ORCID = "0000-0002-9558-4648")))
 Maintainer: Matthias Kloft <kloft@uni-marburg.de>
-<<<<<<< Updated upstream
 Description: Preprocessing, modeling, and visualizing interval-valued data in psychometrics and surrounding disciplines.
 =======
-Description: Preprocessing, modeling, and visualizing interval-valued data in psychometrics and surrounding disciplines. 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
