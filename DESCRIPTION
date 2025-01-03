@@ -11,7 +11,13 @@ Authors@R:
   role = c("aut"),
   comment = c(ORCID = "0000-0002-9558-4648")))
 Maintainer: Matthias Kloft <kloft@uni-marburg.de>
+<<<<<<< Updated upstream
 Description: Preprocessing, modeling, and visualizing interval-valued data in psychometrics and surrounding disciplines. This package provides functions to transform interval-valued responses and to estimate item response theory models for the aggregation of such response data. Additionally, results of these models can be visualized and summarized using convenience functions.
+=======
+Description: Preprocessing, modeling, and visualizing interval-valued data in psychometrics and surrounding disciplines. 
+  This package provides functions to transform interval-valued responses and to estimate item response theory models for the aggregation of such response data.
+  Additionally, results of these models can be visualized and summarized using convenience functions.
+>>>>>>> Stashed changes
 License: GPL (>= 3)
 Encoding: UTF-8
 URL: https://matthiaskloft.github.io/intervalpsych/, https://github.com/matthiaskloft/intervalpsych
@@ -23,6 +29,7 @@ Depends:
     R (>= 3.5)
 Imports:
     dplyr,
+    ggdist,
     ggplot2,
     methods,
     posterior,
