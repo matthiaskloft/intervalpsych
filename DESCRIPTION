@@ -1,17 +1,19 @@
 Package: intervalpsych
 Title: Working with Interval Data in Psychometrics
 Version: 0.0.0.9000
-Authors@R: 
+Authors@R:
     c(person("Matthias", "Kloft",
   email = "kloft@uni-marburg.de",
   role = c("aut", "cre", "cph"),
   comment = c(ORCID = "0000-0003-1845-6957")),
-  person("Björn S.", "Siepe", 
-  email = "bjoernsiepe@gmail.com", 
+  person("Björn S.", "Siepe",
+  email = "bjoernsiepe@gmail.com",
   role = c("aut"),
   comment = c(ORCID = "0000-0002-9558-4648")))
 Maintainer: Matthias Kloft <kloft@uni-marburg.de>
-Description: Preprocessing, modeling, and visualizing interval-valued data in psychometrics and surrounding disciplines. This package provides functions to transform interval-valued responses and to estimate item response theory models for the aggregation of such response data. Additionally, results of these models can be visualized and summarized using convenience functions.
+Description: Preprocessing, modeling, and visualizing interval-valued data in psychometrics and surrounding disciplines.
+  This package provides functions to transform interval-valued responses and to estimate item response theory models for the aggregation of such response data.
+  Additionally, results of these models can be visualized and summarized using convenience functions.
 License: GPL (>= 3)
 Encoding: UTF-8
 URL: https://matthiaskloft.github.io/intervalpsych/, https://github.com/matthiaskloft/intervalpsych
@@ -19,10 +21,11 @@ BugReports: https://github.com/matthiaskloft/intervalpsych/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Biarch: true
-Depends: 
+Depends:
     R (>= 3.5)
-Imports: 
+Imports:
     dplyr,
+    ggdist,
     ggplot2,
     methods,
     posterior,
@@ -30,7 +33,7 @@ Imports:
     RcppParallel (>= 5.0.1),
     rstan (>= 2.18.1),
     rstantools (>= 2.4)
-LinkingTo: 
+LinkingTo:
     BH (>= 1.66.0),
     Rcpp (>= 0.12.0),
     RcppEigen (>= 0.3.3.3.0),
@@ -39,7 +42,7 @@ LinkingTo:
     StanHeaders (>= 2.18.0)
 SystemRequirements: GNU make
 LazyData: true
-Suggests: 
+Suggests:
     kableExtra,
     knitr,
     rmarkdown,
