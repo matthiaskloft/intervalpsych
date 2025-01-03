@@ -15,6 +15,9 @@ Maintainer: Matthias Kloft <kloft@uni-marburg.de>
 Description: Preprocessing, modeling, and visualizing interval-valued data in psychometrics and surrounding disciplines.
 =======
 Description: Preprocessing, modeling, and visualizing interval-valued data in psychometrics and surrounding disciplines. 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   This package provides functions to transform interval-valued responses and to estimate item response theory models for the aggregation of such response data.
   Additionally, results of these models can be visualized and summarized using convenience functions.
