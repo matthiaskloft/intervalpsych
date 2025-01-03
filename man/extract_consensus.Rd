@@ -4,14 +4,12 @@
 \alias{extract_consensus}
 \title{Extract Consensus intervals from ITM Stan Fit Object}
 \usage{
-extract_consensus(itm_stanfit, print_summary = TRUE, plot = TRUE)
+extract_consensus(itm_stanfit, print_summary = TRUE)
 }
 \arguments{
 \item{itm_stanfit}{An object of class \code{itm_stanfit} containing the fitted Stan model.}
 
 \item{print_summary}{A logical value indicating whether to print a summary of the extracted parameters. Default is \code{TRUE}.}
-
-\item{plot}{A logical value indicating whether to plot the intervals. Default is \code{TRUE}.}
 }
 \value{
 A list containing:

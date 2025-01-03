@@ -5,7 +5,6 @@
 #'
 #' @param itm_stanfit An object of class `itm_stanfit` containing the fitted Stan model.
 #' @param print_summary A logical value indicating whether to print a summary of the extracted parameters. Default is `TRUE`.
-#' @param plot A logical value indicating whether to plot the intervals. Default is `TRUE`.
 #'
 #' @return A list containing:
 #' \item{df_rvar}{A data frame with extracted posterior samples as random variables.}
@@ -23,8 +22,8 @@
 #' @export
 extract_consensus <-
   function(itm_stanfit,
-           print_summary = TRUE,
-           plot = TRUE) {
+           print_summary = TRUE
+           ) {
     # check: is class "itm_stanfit"?
     if (!inherits(itm_stanfit, "itm_stanfit")) {
       stop("Input must be an object of class 'itm_stanfit'")
@@ -43,7 +42,7 @@ extract_consensus <-
     T_U <- rstan::extract(itm_stanfit$stan_fit, pars = "Tr_U")[[1]] |>  posterior::rvar()
     names(T_U) <- paste0("T_U_", 1:itm_stanfit$stan_fit@par_dims$Tr_U)
 
-    # create a tibble with rvars
+    # create a data.frame with rvars
     df_rvar <- data.frame(
       T_loc = T_loc,
       T_wid = T_wid,
@@ -72,21 +71,20 @@ extract_consensus <-
       print(summary |> round(2))
     }
 
-    # plot
-    interval_plot <-
-      plot_intervals(df_interval_bounds = summary[, c("T_L_median", "T_U_median")],
-                     item_labels = rownames(summary))
-
-    # plot intervals
-    if (plot) {
-      print(interval_plot)
-    }
-
     # output
     ret_out <- list(df_rvar = df_rvar,
-                    summary = summary,
-                    plot = interval_plot)
+                    summary = summary)
 
     return(ret_out)
 
   }
+
+
+
+#' @exportS3Method package::generic
+summary.itm_stanfit <- function(object, ...) {
+
+  list <- extract_consensus(object, print_summary = FALSE)
+
+  return(list$summary)
+}

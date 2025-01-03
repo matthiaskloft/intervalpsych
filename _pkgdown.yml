@@ -20,6 +20,13 @@ reference:
   - splx_to_itvl
   - remove_zeros
 
+- title: Plotting functions
+  desc: >
+    Plotting functions for interval data.
+  contents:
+  - plot_intervals
+  - theme_itm
+
 - title: Model fitting
 
   desc: >
@@ -27,6 +34,7 @@ reference:
   contents:
   - fit_itm
   - extract_consensus
+  - plot_consensus
 
 - title: Example data
 
@@ -34,11 +42,3 @@ reference:
     Example data sets for interval data.
   contents:
   - quantifiers
-
-- title: internal
-  contents:
-  - check_bvn
-  - check_simplex
-  - intervalpsych-package
-  - plot_intervals
-  - theme_itm

@@ -3,12 +3,14 @@
 
 # helper function: run checks on simplex----------------------------------------
 #' @title Check if data is a valid simplex
+#'
 #' @description Check if data is a valid simplex
 #'
 #' @param simplex A numeric vector that is a 2-simplex (3 elements that sum to 1)
 #' or a dataframe where each of the rows is a 2-simplex
 #' @param n_elements The number of elements in the simplex (3 or 4)
 #'
+#' @noRd
 #'
 check_simplex <- function(simplex, n_elements = NULL) {
 
@@ -54,10 +56,13 @@ check_simplex <- function(simplex, n_elements = NULL) {
 
 # helper function: run checks on simplex----------------------------------------
 #' @title Check if data is a valid bivariate normal vector
+#'
 #' @description Check if data is a valid bivariate normal vector
+#'
 #' @param bvn A numeric vector that is a bivariate normal vector (2 elements) or
 #' a dataframe where each of the rows is a bivariate normal vector
 #'
+#' @noRd
 #'
 check_bvn <- function(bvn) {
   # is numeric
@@ -75,6 +80,17 @@ check_bvn <- function(bvn) {
 
 
 # helper function: check interval bounds data ----------------------------------
+#' @title Check if data is a valid interval bounds
+#'
+#' @description Check if data is a valid interval bounds
+#'
+#' @param raw_data A numeric vector that is a interval bounds (2 elements) or
+#' a dataframe where each of the rows is a interval bounds
+#' @param min The minimum of the original response scale
+#' @param max The maximum of the original response scale
+#'
+#' @noRd
+#'
 check_interval_bounds <- function(raw_data,
                                   min = NULL,
                                   max = NULL) {

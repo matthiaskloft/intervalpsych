@@ -11,8 +11,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><script src="deps/MathJax-3.2.2/tex-chtml.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Working with Interval Data in Psychometrics">
-<meta name="description" content="What the package does (one paragraph).">
-<meta property="og:description" content="What the package does (one paragraph).">
+<meta name="description" content="Preprocessing, modeling, and visualizing interval-valued data in psychometrics and surrounding disciplines. This package provides functions to transform interval-valued responses and to estimate item response theory models for the aggregation of such response data. Additionally, results of these models can be visualized and summarized using convenience functions.">
+<meta property="og:description" content="Preprocessing, modeling, and visualizing interval-valued data in psychometrics and surrounding disciplines. This package provides functions to transform interval-valued responses and to estimate item response theory models for the aggregation of such response data. Additionally, results of these models can be visualized and summarized using convenience functions.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -64,12 +64,15 @@
 </h1></div>
 <!-- badges: start -->
 <!-- badges: end -->
-<p>The goal of intervalpsych is to help you with the analysis of interval responses.</p>
+<p>The <strong>intervalpsych</strong> package provides a toolbox for the analysis of interval responses in psychometrics and similar disciplines. Interval responses can be used to represent uncertainty or variability in responses to survey items, for example. Besides transformation and plotting function, the package also contains a wrapper to estimate the Interval Truth Model (ITM; <a href="https://doi.org/10.31234/osf.io/dzvw2" class="external-link">Kloft, Siepe &amp; Heck, 2024</a>) in the probabilistic programming language <a href="https://mc-stan.org/" class="external-link"><strong>Stan</strong></a>. Results of the model can be visualized and summarized using the functions provided in the package.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the latest version of intervalpsych from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>You can install the released version of <strong>intervalpsych</strong> from <a href="https://CRAN.R-project.org" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"intervalpsych"</span><span class="op">)</span></span></code></pre></div>
+<p>You can install the latest development version of <strong>intervalpsych</strong> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"matthiaskloft/intervalpsych"</span><span class="op">)</span></span></code></pre></div>
 </div>

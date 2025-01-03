@@ -8,6 +8,7 @@
 #' @return A ggplot2 theme object.
 #'
 #' @import ggplot2
+#' @export
 #'
 theme_itm <- function(hide_axis_text_y = FALSE,
                       base_size = 12) {

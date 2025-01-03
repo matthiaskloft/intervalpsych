@@ -12,6 +12,8 @@
 #' @importFrom rstantools rstan_config
 #' @importFrom RcppParallel RcppParallelLibs
 #'
+#' @noRd
+#'
 #' @references
 #' Stan Development Team (NA). RStan: the R interface to Stan. R package version 2.35.0.9000. https://mc-stan.org
 #'
