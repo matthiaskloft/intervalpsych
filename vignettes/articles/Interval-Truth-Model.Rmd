@@ -54,6 +54,45 @@ head(quantifiers) |>
 ```
 
 
+What does the dataset look like? We can visualize the interval responses using the `plot_intervals_cumulative` function:
+
+```{r}
+#| fig.alt: >
+#|  Cumulative distribution of interval responses.
+
+plot_intervals_cumulative(
+  lower = quantifiers$x_L,
+  upper = quantifiers$x_U,
+  min = quantifiers$scale_min,
+  max = quantifiers$scale_max,
+  cluster_id = quantifiers$name_en,
+  weighted = FALSE,
+  facet_wrap = TRUE,
+  show_quantiles = FALSE,
+  ncol = 3
+)
+```
+
+```{r}
+#| fig.alt: >
+#|  Cumulative distribution of interval responses.
+
+plot_intervals_cumulative(
+  lower = quantifiers$x_L,
+  upper = quantifiers$x_U,
+  min = quantifiers$scale_min,
+  max = quantifiers$scale_max,
+  cluster_id = quantifiers$name_en,
+  weighted = TRUE,
+  facet_wrap = TRUE,
+  show_quantiles = FALSE,
+  ncol = 3
+)
+```
+
+
+
+
 Next, we need to convert the interval responses to the simplex format:
 
 ```{r}
