@@ -117,7 +117,8 @@ plot_consensus <- function(
 
 
 
-#' @exportS3Method package::generic
+#' @exportS3Method intervalpsych::plot
+#' @noRd
 plot.itm_stanfit <- function(x, ...) {
   plot_consensus(x, ...)
 }

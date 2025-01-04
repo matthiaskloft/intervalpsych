@@ -25,6 +25,7 @@ reference:
     Plotting functions for interval data.
   contents:
   - plot_intervals
+  - plot_intervals_cumulative
   - theme_itm
 
 - title: Model fitting

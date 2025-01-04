@@ -11,10 +11,10 @@ plot_intervals_cumulative(
   truth = NA,
   min,
   max,
-  facet_wrap = FALSE,
+  facet_wrap = NULL,
   weighted = NULL,
   show_quantiles = TRUE,
-  ncol = 2
+  ncol = 3
 )
 }
 \arguments{
@@ -37,8 +37,6 @@ plot_intervals_cumulative(
 \item{show_quantiles}{A logical value indicating whether to show quantiles on the plot. Default is TRUE.}
 
 \item{ncol}{The number of columns for facet wrapping. Default is 2.}
-
-\item{design}{An optional design parameter for the plot.}
 }
 \value{
 A ggplot object representing the cumulative interval plot.

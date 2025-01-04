@@ -66,27 +66,7 @@ plot_intervals_cumulative(
   min = quantifiers$scale_min,
   max = quantifiers$scale_max,
   cluster_id = quantifiers$name_en,
-  weighted = FALSE,
-  facet_wrap = TRUE,
-  show_quantiles = FALSE,
-  ncol = 3
-)
-```
-
-```{r}
-#| fig.alt: >
-#|  Cumulative distribution of interval responses.
-
-plot_intervals_cumulative(
-  lower = quantifiers$x_L,
-  upper = quantifiers$x_U,
-  min = quantifiers$scale_min,
-  max = quantifiers$scale_max,
-  cluster_id = quantifiers$name_en,
-  weighted = TRUE,
-  facet_wrap = TRUE,
-  show_quantiles = FALSE,
-  ncol = 3
+  weighted = TRUE
 )
 ```
 
@@ -152,8 +132,7 @@ attributes(consensus)
 
 If we want to get a summary of the consensus intervals, we can use the `summary` function, which is a wrapper function around `extract_consensus`.
 ```{r}
-summary(fit) |> 
-  round(2) |>
+summary(fit) |>
   kable() |> 
   kable_styling()
 ```

@@ -50,7 +50,16 @@ fit_itm <-
     # check for NAs
 
 
+    # get number of cols
+    n_elements <- ncol(df_simplex)
 
+    if (n_elements != 3) {
+      stop("Simplex must have 3 elements")
+    }
+    # run log-ratio checks
+    for (i in 1:nrow(df_simplex)) {
+      check_simplex(as.matrix(df_simplex)[i, ], n_elements)
+    }
 
 
     ### Stan Data --------------------------------------------------------------

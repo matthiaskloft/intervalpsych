@@ -81,7 +81,8 @@ extract_consensus <-
 
 
 
-#' @exportS3Method package::generic
+#' @exportS3Method intervalpsych::summary
+#' @noRd
 summary.itm_stanfit <- function(object, ...) {
 
   list <- extract_consensus(object, print_summary = FALSE)
