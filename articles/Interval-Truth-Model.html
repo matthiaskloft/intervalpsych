@@ -75,9 +75,7 @@ Consensus Intervals for Interval Ratings</h3>
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://matthiaskloft.github.io/intervalpsych/">intervalpsych</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in get(paste0(generic, ".", class), envir = get_method_env()) : </span></span>
-<span><span class="co">#&gt;   object 'type_sum.accel' not found</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://matthiaskloft.github.io/intervalpsych/">intervalpsych</a></span><span class="op">)</span></span></code></pre></div>
 <p>We want to fit the Interval Truth Model to the Verbal Quantifiers
 dataset.</p>
 <p>First, we load the verbal quantifiers dataset:</p>
@@ -351,7 +349,8 @@ NA
 <p>What does the dataset look like? We can visualize the interval
 responses using the <code>plot_intervals_cumulative</code> function:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_intervals_cumulative.html">plot_intervals_cumulative</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="../reference/plot_intervals_cumulative.html">plot_intervals_cumulative</a></span><span class="op">(</span></span>
 <span>  lower <span class="op">=</span> <span class="va">quantifiers</span><span class="op">$</span><span class="va">x_L</span>,</span>
 <span>  upper <span class="op">=</span> <span class="va">quantifiers</span><span class="op">$</span><span class="va">x_U</span>,</span>
 <span>  min <span class="op">=</span> <span class="va">quantifiers</span><span class="op">$</span><span class="va">scale_min</span>,</span>
@@ -359,7 +358,6 @@ responses using the <code>plot_intervals_cumulative</code> function:</p>
 <span>  cluster_id <span class="op">=</span> <span class="va">quantifiers</span><span class="op">$</span><span class="va">name_en</span>,</span>
 <span>  weighted <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Joining with `by = join_by(cluster_id)`</span></span>
 <span><span class="co">#&gt; Warning: Removed 390000 rows containing missing values or values outside the scale range</span></span>
 <span><span class="co">#&gt; (`geom_vline()`).</span></span></code></pre></div>
 <p><img src="man%2Ffigures%2FREADME-unnamed-chunk-3-1.png" alt="Cumulative distribution of interval responses." width="90%"></p>
