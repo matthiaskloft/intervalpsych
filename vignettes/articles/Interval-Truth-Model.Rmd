@@ -56,9 +56,10 @@ head(quantifiers) |>
 
 What does the dataset look like? We can visualize the interval responses using the `plot_intervals_cumulative` function:
 
-```{r}
+```{r message=FALSE, fig.width=10, fig.height=10}
 #| fig.alt: >
 #|  Cumulative distribution of interval responses.
+
 
 plot_intervals_cumulative(
   lower = quantifiers$x_L,
