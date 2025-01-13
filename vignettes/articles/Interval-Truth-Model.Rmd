@@ -13,7 +13,10 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "90%"
+  out.width = "90%",
+  fig.width = 10,
+  fig.height = 10,
+  message = FALSE
 )
 ```
 
@@ -56,7 +59,7 @@ head(quantifiers) |>
 
 What does the dataset look like? We can visualize the interval responses using the `plot_intervals_cumulative` function:
 
-```{r message=FALSE, fig.width=10, fig.height=10}
+```{r message=FALSE}
 #| fig.alt: >
 #|  Cumulative distribution of interval responses.
 
