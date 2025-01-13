@@ -22,6 +22,7 @@ Biarch: true
 Depends:
     R (>= 3.5)
 Imports:
+    distributional,
     dplyr,
     ggdist,
     ggokabeito,
@@ -48,5 +49,4 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-VignetteBuilder: knitr
 Config/Needs/website: rmarkdown

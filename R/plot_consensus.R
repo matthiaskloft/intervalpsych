@@ -95,7 +95,7 @@ plot_consensus <- function(
         ggplot2::aes(
           xdist = .data$consensus,
           y = .data$item,
-          slab_alpha = after_stat(-pmax(abs(1 - 2 * cdf), CI_gradient))
+          slab_alpha = after_stat(-pmax(abs(1 - 2 * distributional::cdf), CI_gradient))
         )
         ,
         .width = CI
@@ -117,9 +117,5 @@ plot_consensus <- function(
 
 
 
-#' @exportS3Method intervalpsych::plot
-#' @noRd
-plot.itm_stanfit <- function(x, ...) {
-  plot_consensus(x, ...)
-}
+
 

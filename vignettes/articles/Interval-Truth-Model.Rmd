@@ -152,7 +152,7 @@ plot(fit, method = "median_bounds")
 We can call the function `plot_consensus` directly for the alternative plotting method `draws_gradient`.
 This method plots the consensus intervals based on the posterior draws. For every posterior draw, a sample is drawn from a uniform distribution using the respective interval bounds of the posterior draw as minimum and maximum. The result is an rvar containing the values from the respective consensus interval, which is visualized in the plot.
 
-alternative method is `draws_gradient` which plots the consensus intervals based on the posterior draws. For every posterior draw, a sample is drawn from a uniform distribution using the respective interval bounds of the posterior draw as minimum and maximum. The result is an rvar containing the values from the respective consensus interval, which is visualized in the plot.
+An alternative method is `draws_gradient` which plots the consensus intervals based on the posterior draws. For every posterior draw, a sample is drawn from a uniform distribution using the respective interval bounds of the posterior draw as minimum and maximum. The result is an rvar containing the values from the respective consensus interval, which is visualized in the plot.
 The argument `CI` specifies the credible interval for this distribution and `CI_gradient` specifies the credible interval outside which the uncertainty is visualized by a gradient.
 ```{r}
 #| fig.alt: >

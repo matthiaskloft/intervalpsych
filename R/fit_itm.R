@@ -43,11 +43,41 @@ fit_itm <-
       stop("Error: simplex must be a dataframe!")
     }
 
-    # check indices
+    # check length of person indices
+    if (length(id_person) != nrow(df_simplex)) {
+      stop("Error: id_person must have the same length as the number of rows in the simplex!")
+    }
 
+    # check length of person indices
+    if (length(id_item) != nrow(df_simplex)) {
+      stop("Error: id_item must have the same length as the number of rows in the simplex!")
+    }
 
+    # if item_labels is not NULL, check that length of item_labels is eitherc equal to the number of rows in the simplex or equal to the unique elements in id_item
+    if (!is.null(item_labels)) {
+      if (length(item_labels) != nrow(df_simplex) & length(item_labels) != length(unique(id_item))) {
+        stop("Error: item_labels must have the same length as the number of rows in the simplex or the number of unique elements in id_item!")
+      }
+    }
+
+    # check that person and item IDs are of type integer
+    if (is.integer(id_person) == FALSE) {
+      stop("Error: id_person must be of type integer!")
+    }
+
+    if (is.integer(id_item) == FALSE) {
+      stop("Error: id_item must be of type integer!")
+    }
+
+    # check that item labels are of type character
+    if (is.character(item_labels) == FALSE) {
+      stop("Error: item_labels must be of type character!")
+    }
 
     # check for NAs
+    if (any(is.na(df_simplex))) {
+      stop("Error: simplex contains NAs!")
+    }
 
 
     # get number of cols
@@ -61,6 +91,17 @@ fit_itm <-
       check_simplex(as.matrix(df_simplex)[i, ], n_elements)
     }
 
+
+    ### Recompute indices and labels -------------------------------------------
+    id_person <- as.numeric(factor(id_person))
+    id_item <- as.numeric(factor(id_item))
+    if(!is.null(item_labels)) {
+      if(length(item_labels) == nrow(df_simplex)) {
+        item_labels <- unique(item_labels)
+      }
+    } else {
+      item_labels <- 1:max(id_item)
+    }
 
     ### Stan Data --------------------------------------------------------------
 
