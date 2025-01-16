@@ -46,7 +46,7 @@ quantifiers <- quantifiers |>
   # exclude missing values
   dplyr::filter(!is.na(x_L) & !is.na(x_U)) |>
   # recompute IDs
-  mutate(
+  dplyr::mutate(
     id_person = factor(id_person) |> as.numeric(),
     id_item = factor(id_item) |> as.numeric()
   )
@@ -116,8 +116,8 @@ fit <-
     id_person = quantifiers$id_person,
     id_item = quantifiers$id_item,
     item_labels = quantifiers |> 
-      distinct(id_item, name_en) |> 
-      pull(name_en),
+      dplyr::distinct(id_item, name_en) |> 
+      dplyr::pull(name_en),
     n_chains = 2,
     n_cores = 2,
     iter_sampling = 1000,

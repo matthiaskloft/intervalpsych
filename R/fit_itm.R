@@ -60,14 +60,15 @@ fit_itm <-
       }
     }
 
-    # check that person and item IDs are of type integer
-    if (is.integer(id_person) == FALSE) {
-      stop("Error: id_person must be of type integer!")
+    # check that person and item IDs are natural numbers
+    if (all(id_person %% 1 == 0) == FALSE) {
+      stop("Error: id_person must be natural numbers!")
     }
 
-    if (is.integer(id_item) == FALSE) {
-      stop("Error: id_item must be of type integer!")
+    if (all(id_item %% 1 == 0) == FALSE) {
+      stop("Error: id_item must be natural numbers!")
     }
+
 
     # check that item labels are of type character
     if (is.character(item_labels) == FALSE) {
