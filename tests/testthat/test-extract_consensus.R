@@ -42,7 +42,7 @@ test_that("extract_consensus works correctly", {
 
 fit <-
   intervalpsych::fit_itm(
-    df_simplex = stats::rdir(50) |> as.data.frame(),
+    df_simplex = extraDistr::rdirichlet(50, c(2,5,2)) |> as.data.frame(),
     id_person = rep(1:10,5),
     id_item = rep(1:5, each = 5),
     item_labels = quantifiers |>
