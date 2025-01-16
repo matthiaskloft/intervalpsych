@@ -53,7 +53,7 @@ fit_itm <-
       stop("Error: id_item must have the same length as the number of rows in the simplex!")
     }
 
-    # if item_labels is not NULL, check that length of item_labels is eitherc equal to the number of rows in the simplex or equal to the unique elements in id_item
+    # if item_labels is not NULL, check that length of item_labels is either equal to the number of rows in the simplex or equal to the unique elements in id_item
     if (!is.null(item_labels)) {
       if (length(item_labels) != nrow(df_simplex) & length(item_labels) != length(unique(id_item))) {
         stop("Error: item_labels must have the same length as the number of rows in the simplex or the number of unique elements in id_item!")
@@ -70,16 +70,10 @@ fit_itm <-
     }
 
 
-    # check that item labels are of type character
-    if (is.character(item_labels) == FALSE) {
-      stop("Error: item_labels must be of type character!")
-    }
-
     # check for NAs
     if (any(is.na(df_simplex))) {
       stop("Error: simplex contains NAs!")
     }
-
 
     # get number of cols
     n_elements <- ncol(df_simplex)
