@@ -1,6 +1,3 @@
-### Helper Functions to check that data have valid formatting
-
-
 # helper function: run checks on simplex----------------------------------------
 #' @title Check if data is a valid simplex
 #'
@@ -8,49 +5,32 @@
 #'
 #' @param simplex A numeric vector that is a 2-simplex (3 elements that sum to 1)
 #' or a dataframe where each of the rows is a 2-simplex
-#' @param n_elements The number of elements in the simplex (3 or 4)
 #'
 #' @noRd
 #'
-check_simplex <- function(simplex, n_elements = NULL) {
-
-  # check if n_elements is specified
-  if (is.null(n_elements)) {
-    stop("Please specify the number of elements in the simplex.")
-  }
-
+check_simplex <- function(simplex) {
   # is numeric
   if (is.numeric(simplex) == FALSE) {
     stop("Error: vector must be numeric!")
   }
-
   # has length 3
-  if (n_elements == 3 && length(simplex) != 3) {
+  if (length(simplex) != 3) {
     stop("Error: (row-)vector must have exactly 3 elements!")
   }
-
-  # has length 4
-  if (n_elements == 4 && length(simplex) != 4) {
-    stop("Error: (row-)vector must have exactly 4 elements!")
-  }
-
   # check unit scale
   if (any(simplex < 0) | any(simplex > 1)) {
     stop("Error: (row-)vector must be in the unit scale!")
   }
-
   # check that all elements sum to one, round the sum to prevent numerical issues
   if (round(sum(simplex), 6) != 1) {
     stop("Error: (row-)vector must sum to 1!")
   }
-
   # all elements are non-zero and sums to one
   if (any(simplex == 0)) {
     stop(
       "Error: None of the elements in the (row-)vector must be exactly 0! Please apply padding first!"
     )
   }
-
 }
 
 
@@ -69,14 +49,11 @@ check_bvn <- function(bvn) {
   if (!is.numeric(bvn)) {
     stop("Error: vector must be numeric!")
   }
-
   # has length 2
   if (length(bvn) != 2) {
     stop("Error: (row-)vector must have exactly 2 elements!")
   }
 }
-
-
 
 
 # helper function: check interval bounds data ----------------------------------
