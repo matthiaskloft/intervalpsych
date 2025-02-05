@@ -3,7 +3,7 @@ pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   articles/Interval-Truth-Model: Interval-Truth-Model.html
-last_built: 2025-02-05T18:18Z
+last_built: 2025-02-05T19:55Z
 urls:
   reference: https://matthiaskloft.github.io/intervalpsych/reference
   article: https://matthiaskloft.github.io/intervalpsych/articles
