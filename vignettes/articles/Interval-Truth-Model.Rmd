@@ -158,12 +158,12 @@ The argument `CI` specifies the credible interval for this distribution and `CI_
 #| fig.alt: >
 #|   Plot of the estimated consensus intervals.
 
-plot_consensus(fit, method = "draws_gradient", CI = 0, CI_gradient = .5)
+plot_consensus(fit, method = "draws_distribution", CI = .95)
 ```
 
 ```{r}
 #| fig.alt: >
 #|   Plot of the estimated consensus intervals.
 
-plot_consensus(fit, method = "draws_gradient", CI = c(.9,1), CI_gradient = .9)
+plot_consensus(fit, method = "draws_distribution", CI = c(.9,1))
 ```

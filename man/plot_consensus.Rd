@@ -4,21 +4,14 @@
 \alias{plot_consensus}
 \title{Plot ITM Consensus Intervals}
 \usage{
-plot_consensus(
-  itm_stanfit,
-  method = "median_bounds",
-  CI = 0.95,
-  CI_gradient = 0.5
-)
+plot_consensus(itm_stanfit, method = "median_bounds", CI = 0.95)
 }
 \arguments{
 \item{itm_stanfit}{An object of class 'itm_stanfit' containing the Stanfit results.}
 
-\item{method}{A character string specifying the plotting method. Options are "median_bounds" (default) or "draws_gradient".}
+\item{method}{A character string specifying the plotting method. Options are "median_bounds" (default) or "draws_distribution".}
 
 \item{CI}{A numeric value specifying the confidence interval for the median bounds method. Default is 0.95.}
-
-\item{CI_gradient}{A numeric value specifying the gradient for the confidence interval in the draws gradient method. Default is 0.5.}
 }
 \value{
 A ggplot2 object representing the interval plot.
@@ -31,5 +24,5 @@ The function checks if the input object is of class 'itm_stanfit'. It then extra
 
 If the method is "median_bounds", the function calculates the median of the lower and upper bounds and generates an interval plot using these medians.
 
-If the method is "draws_gradient", the function checks the number of draws and warns if it is less than 1000. It then computes a consensus distribution for each item and generates a gradient interval plot.
+If the method is "draws_distribution", the function checks the number of draws and warns if it is less than 1000. It then computes a consensus distribution for each item and generates a gradient interval plot.
 }

@@ -83,7 +83,7 @@ fit_itm <-
     }
     # run log-ratio checks
     for (i in 1:nrow(df_simplex)) {
-      check_simplex(as.matrix(df_simplex)[i, ], n_elements)
+      check_simplex(as.matrix(df_simplex)[i, ])
     }
 
 

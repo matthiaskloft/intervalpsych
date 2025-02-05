@@ -3,9 +3,8 @@
 #' This function generates plots for ITM Stanfit results using either the median bounds method or the draws gradient method.
 #'
 #' @param itm_stanfit An object of class 'itm_stanfit' containing the Stanfit results.
-#' @param method A character string specifying the plotting method. Options are "median_bounds" (default) or "draws_gradient".
+#' @param method A character string specifying the plotting method. Options are "median_bounds" (default) or "draws_distribution".
 #' @param CI A numeric value specifying the confidence interval for the median bounds method. Default is 0.95.
-#' @param CI_gradient A numeric value specifying the gradient for the confidence interval in the draws gradient method. Default is 0.5.
 #'
 #' @return A ggplot2 object representing the interval plot.
 #'
@@ -14,7 +13,7 @@
 #'
 #' If the method is "median_bounds", the function calculates the median of the lower and upper bounds and generates an interval plot using these medians.
 #'
-#' If the method is "draws_gradient", the function checks the number of draws and warns if it is less than 1000. It then computes a consensus distribution for each item and generates a gradient interval plot.
+#' If the method is "draws_distribution", the function checks the number of draws and warns if it is less than 1000. It then computes a consensus distribution for each item and generates a gradient interval plot.
 #'
 #'
 #'
@@ -23,8 +22,7 @@
 plot_consensus <- function(
     itm_stanfit,
     method = "median_bounds",
-    CI = .95,
-    CI_gradient = .5){
+    CI = .95){
 
   # check: is class "itm_stanfit"?
   if (!inherits(itm_stanfit, "itm_stanfit")) {
@@ -68,7 +66,7 @@ plot_consensus <- function(
 
   ### method: draws_gradient ---------------------------------------------------
 
-  if (method == "draws_gradient") {
+  if (method == "draws_distribution") {
 
     # check number of draws
     n_iter <- attributes(df_rvar$T_L[1])$draws |> length()
@@ -95,7 +93,6 @@ plot_consensus <- function(
         ggplot2::aes(
           xdist = .data$consensus,
           y = .data$item),
-        #fill_type = "gradient",
         .width = CI
       ) +
       ggplot2::scale_x_continuous(
