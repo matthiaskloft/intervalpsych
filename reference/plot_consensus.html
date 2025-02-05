@@ -38,7 +38,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Plot ITM Consensus Intervals</h1>
-      <small class="dont-index">Source: <a href="https://github.com/matthiaskloft/intervalpsych/blob/development/R/plot_itm.R" class="external-link"><code>R/plot_itm.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/matthiaskloft/intervalpsych/blob/development/R/plot_consensus.R" class="external-link"><code>R/plot_consensus.R</code></a></small>
       <div class="d-none name"><code>plot_consensus.Rd</code></div>
     </div>
 
@@ -48,12 +48,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_consensus</span><span class="op">(</span></span>
-<span>  <span class="va">itm_stanfit</span>,</span>
-<span>  method <span class="op">=</span> <span class="st">"median_bounds"</span>,</span>
-<span>  CI <span class="op">=</span> <span class="fl">0.95</span>,</span>
-<span>  CI_gradient <span class="op">=</span> <span class="fl">0.5</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_consensus</span><span class="op">(</span><span class="va">itm_stanfit</span>, method <span class="op">=</span> <span class="st">"median_bounds"</span>, CI <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -65,15 +60,11 @@
 
 
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
-<dd><p>A character string specifying the plotting method. Options are "median_bounds" (default) or "draws_gradient".</p></dd>
+<dd><p>A character string specifying the plotting method. Options are "median_bounds" (default) or "draws_distribution".</p></dd>
 
 
 <dt id="arg-ci">CI<a class="anchor" aria-label="anchor" href="#arg-ci"></a></dt>
 <dd><p>A numeric value specifying the confidence interval for the median bounds method. Default is 0.95.</p></dd>
-
-
-<dt id="arg-ci-gradient">CI_gradient<a class="anchor" aria-label="anchor" href="#arg-ci-gradient"></a></dt>
-<dd><p>A numeric value specifying the gradient for the confidence interval in the draws gradient method. Default is 0.5.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -84,7 +75,7 @@
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The function checks if the input object is of class 'itm_stanfit'. It then extracts the draws for the lower and upper bounds (T_L and T_U) from the Stanfit object.</p>
 <p>If the method is "median_bounds", the function calculates the median of the lower and upper bounds and generates an interval plot using these medians.</p>
-<p>If the method is "draws_gradient", the function checks the number of draws and warns if it is less than 1000. It then computes a consensus distribution for each item and generates a gradient interval plot.</p>
+<p>If the method is "draws_distribution", the function checks the number of draws and warns if it is less than 1000. It then computes a consensus distribution for each item and generates a gradient interval plot.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
