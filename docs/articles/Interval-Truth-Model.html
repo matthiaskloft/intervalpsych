@@ -81,20 +81,7 @@ dataset.</p>
 <p>First, we load the verbal quantifiers dataset:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     filter, lag</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/" class="external-link">kableExtra</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'kableExtra'</span></span>
-<span><span class="co">#&gt; The following object is masked from 'package:dplyr':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     group_rows</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">quantifiers</span><span class="op">)</span></span>
 <span></span>
@@ -110,7 +97,7 @@ dataset.</p>
 <span>  <span class="co"># exclude missing values</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">x_L</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">x_U</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># recompute IDs</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    id_person <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">id_person</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    id_item <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">id_item</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
@@ -349,7 +336,8 @@ NA
 <p>What does the dataset look like? We can visualize the interval
 responses using the <code>plot_intervals_cumulative</code> function:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_intervals_cumulative.html">plot_intervals_cumulative</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="../reference/plot_intervals_cumulative.html">plot_intervals_cumulative</a></span><span class="op">(</span></span>
 <span>  lower <span class="op">=</span> <span class="va">quantifiers</span><span class="op">$</span><span class="va">x_L</span>,</span>
 <span>  upper <span class="op">=</span> <span class="va">quantifiers</span><span class="op">$</span><span class="va">x_U</span>,</span>
 <span>  min <span class="op">=</span> <span class="va">quantifiers</span><span class="op">$</span><span class="va">scale_min</span>,</span>
@@ -357,7 +345,6 @@ responses using the <code>plot_intervals_cumulative</code> function:</p>
 <span>  cluster_id <span class="op">=</span> <span class="va">quantifiers</span><span class="op">$</span><span class="va">name_en</span>,</span>
 <span>  weighted <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Joining with `by = join_by(cluster_id)`</span></span>
 <span><span class="co">#&gt; Warning: Removed 390000 rows containing missing values or values outside the scale range</span></span>
 <span><span class="co">#&gt; (`geom_vline()`).</span></span></code></pre></div>
 <p><img src="man%2Ffigures%2FREADME-unnamed-chunk-3-1.png" alt="Cumulative distribution of interval responses." width="90%"></p>
@@ -499,7 +486,7 @@ x_3
 transformation:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="../reference/ilr.html">ilr</a></span><span class="op">(</span><span class="va">quantifiers</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x_1"</span>,<span class="st">"x_2"</span>,<span class="st">"x_3"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in check_simplex(simplex[i, ], n_elements) : </span></span>
+<span><span class="co">#&gt; Error in check_simplex(simplex[i, ]) : </span></span>
 <span><span class="co">#&gt;   Error: None of the elements in the (row-)vector must be exactly 0! Please apply padding first!</span></span></code></pre></div>
 <p>It seems we have components in our simplex data that are zero. So we
 first have to deal with these zero components. We can do this by adding
@@ -642,8 +629,8 @@ x_3
 <span>    id_person <span class="op">=</span> <span class="va">quantifiers</span><span class="op">$</span><span class="va">id_person</span>,</span>
 <span>    id_item <span class="op">=</span> <span class="va">quantifiers</span><span class="op">$</span><span class="va">id_item</span>,</span>
 <span>    item_labels <span class="op">=</span> <span class="va">quantifiers</span> <span class="op">|&gt;</span> </span>
-<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">id_item</span>, <span class="va">name_en</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">name_en</span><span class="op">)</span>,</span>
+<span>      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">id_item</span>, <span class="va">name_en</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">name_en</span><span class="op">)</span>,</span>
 <span>    n_chains <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>    n_cores <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>    iter_sampling <span class="op">=</span> <span class="fl">1000</span>,</span>
@@ -695,22 +682,22 @@ T_U_CI_975
 now and then
 </td>
 <td style="text-align:right;">
-0.1682403
+0.1690094
 </td>
 <td style="text-align:right;">
-0.11958107
+0.11927735
 </td>
 <td style="text-align:right;">
-0.23364738
+0.23206153
 </td>
 <td style="text-align:right;">
-0.3830849
+0.3828861
 </td>
 <td style="text-align:right;">
-0.32059929
+0.32108055
 </td>
 <td style="text-align:right;">
-0.4528290
+0.4513745
 </td>
 </tr>
 <tr>
@@ -718,22 +705,22 @@ now and then
 possibly
 </td>
 <td style="text-align:right;">
-0.2310416
+0.2315702
 </td>
 <td style="text-align:right;">
-0.16964754
+0.17241385
 </td>
 <td style="text-align:right;">
-0.29947371
+0.29961898
 </td>
 <td style="text-align:right;">
-0.4815880
+0.4828900
 </td>
 <td style="text-align:right;">
-0.40014074
+0.39989960
 </td>
 <td style="text-align:right;">
-0.5645378
+0.5650757
 </td>
 </tr>
 <tr>
@@ -741,22 +728,22 @@ possibly
 almost always
 </td>
 <td style="text-align:right;">
-0.8269087
+0.8277478
 </td>
 <td style="text-align:right;">
-0.77914904
+0.77806805
 </td>
 <td style="text-align:right;">
-0.86851530
+0.86644378
 </td>
 <td style="text-align:right;">
-0.9559770
+0.9557990
 </td>
 <td style="text-align:right;">
-0.93452646
+0.93630437
 </td>
 <td style="text-align:right;">
-0.9714779
+0.9720936
 </td>
 </tr>
 <tr>
@@ -764,22 +751,22 @@ almost always
 almost never
 </td>
 <td style="text-align:right;">
-0.0299260
+0.0299666
 </td>
 <td style="text-align:right;">
-0.01734369
+0.01806039
 </td>
 <td style="text-align:right;">
-0.04658074
+0.04705115
 </td>
 <td style="text-align:right;">
-0.1231743
+0.1219955
 </td>
 <td style="text-align:right;">
-0.09068052
+0.09100101
 </td>
 <td style="text-align:right;">
-0.1607086
+0.1640328
 </td>
 </tr>
 <tr>
@@ -787,22 +774,22 @@ almost never
 occasionally
 </td>
 <td style="text-align:right;">
-0.2142231
+0.2147098
 </td>
 <td style="text-align:right;">
-0.16022726
+0.15843886
 </td>
 <td style="text-align:right;">
-0.27932867
+0.28122250
 </td>
 <td style="text-align:right;">
-0.4007511
+0.4007917
 </td>
 <td style="text-align:right;">
-0.32282699
+0.32202411
 </td>
 <td style="text-align:right;">
-0.4797736
+0.4833140
 </td>
 </tr>
 <tr>
@@ -810,22 +797,22 @@ occasionally
 frequently
 </td>
 <td style="text-align:right;">
-0.6277243
+0.6287658
 </td>
 <td style="text-align:right;">
-0.57638430
+0.57332526
 </td>
 <td style="text-align:right;">
-0.67831956
+0.67646308
 </td>
 <td style="text-align:right;">
-0.8544276
+0.8545198
 </td>
 <td style="text-align:right;">
-0.80719681
+0.80618471
 </td>
 <td style="text-align:right;">
-0.8951893
+0.8930858
 </td>
 </tr>
 <tr>
@@ -833,22 +820,22 @@ frequently
 hardly
 </td>
 <td style="text-align:right;">
-0.0557750
+0.0560271
 </td>
 <td style="text-align:right;">
-0.03833188
+0.03680012
 </td>
 <td style="text-align:right;">
-0.07890361
+0.07961678
 </td>
 <td style="text-align:right;">
-0.1964748
+0.1968097
 </td>
 <td style="text-align:right;">
-0.15478910
+0.15487154
 </td>
 <td style="text-align:right;">
-0.2438005
+0.2438223
 </td>
 </tr>
 <tr>
@@ -856,22 +843,22 @@ hardly
 sometimes
 </td>
 <td style="text-align:right;">
-0.2586830
+0.2591946
 </td>
 <td style="text-align:right;">
-0.20715802
+0.20552789
 </td>
 <td style="text-align:right;">
-0.31876535
+0.31458233
 </td>
 <td style="text-align:right;">
-0.4575218
+0.4566146
 </td>
 <td style="text-align:right;">
-0.39692422
+0.39422390
 </td>
 <td style="text-align:right;">
-0.5230666
+0.5181642
 </td>
 </tr>
 <tr>
@@ -879,22 +866,22 @@ sometimes
 most of the time
 </td>
 <td style="text-align:right;">
-0.7162168
+0.7164727
 </td>
 <td style="text-align:right;">
-0.65483226
+0.65711431
 </td>
 <td style="text-align:right;">
-0.77437469
+0.76762968
 </td>
 <td style="text-align:right;">
-0.9298290
+0.9304844
 </td>
 <td style="text-align:right;">
-0.89354366
+0.89391640
 </td>
 <td style="text-align:right;">
-0.9585579
+0.9563319
 </td>
 </tr>
 <tr>
@@ -902,22 +889,22 @@ most of the time
 often
 </td>
 <td style="text-align:right;">
-0.6274158
+0.6281066
 </td>
 <td style="text-align:right;">
-0.57466970
+0.57390714
 </td>
 <td style="text-align:right;">
-0.67723043
+0.67682153
 </td>
 <td style="text-align:right;">
-0.8456452
+0.8465594
 </td>
 <td style="text-align:right;">
-0.81319109
+0.81228993
 </td>
 <td style="text-align:right;">
-0.8762476
+0.8774847
 </td>
 </tr>
 <tr>
@@ -925,22 +912,22 @@ often
 potentially
 </td>
 <td style="text-align:right;">
-0.3767954
+0.3766746
 </td>
 <td style="text-align:right;">
-0.28035904
+0.27999639
 </td>
 <td style="text-align:right;">
-0.48099973
+0.48496081
 </td>
 <td style="text-align:right;">
-0.6737520
+0.6735070
 </td>
 <td style="text-align:right;">
-0.56373698
+0.56832608
 </td>
 <td style="text-align:right;">
-0.7684696
+0.7641201
 </td>
 </tr>
 <tr>
@@ -948,22 +935,22 @@ potentially
 rarely
 </td>
 <td style="text-align:right;">
-0.0619707
+0.0617854
 </td>
 <td style="text-align:right;">
-0.04061118
+0.04069984
 </td>
 <td style="text-align:right;">
-0.09148781
+0.08935647
 </td>
 <td style="text-align:right;">
-0.2087228
+0.2074241
 </td>
 <td style="text-align:right;">
-0.15952392
+0.15946239
 </td>
 <td style="text-align:right;">
-0.2677505
+0.2638009
 </td>
 </tr>
 <tr>
@@ -971,22 +958,22 @@ rarely
 constantly
 </td>
 <td style="text-align:right;">
-0.7662953
+0.7660636
 </td>
 <td style="text-align:right;">
-0.68515672
+0.68305452
 </td>
 <td style="text-align:right;">
-0.83250179
+0.83602194
 </td>
 <td style="text-align:right;">
-0.9414990
+0.9416373
 </td>
 <td style="text-align:right;">
-0.89998809
+0.89783598
 </td>
 <td style="text-align:right;">
-0.9682848
+0.9683191
 </td>
 </tr>
 </tbody>
@@ -1005,7 +992,7 @@ posterior draw, a sample is drawn from a uniform distribution using the
 respective interval bounds of the posterior draw as minimum and maximum.
 The result is an rvar containing the values from the respective
 consensus interval, which is visualized in the plot.</p>
-<p>alternative method is <code>draws_gradient</code> which plots the
+<p>An alternative method is <code>draws_gradient</code> which plots the
 consensus intervals based on the posterior draws. For every posterior
 draw, a sample is drawn from a uniform distribution using the respective
 interval bounds of the posterior draw as minimum and maximum. The result
@@ -1015,10 +1002,10 @@ the credible interval for this distribution and <code>CI_gradient</code>
 specifies the credible interval outside which the uncertainty is
 visualized by a gradient.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_consensus.html">plot_consensus</a></span><span class="op">(</span><span class="va">fit</span>, method <span class="op">=</span> <span class="st">"draws_gradient"</span>, CI <span class="op">=</span> <span class="fl">0</span>, CI_gradient <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_consensus.html">plot_consensus</a></span><span class="op">(</span><span class="va">fit</span>, method <span class="op">=</span> <span class="st">"draws_distribution"</span>, CI <span class="op">=</span> <span class="fl">.95</span><span class="op">)</span></span></code></pre></div>
 <p><img src="man%2Ffigures%2FREADME-unnamed-chunk-11-1.png" alt="Plot of the estimated consensus intervals." width="90%"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_consensus.html">plot_consensus</a></span><span class="op">(</span><span class="va">fit</span>, method <span class="op">=</span> <span class="st">"draws_gradient"</span>, CI <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.9</span>,<span class="fl">1</span><span class="op">)</span>, CI_gradient <span class="op">=</span> <span class="fl">.9</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_consensus.html">plot_consensus</a></span><span class="op">(</span><span class="va">fit</span>, method <span class="op">=</span> <span class="st">"draws_distribution"</span>, CI <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.9</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="man%2Ffigures%2FREADME-unnamed-chunk-12-1.png" alt="Plot of the estimated consensus intervals." width="90%"></p>
   </main>
 </div>
