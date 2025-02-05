@@ -4,34 +4,23 @@
 
 test_that("check_simplex works correctly", {
   # Test for valid 3-element simplex
-  expect_silent(check_simplex(c(0.2, 0.3, 0.5), n_elements = 3))
-
-  # Test for valid 4-element simplex
-  expect_silent(check_simplex(c(0.1, 0.2, 0.3, 0.4), n_elements = 4))
-
-  # Test for missing n_elements
-  expect_error(check_simplex(c(0.2, 0.3, 0.5)),
-               "Please specify the number of elements in the simplex.")
+  expect_silent(check_simplex(c(0.2, 0.3, 0.5)))
 
   # Test for non-numeric vector
-  expect_error(check_simplex(c("a", "b", "c"), n_elements = 3),
+  expect_error(check_simplex(c("a", "b", "c")),
                "Error: vector must be numeric\\!")
 
   # Test for incorrect length (3-element simplex)
-  expect_error(check_simplex(c(0.2, 0.3), n_elements = 3),
+  expect_error(check_simplex(c(0.2, 0.3)),
                "Error: \\(row-\\)vector must have exactly 3 elements\\!")
 
-  # Test for incorrect length (4-element simplex)
-  expect_error(check_simplex(c(0.2, 0.3, 0.5), n_elements = 4),
-               "Error: \\(row-\\)vector must have exactly 4 elements\\!")
-
   # Test for sum not equal to 1
-  expect_error(check_simplex(c(0.2, 0.3, 0.6), n_elements = 3),
+  expect_error(check_simplex(c(0.2, 0.3, 0.6)),
                "Error: \\(row-\\)vector must sum to 1\\!")
 
   # Test for zero elements
   expect_error(
-    check_simplex(c(0.7, 0.3, 0), n_elements = 3),
+    check_simplex(c(0.7, 0.3, 0)),
     "Error: None of the elements in the \\(row-\\)vector must be exactly 0\\! Please apply padding first\\!"
   )
 })

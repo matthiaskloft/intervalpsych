@@ -24,7 +24,7 @@ ilr <- function(simplex) {
     }
 
     # run checks
-    check_simplex(simplex, n_elements)
+    check_simplex(simplex)
 
     # calculate ILR
     Y <- rep(NA, 2)
@@ -51,7 +51,7 @@ ilr <- function(simplex) {
 
     # run checks
     for (i in 1:nrow(simplex)) {
-      check_simplex(simplex[i, ], n_elements)
+      check_simplex(simplex[i, ])
     }
 
     # calculate ILR
@@ -283,13 +283,13 @@ splx_to_itvl <- function(simplex, min = NULL, max = NULL) {
 
     n_elements <- length(simplex)
 
-    # check that n_elements is either 3 or 4
-    if (n_elements != 3 & n_elements != 4) {
-      stop("Simplex must have either 3 or 4 elements")
+    # check that n_elements is 3
+    if (n_elements != 3) {
+      stop("Simplex must have 3 elements")
     }
 
     # run checks
-    check_simplex(simplex, n_elements)
+    check_simplex(simplex)
 
     # compute simplex
     if (length(simplex) == 3) {
@@ -313,14 +313,14 @@ splx_to_itvl <- function(simplex, min = NULL, max = NULL) {
 
     n_elements <- ncol(simplex)
 
-    # check that n_elements is either 3 or 4
-    if (n_elements != 3 & n_elements != 4) {
-      stop("Simplex must have either 3 or 4 elements")
+    # check that n_elements is 3
+    if (n_elements != 3) {
+      stop("Simplex must have 3 elements")
     }
 
     # run checks
     for (i in 1:nrow(simplex)) {
-      check_simplex(simplex[i, ], n_elements)
+      check_simplex(simplex[i, ])
     }
 
     # compute simplex
