@@ -486,8 +486,8 @@ x_3
 transformation:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="../reference/ilr.html">ilr</a></span><span class="op">(</span><span class="va">quantifiers</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x_1"</span>,<span class="st">"x_2"</span>,<span class="st">"x_3"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in check_simplex(simplex[i, ], n_elements) : </span></span>
-<span><span class="co">#&gt;   unused argument (n_elements)</span></span></code></pre></div>
+<span><span class="co">#&gt; Error in check_simplex(simplex[i, ]) : </span></span>
+<span><span class="co">#&gt;   Error: None of the elements in the (row-)vector must be exactly 0! Please apply padding first!</span></span></code></pre></div>
 <p>It seems we have components in our simplex data that are zero. So we
 first have to deal with these zero components. We can do this by adding
 a padding constant:</p>
