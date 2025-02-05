@@ -91,13 +91,11 @@ plot_consensus <- function(
     interval_plot <-
       df_rvar |>
       ggplot2::ggplot() +
-      ggdist::stat_dist_gradientinterval(
+      ggdist::stat_halfeye(
         ggplot2::aes(
           xdist = .data$consensus,
-          y = .data$item,
-          slab_alpha = after_stat(-pmax(abs(1 - 2 * distributional::cdf), CI_gradient))
-        )
-        ,
+          y = .data$item),
+        #fill_type = "gradient",
         .width = CI
       ) +
       ggplot2::scale_x_continuous(
