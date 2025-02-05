@@ -18,6 +18,15 @@ remove_zeros <- function(simplex,
                          method = "simple_replacement",
                          padding = .01) {
 
+  ### Check method
+
+  available_methods <- c("simple_replacement")
+
+  if (!method %in% available_methods) {
+    stop("Error: method must be one of ", paste(available_methods, collapse = ", "))
+  }
+
+
   ### Coerce to Matrix ---------------------------------------------------------
 
   if (is.vector(simplex)) {

@@ -194,8 +194,8 @@ ggplot_cumulative_intervals <-
       theme(
         plot.margin = margin(.2, .5, .2, .2, "cm"),
         panel.grid = element_blank(),
-        axis.line = element_line(colour = "#6d6d6e", size = .3),
-        axis.ticks = element_line(colour = "#6d6d6e", size = .3),
+        axis.line = element_line(colour = "#6d6d6e", linewidth = .3),
+        axis.ticks = element_line(colour = "#6d6d6e", linewidth = .3),
         axis.text = element_text(size = 10),
         strip.text = element_text(size = 11, margin = margin(0, 0, .3, 0, "cm"))
       )
