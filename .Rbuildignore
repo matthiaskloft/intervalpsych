@@ -10,3 +10,4 @@
 ^vignettes/articles$
 ^pkgdown$
 ^\.covignore
+^cran-comments\.md$
