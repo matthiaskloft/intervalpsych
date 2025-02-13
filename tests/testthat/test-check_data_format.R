@@ -45,7 +45,6 @@ test_that("check_bvn works correctly", {
 test_that("check_interval_bounds works correctly", {
   # Test for valid interval bounds data
   expect_silent(check_interval_bounds(c(1, 2), min = 0, max = 3))
-  expect_silent(check_interval_bounds(c(1, 2, 3), min = 0, max = 3))
 
   # Test for non-numeric vector
   expect_error(check_interval_bounds(c("a", "b"), min = 0, max = 3), "Error: Input must be a numeric vector\\!")
@@ -61,6 +60,6 @@ test_that("check_interval_bounds works correctly", {
   expect_error(check_interval_bounds(c(1, 2), min = 3, max = 3), "Minimum must be smaller than Maximum\\!")
 
   # Test for incorrect length
-  expect_error(check_interval_bounds(c(1), min = 0, max = 3), "Raw data must have either 2 or 3 values per response\\!")
-  expect_error(check_interval_bounds(c(1, 2, 3, 4), min = 0, max = 3), "Raw data must have either 2 or 3 values per response\\!")
+  expect_error(check_interval_bounds(c(1), min = 0, max = 3), "Interval bounds data must have 2 values per response\\!")
+  expect_error(check_interval_bounds(c(1, 2, 3), min = 0, max = 3), "Interval bounds data must have 2 values per response\\!")
 })

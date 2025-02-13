@@ -93,7 +93,7 @@ check_interval_bounds <- function(raw_data,
 
   l <- length(raw_data)
   # check length
-  if (!l %in% 2:3) {
-    stop("Raw data must have either 2 or 3 values per response!")
+  if (l != 2) {
+    stop("Interval bounds data must have 2 values per response!")
   }
 }

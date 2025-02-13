@@ -205,14 +205,6 @@ itvl_to_splx <- function(interval_bounds,
         x_3 = (max - interval_bounds[2]) / max
       )
     }
-    if (length(interval_bounds)  == 3) {
-      comp <- c(
-        x_1 = (interval_bounds[1] - min) / max,
-        x_2 = (interval_bounds[2] - interval_bounds[1]) / max,
-        x_3 = (interval_bounds[3] - interval_bounds[2]) / max,
-        x_4 = (max - interval_bounds[3]) / max
-      )
-    }
 
     return(comp)
 
@@ -236,23 +228,15 @@ itvl_to_splx <- function(interval_bounds,
         x_3 = (max - interval_bounds[, 2]) / max
       )
     }
-    if (ncol(interval_bounds) == 3) {
-      comp <- data.frame(
-        x_1 = (interval_bounds[, 1] - min) / max,
-        x_2 = (interval_bounds[, 2] - interval_bounds[, 1]) / max,
-        x_3 = (interval_bounds[, 3] - interval_bounds[, 2]) / max,
-        x_4 = (max - interval_bounds[, 3]) / max
-      )
-    }
 
     return(comp)
   }
 }
 
 # test examples
-itvl_to_splx(c(.1, .5), min = 0, max = 1)
-interval_responses <- data.frame(rbind(c(.1, .5), c(.4, .7)))
-itvl_to_splx(interval_responses, min = 0, max = 1)
+#itvl_to_splx(c(.1, .5), min = 0, max = 1)
+#interval_responses <- data.frame(rbind(c(.1, .5), c(.4, .7)))
+#itvl_to_splx(interval_responses, min = 0, max = 1)
 
 
 
@@ -295,13 +279,6 @@ splx_to_itvl <- function(simplex, min = NULL, max = NULL) {
     if (length(simplex) == 3) {
       interval <- c(x_lo = simplex[1] + min, x_up = max - simplex[3])
     }
-    if (length(simplex) == 4) {
-      interval <- c(
-        x_lo = simplex[1] + min,
-        x_mid = simplex[1] + simplex[2] + min,
-        x_up = max - simplex[4]
-      )
-    }
 
     return(interval)
 
@@ -327,13 +304,7 @@ splx_to_itvl <- function(simplex, min = NULL, max = NULL) {
     if (ncol(simplex) == 3) {
       interval <- data.frame(x_lo = simplex[, 1] + min, x_up = max - simplex[, 3])
     }
-    if (ncol(simplex) == 4) {
-      interval <- data.frame(
-        x_lo = simplex[, 1] + min,
-        x_mid = simplex[, 1] + simplex[, 2] + min,
-        x_up = max - simplex[, 4]
-      )
-    }
+
     return(interval)
   }
 }

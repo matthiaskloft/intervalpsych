@@ -1,5 +1,6 @@
 
 
+
 ### ILR ########################################################################
 
 # Test for vector input
@@ -71,15 +72,6 @@ test_that("itvl_to_splx transformation works for vector input with 2 elements",
             expect_named(result, c("x_1", "x_2", "x_3"))
           })
 
-# Test for vector input with 3 elements
-test_that("itvl_to_splx transformation works for vector input with 3 elements",
-          {
-            interval_bounds <- c(0.1, 0.3, 0.6)
-            result <- itvl_to_splx(interval_bounds, min = 0, max = 1)
-            expect_equal(length(result), 4)
-            expect_named(result, c("x_1", "x_2", "x_3", "x_4"))
-          })
-
 # Test for dataframe input with 2 elements per row
 test_that("itvl_to_splx transformation works for dataframe input with 2 elements per row",
           {
@@ -92,15 +84,17 @@ test_that("itvl_to_splx transformation works for dataframe input with 2 elements
 
 # Test for invalid input
 test_that("itvl_to_splx transformation handles invalid input", {
-  expect_error(itvl_to_splx(c(0.4), min = 0, max = 1),
-               "Raw data must have either 2 or 3 values per response\\!")
+  expect_error(
+    itvl_to_splx(c(0.4), min = 0, max = 1),
+    "Interval bounds data must have 2 values per response\\!"
+  )
   expect_error(
     itvl_to_splx(data.frame(rbind(c(
       0.1
     ), c(
       0.4
     ))), min = 0, max = 1),
-    "Raw data must have either 2 or 3 values per response\\!"
+    "Interval bounds data must have 2 values per response\\!"
   )
 })
 

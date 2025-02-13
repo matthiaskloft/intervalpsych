@@ -73,8 +73,7 @@ plot_consensus <- function(
 
     # warn if number of draws < 1000
     if (n_iter < 2000) {
-      warning("Number of draws is less than 1000.
-              Consider increasing the number of iterations or using method = 'median_bounds' instead.")
+      warning("Number of draws is less than 1000. Consider increasing the number of iterations or using method = 'median_bounds' instead.")
     }
 
 
