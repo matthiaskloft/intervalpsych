@@ -12,10 +12,10 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 
-RcppExport SEXP _rcpp_module_boot_stan_fit4itm_mod();
+RcppExport SEXP _rcpp_module_boot_stan_fit4itm_ilr_mod();
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_rcpp_module_boot_stan_fit4itm_mod", (DL_FUNC) &_rcpp_module_boot_stan_fit4itm_mod, 0},
+    {"_rcpp_module_boot_stan_fit4itm_ilr_mod", (DL_FUNC) &_rcpp_module_boot_stan_fit4itm_ilr_mod, 0},
     {NULL, NULL, 0}
 };
 

@@ -7,6 +7,7 @@
 #' @param id_item A vector of item indices.
 #' @param item_labels A vector of item labels. Can be long format matching id_item or
 #' a vector of unique labels in ascending order. Default is NULL.
+#' @param link A character string specifying the link function. The only option as of now is "ilr", the Isometric Log-Ratio function.
 #' @param iter_sampling An integer specifying the number of sampling iterations. Default is 500.
 #' @param iter_warmup An integer specifying the number of warmup iterations. Default is 500.
 #' @param n_chains An integer specifying the number of Markov chains. Default is 4.
@@ -29,6 +30,7 @@ fit_itm <-
            id_person,
            id_item,
            item_labels = NULL,
+           link = "ilr",
            iter_sampling = 500,
            iter_warmup = 500,
            n_chains = 4,
@@ -37,6 +39,12 @@ fit_itm <-
            ...) {
 
     ### Data Checks ------------------------------------------------------------
+
+    # check that a valid link was specified
+    link_functions <- c("ilr")
+    if (!link %in% link_functions) {
+      stop("Error: link must be either 'ilr' or 'clr'!")
+    }
 
     # check if simplex is a dataframe
     if (is.data.frame(df_simplex) == FALSE) {
@@ -81,10 +89,13 @@ fit_itm <-
     if (n_elements != 3) {
       stop("Simplex must have 3 elements")
     }
+
     # run log-ratio checks
     for (i in 1:nrow(df_simplex)) {
       check_simplex(as.matrix(df_simplex)[i, ])
     }
+
+
 
 
     ### Recompute indices and labels -------------------------------------------
