@@ -9,6 +9,7 @@ fit_itm(
   id_person,
   id_item,
   item_labels = NULL,
+  link = "ilr",
   iter_sampling = 500,
   iter_warmup = 500,
   n_chains = 4,
@@ -26,6 +27,8 @@ fit_itm(
 
 \item{item_labels}{A vector of item labels. Can be long format matching id_item or
 a vector of unique labels in ascending order. Default is NULL.}
+
+\item{link}{A character string specifying the link function. The only option as of now is "ilr", the Isometric Log-Ratio function.}
 
 \item{iter_sampling}{An integer specifying the number of sampling iterations. Default is 500.}
 

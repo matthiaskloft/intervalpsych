@@ -9,5 +9,5 @@
 ^\.github$
 ^vignettes/articles$
 ^pkgdown$
-^\.covignore
+^\.covrignore
 ^cran-comments\.md$

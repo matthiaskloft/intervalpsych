@@ -17,7 +17,7 @@ test_that("fit_itm works correctly", {
   expect_s3_class(fit, "list")
   expect_s3_class(fit, "itm_stanfit")
 
-  expect_true(all(c("stan_fit", "stan_data", "item_labels") %in% names(fit)))
+  expect_true(all(c("stan_model" ,"stan_fit", "stan_data", "item_labels") %in% names(fit)))
 
 })
 

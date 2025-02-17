@@ -23,7 +23,6 @@ Depends:
     R (>= 3.5)
 Imports:
     dplyr,
-    extraDistr,
     ggdist,
     ggokabeito,
     ggplot2,
@@ -44,6 +43,7 @@ LinkingTo:
 SystemRequirements: GNU make
 LazyData: true
 Suggests:
+    extraDistr,
     kableExtra,
     knitr,
     rmarkdown,

@@ -121,11 +121,19 @@ fit_itm <-
       Y_splx = df_simplex
     )
 
+    ### Stan Model --------------------------------------------------------------
+
+    if(link == "ilr") {
+      stan_model <- stanmodels$itm_ilr
+    }
+
     ### Run Sampler Stan Model -------------------------------------------------
+
+
 
     # specify default arguments
     default_args <- list(
-      object = stanmodels$itm,
+      object = stan_model,
       data = stan_data,
       pars = c("Tr_loc_beta",
                "Tr_wid_beta",
@@ -150,6 +158,7 @@ fit_itm <-
     ### Return Object ----------------------------------------------------------
 
     ret_fit <- list(
+      stan_model = stan_model,
       stan_fit = stan_fit,
       stan_data = stan_data,
       item_labels = item_labels
