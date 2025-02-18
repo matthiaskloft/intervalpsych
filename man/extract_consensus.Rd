@@ -4,10 +4,10 @@
 \alias{extract_consensus}
 \title{Extract Consensus intervals from ITM Stan Fit Object}
 \usage{
-extract_consensus(itm_stanfit, print_summary = TRUE)
+extract_consensus(icm_stanfit, print_summary = TRUE)
 }
 \arguments{
-\item{itm_stanfit}{An object of class \code{itm_stanfit} containing the fitted Stan model.}
+\item{icm_stanfit}{An object of class \code{icm_stanfit} containing the fitted Stan model.}
 
 \item{print_summary}{A logical value indicating whether to print a summary of the extracted parameters. Default is \code{TRUE}.}
 }
@@ -19,9 +19,9 @@ A list containing:
 }
 \description{
 This function extracts parameter estimates for the consensus intervals from a
-fitted Interval Truth Model Stan fit object of class \code{itm_stanfit}.
+fitted Interval Consensus Model Stan fit object of class \code{icm_stanfit}.
 }
 \details{
 This function extracts parameter estimates for the consensus intervals from a
-fitted Interval Truth Model Stan fit object of class \code{itm_stanfit}.
+fitted Interval Consensus Model Stan fit object of class \code{icm_stanfit}.
 }

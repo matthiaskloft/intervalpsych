@@ -124,7 +124,7 @@ fit_itm <-
     ### Stan Model --------------------------------------------------------------
 
     if(link == "ilr") {
-      stan_model <- stanmodels$itm_ilr
+      stan_model <- stanmodels$icm_ilr
     }
 
     ### Run Sampler Stan Model -------------------------------------------------
@@ -164,7 +164,7 @@ fit_itm <-
       item_labels = item_labels
     )
 
-    class(ret_fit) <- c("itm_stanfit", class(ret_fit))
+    class(ret_fit) <- c("icm_stanfit", class(ret_fit))
 
     return(ret_fit)
 

@@ -4,10 +4,10 @@
 \alias{plot_consensus}
 \title{Plot ITM Consensus Intervals}
 \usage{
-plot_consensus(itm_stanfit, method = "median_bounds", CI = 0.95)
+plot_consensus(icm_stanfit, method = "median_bounds", CI = 0.95)
 }
 \arguments{
-\item{itm_stanfit}{An object of class 'itm_stanfit' containing the Stanfit results.}
+\item{icm_stanfit}{An object of class 'icm_stanfit' containing the Stanfit results.}
 
 \item{method}{A character string specifying the plotting method. Options are "median_bounds" (default) or "draws_distribution".}
 
@@ -20,7 +20,7 @@ A ggplot2 object representing the interval plot.
 This function generates plots for ITM Stanfit results using either the median bounds method or the draws gradient method.
 }
 \details{
-The function checks if the input object is of class 'itm_stanfit'. It then extracts the draws for the lower and upper bounds (T_L and T_U) from the Stanfit object.
+The function checks if the input object is of class 'icm_stanfit'. It then extracts the draws for the lower and upper bounds (T_L and T_U) from the Stanfit object.
 
 If the method is "median_bounds", the function calculates the median of the lower and upper bounds and generates an interval plot using these medians.
 

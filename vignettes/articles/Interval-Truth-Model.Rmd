@@ -1,9 +1,9 @@
 ---
-title: "Interval Truth Model"
+title: "Interval Consensus Model"
 subtitle: "Estimation of Weighted Consensus Intervals for Interval Ratings"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Interval Truth Model}
+  %\VignetteIndexEntry{Interval Consensus Model}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -25,7 +25,7 @@ library(intervalpsych)
 ```
 
 
-We want to fit the Interval Truth Model to the Verbal Quantifiers dataset.
+We want to fit the Interval Consensus Model to the Verbal Quantifiers dataset.
 
 First, we load the verbal quantifiers dataset:
 ```{r}
@@ -137,6 +137,7 @@ attributes(consensus)
 If we want to get a summary of the consensus intervals, we can use the `summary` function, which is a wrapper function around `extract_consensus`.
 ```{r}
 summary(fit) |>
+  round(2) |> 
   kable() |> 
   kable_styling()
 ```
@@ -165,5 +166,5 @@ plot_consensus(fit, method = "draws_distribution", CI = .95)
 #| fig.alt: >
 #|   Plot of the estimated consensus intervals.
 
-plot_consensus(fit, method = "draws_distribution", CI = c(.9,1))
+plot_consensus(fit, method = "draws_distribution", CI = c(.5,.95))
 ```

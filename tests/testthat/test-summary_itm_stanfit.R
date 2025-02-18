@@ -1,4 +1,4 @@
-test_that("summary.itm_stanfit works correctly", {
+test_that("summary.icm_stanfit works correctly", {
 
   suppressWarnings(
     fit <-

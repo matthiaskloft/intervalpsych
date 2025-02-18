@@ -48,7 +48,7 @@ test_that("plot_consensus throws errors", {
   fit <-  list()
   expect_error(
     intervalpsych::plot_consensus(fit, method = "median_bounds"),
-    "Input must be an object of class 'itm_stanfit'"
+    "Input must be an object of class 'icm_stanfit'"
   )
 
 })

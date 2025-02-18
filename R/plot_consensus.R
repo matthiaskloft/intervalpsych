@@ -2,14 +2,14 @@
 #'
 #' This function generates plots for ITM Stanfit results using either the median bounds method or the draws gradient method.
 #'
-#' @param itm_stanfit An object of class 'itm_stanfit' containing the Stanfit results.
+#' @param icm_stanfit An object of class 'icm_stanfit' containing the Stanfit results.
 #' @param method A character string specifying the plotting method. Options are "median_bounds" (default) or "draws_distribution".
 #' @param CI A numeric value specifying the confidence interval for the median bounds method. Default is 0.95.
 #'
 #' @return A ggplot2 object representing the interval plot.
 #'
 #' @details
-#' The function checks if the input object is of class 'itm_stanfit'. It then extracts the draws for the lower and upper bounds (T_L and T_U) from the Stanfit object.
+#' The function checks if the input object is of class 'icm_stanfit'. It then extracts the draws for the lower and upper bounds (T_L and T_U) from the Stanfit object.
 #'
 #' If the method is "median_bounds", the function calculates the median of the lower and upper bounds and generates an interval plot using these medians.
 #'
@@ -20,25 +20,25 @@
 #' @export
 #'
 plot_consensus <- function(
-    itm_stanfit,
+    icm_stanfit,
     method = "median_bounds",
     CI = .95){
 
-  # check: is class "itm_stanfit"?
-  if (!inherits(itm_stanfit, "itm_stanfit")) {
-    stop("Input must be an object of class 'itm_stanfit'")
+  # check: is class "icm_stanfit"?
+  if (!inherits(icm_stanfit, "icm_stanfit")) {
+    stop("Input must be an object of class 'icm_stanfit'")
   }
 
   # get draws
-  T_L <- rstan::extract(itm_stanfit$stan_fit, pars = "Tr_L")[[1]] |>  posterior::rvar()
-  names(T_L) <- paste0("T_L_", 1:itm_stanfit$stan_fit@par_dims$Tr_L)
+  T_L <- rstan::extract(icm_stanfit$stan_fit, pars = "Tr_L")[[1]] |>  posterior::rvar()
+  names(T_L) <- paste0("T_L_", 1:icm_stanfit$stan_fit@par_dims$Tr_L)
 
-  T_U <- rstan::extract(itm_stanfit$stan_fit, pars = "Tr_U")[[1]] |>  posterior::rvar()
-  names(T_U) <- paste0("T_U_", 1:itm_stanfit$stan_fit@par_dims$Tr_U)
+  T_U <- rstan::extract(icm_stanfit$stan_fit, pars = "Tr_U")[[1]] |>  posterior::rvar()
+  names(T_U) <- paste0("T_U_", 1:icm_stanfit$stan_fit@par_dims$Tr_U)
 
   # create a data.frame with rvars
   df_rvar <- data.frame(
-    item = itm_stanfit$item_labels,
+    item = icm_stanfit$item_labels,
     T_L = T_L,
     T_U = T_U
   )
@@ -57,7 +57,7 @@ plot_consensus <- function(
     interval_plot <-
       plot_intervals(
         df_interval_bounds = summary[, c("T_L_median", "T_U_median")],
-        item_labels = itm_stanfit$item_labels
+        item_labels = icm_stanfit$item_labels
       )
 
     return(interval_plot)
