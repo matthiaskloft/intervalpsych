@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Interval Truth Model • intervalpsych</title>
+<title>Interval Consensus Model • intervalpsych</title>
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><script src="../deps/MathJax-3.2.2/tex-chtml.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Interval Truth Model">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><script src="../deps/MathJax-3.2.2/tex-chtml.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Interval Consensus Model">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -33,7 +33,7 @@
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/Interval-Truth-Model.html">Interval Truth Model</a></li>
+<li><a class="dropdown-item" href="../articles/Interval-Truth-Model.html">Interval Consensus Model</a></li>
   </ul>
 </li>
       </ul>
@@ -63,7 +63,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>Interval Truth Model</h1>
+      <h1>Interval Consensus Model</h1>
             <h3 data-toc-skip class="subtitle">Estimation of Weighted
 Consensus Intervals for Interval Ratings</h3>
             
@@ -76,7 +76,7 @@ Consensus Intervals for Interval Ratings</h3>
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://matthiaskloft.github.io/intervalpsych/">intervalpsych</a></span><span class="op">)</span></span></code></pre></div>
-<p>We want to fit the Interval Truth Model to the Verbal Quantifiers
+<p>We want to fit the Interval Consensus Model to the Verbal Quantifiers
 dataset.</p>
 <p>First, we load the verbal quantifiers dataset:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -651,6 +651,7 @@ the <code>summary</code> function, which is a wrapper function around
 <code>extract_consensus</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html" class="external-link">kable_styling</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table table" style="margin-left: auto; margin-right: auto;">
@@ -682,22 +683,22 @@ T_U_CI_975
 now and then
 </td>
 <td style="text-align:right;">
-0.1690929
+0.17
 </td>
 <td style="text-align:right;">
-0.11655426
+0.12
 </td>
 <td style="text-align:right;">
-0.22834323
+0.23
 </td>
 <td style="text-align:right;">
-0.3844032
+0.38
 </td>
 <td style="text-align:right;">
-0.31811509
+0.32
 </td>
 <td style="text-align:right;">
-0.4506452
+0.45
 </td>
 </tr>
 <tr>
@@ -705,22 +706,22 @@ now and then
 possibly
 </td>
 <td style="text-align:right;">
-0.2311240
+0.23
 </td>
 <td style="text-align:right;">
-0.16935718
+0.17
 </td>
 <td style="text-align:right;">
-0.30106167
+0.30
 </td>
 <td style="text-align:right;">
-0.4818529
+0.48
 </td>
 <td style="text-align:right;">
-0.39772591
+0.40
 </td>
 <td style="text-align:right;">
-0.5691432
+0.57
 </td>
 </tr>
 <tr>
@@ -728,22 +729,22 @@ possibly
 almost always
 </td>
 <td style="text-align:right;">
-0.8275384
+0.83
 </td>
 <td style="text-align:right;">
-0.77767634
+0.78
 </td>
 <td style="text-align:right;">
-0.86815632
+0.87
 </td>
 <td style="text-align:right;">
-0.9557618
+0.96
 </td>
 <td style="text-align:right;">
-0.93430275
+0.93
 </td>
 <td style="text-align:right;">
-0.9716394
+0.97
 </td>
 </tr>
 <tr>
@@ -751,22 +752,22 @@ almost always
 almost never
 </td>
 <td style="text-align:right;">
-0.0298780
+0.03
 </td>
 <td style="text-align:right;">
-0.01755231
+0.02
 </td>
 <td style="text-align:right;">
-0.04639833
+0.05
 </td>
 <td style="text-align:right;">
-0.1235490
+0.12
 </td>
 <td style="text-align:right;">
-0.09127823
+0.09
 </td>
 <td style="text-align:right;">
-0.1630498
+0.16
 </td>
 </tr>
 <tr>
@@ -774,22 +775,22 @@ almost never
 occasionally
 </td>
 <td style="text-align:right;">
-0.2149858
+0.21
 </td>
 <td style="text-align:right;">
-0.15628364
+0.16
 </td>
 <td style="text-align:right;">
-0.28293292
+0.28
 </td>
 <td style="text-align:right;">
-0.4029722
+0.40
 </td>
 <td style="text-align:right;">
-0.32074187
+0.32
 </td>
 <td style="text-align:right;">
-0.4845552
+0.48
 </td>
 </tr>
 <tr>
@@ -797,22 +798,22 @@ occasionally
 frequently
 </td>
 <td style="text-align:right;">
-0.6289619
+0.63
 </td>
 <td style="text-align:right;">
-0.57874565
+0.58
 </td>
 <td style="text-align:right;">
-0.67710491
+0.68
 </td>
 <td style="text-align:right;">
-0.8560117
+0.86
 </td>
 <td style="text-align:right;">
-0.80802747
+0.81
 </td>
 <td style="text-align:right;">
-0.8965841
+0.90
 </td>
 </tr>
 <tr>
@@ -820,22 +821,22 @@ frequently
 hardly
 </td>
 <td style="text-align:right;">
-0.0563423
+0.06
 </td>
 <td style="text-align:right;">
-0.03774335
+0.04
 </td>
 <td style="text-align:right;">
-0.07862811
+0.08
 </td>
 <td style="text-align:right;">
-0.1977537
+0.20
 </td>
 <td style="text-align:right;">
-0.15726584
+0.16
 </td>
 <td style="text-align:right;">
-0.2430091
+0.24
 </td>
 </tr>
 <tr>
@@ -843,22 +844,22 @@ hardly
 sometimes
 </td>
 <td style="text-align:right;">
-0.2589608
+0.26
 </td>
 <td style="text-align:right;">
-0.20532427
+0.21
 </td>
 <td style="text-align:right;">
-0.31857381
+0.32
 </td>
 <td style="text-align:right;">
-0.4586398
+0.46
 </td>
 <td style="text-align:right;">
-0.39372391
+0.39
 </td>
 <td style="text-align:right;">
-0.5223143
+0.52
 </td>
 </tr>
 <tr>
@@ -866,22 +867,22 @@ sometimes
 most of the time
 </td>
 <td style="text-align:right;">
-0.7166893
+0.72
 </td>
 <td style="text-align:right;">
-0.65996355
+0.66
 </td>
 <td style="text-align:right;">
-0.76919999
+0.77
 </td>
 <td style="text-align:right;">
-0.9311691
+0.93
 </td>
 <td style="text-align:right;">
-0.89475988
+0.89
 </td>
 <td style="text-align:right;">
-0.9578424
+0.96
 </td>
 </tr>
 <tr>
@@ -889,22 +890,22 @@ most of the time
 often
 </td>
 <td style="text-align:right;">
-0.6282608
+0.63
 </td>
 <td style="text-align:right;">
-0.57872036
+0.58
 </td>
 <td style="text-align:right;">
-0.67565683
+0.68
 </td>
 <td style="text-align:right;">
-0.8476733
+0.85
 </td>
 <td style="text-align:right;">
-0.81295539
+0.81
 </td>
 <td style="text-align:right;">
-0.8773676
+0.88
 </td>
 </tr>
 <tr>
@@ -912,22 +913,22 @@ often
 potentially
 </td>
 <td style="text-align:right;">
-0.3772926
+0.38
 </td>
 <td style="text-align:right;">
-0.27854373
+0.28
 </td>
 <td style="text-align:right;">
-0.48408578
+0.48
 </td>
 <td style="text-align:right;">
-0.6754181
+0.68
 </td>
 <td style="text-align:right;">
-0.56840433
+0.57
 </td>
 <td style="text-align:right;">
-0.7683667
+0.77
 </td>
 </tr>
 <tr>
@@ -935,22 +936,22 @@ potentially
 rarely
 </td>
 <td style="text-align:right;">
-0.0620641
+0.06
 </td>
 <td style="text-align:right;">
-0.04019908
+0.04
 </td>
 <td style="text-align:right;">
-0.08955330
+0.09
 </td>
 <td style="text-align:right;">
-0.2095941
+0.21
 </td>
 <td style="text-align:right;">
-0.15777449
+0.16
 </td>
 <td style="text-align:right;">
-0.2661566
+0.27
 </td>
 </tr>
 <tr>
@@ -958,22 +959,22 @@ rarely
 constantly
 </td>
 <td style="text-align:right;">
-0.7671629
+0.77
 </td>
 <td style="text-align:right;">
-0.68317164
+0.68
 </td>
 <td style="text-align:right;">
-0.83501003
+0.84
 </td>
 <td style="text-align:right;">
-0.9414492
+0.94
 </td>
 <td style="text-align:right;">
-0.90009554
+0.90
 </td>
 <td style="text-align:right;">
-0.9689663
+0.97
 </td>
 </tr>
 </tbody>
@@ -1005,7 +1006,7 @@ visualized by a gradient.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_consensus.html">plot_consensus</a></span><span class="op">(</span><span class="va">fit</span>, method <span class="op">=</span> <span class="st">"draws_distribution"</span>, CI <span class="op">=</span> <span class="fl">.95</span><span class="op">)</span></span></code></pre></div>
 <p><img src="man%2Ffigures%2FREADME-unnamed-chunk-11-1.png" alt="Plot of the estimated consensus intervals." width="90%"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_consensus.html">plot_consensus</a></span><span class="op">(</span><span class="va">fit</span>, method <span class="op">=</span> <span class="st">"draws_distribution"</span>, CI <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.9</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_consensus.html">plot_consensus</a></span><span class="op">(</span><span class="va">fit</span>, method <span class="op">=</span> <span class="st">"draws_distribution"</span>, CI <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.5</span>,<span class="fl">.95</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="man%2Ffigures%2FREADME-unnamed-chunk-12-1.png" alt="Plot of the estimated consensus intervals." width="90%"></p>
   </main>
 </div>
