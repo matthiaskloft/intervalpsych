@@ -1,4 +1,4 @@
-#' Extract Consensus intervals from ITM Stan Fit Object
+#' Extract Consensus intervals from ICM Stan Fit Object
 #'
 #' This function extracts parameter estimates for the consensus intervals from a
 #' fitted Interval Consensus Model Stan fit object of class `icm_stanfit`.

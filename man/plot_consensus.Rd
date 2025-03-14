@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_consensus.R
 \name{plot_consensus}
 \alias{plot_consensus}
-\title{Plot ITM Consensus Intervals}
+\title{Plot ICM Consensus Intervals}
 \usage{
 plot_consensus(icm_stanfit, method = "median_bounds", CI = 0.95)
 }
@@ -17,7 +17,7 @@ plot_consensus(icm_stanfit, method = "median_bounds", CI = 0.95)
 A ggplot2 object representing the interval plot.
 }
 \description{
-This function generates plots for ITM Stanfit results using either the median bounds method or the draws gradient method.
+This function generates plots for ICM Stanfit results using either the median bounds method or the draws gradient method.
 }
 \details{
 The function checks if the input object is of class 'icm_stanfit'. It then extracts the draws for the lower and upper bounds (T_L and T_U) from the Stanfit object.

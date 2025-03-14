@@ -11,7 +11,7 @@ interval responses in psychometrics and similar disciplines. Interval
 responses can be used to represent uncertainty or variability in
 responses to survey items, for example. Besides transformation and
 plotting function, the package also contains a wrapper to estimate the
-Interval Consensus Model (ITM; [Kloft, Siepe & Heck,
+Interval Consensus Model (ICM; [Kloft, Siepe & Heck,
 2024](https://doi.org/10.31234/osf.io/dzvw2)) in the probabilistic
 programming language [**Stan**](https://mc-stan.org/). Results of the
 model can be visualized and summarized using the functions provided in

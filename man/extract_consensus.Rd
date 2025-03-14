@@ -2,7 +2,7 @@
 % Please edit documentation in R/extract_consensus.R
 \name{extract_consensus}
 \alias{extract_consensus}
-\title{Extract Consensus intervals from ITM Stan Fit Object}
+\title{Extract Consensus intervals from ICM Stan Fit Object}
 \usage{
 extract_consensus(icm_stanfit, print_summary = TRUE)
 }

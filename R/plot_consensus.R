@@ -1,6 +1,6 @@
-#' Plot ITM Consensus Intervals
+#' Plot ICM Consensus Intervals
 #'
-#' This function generates plots for ITM Stanfit results using either the median bounds method or the draws gradient method.
+#' This function generates plots for ICM Stanfit results using either the median bounds method or the draws gradient method.
 #'
 #' @param icm_stanfit An object of class 'icm_stanfit' containing the Stanfit results.
 #' @param method A character string specifying the plotting method. Options are "median_bounds" (default) or "draws_distribution".
