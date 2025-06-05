@@ -52,7 +52,7 @@ plot_intervals <- function(df_interval_bounds, item_labels = NULL) {
       expand = ggplot2::expansion(0, 0)
     ) +
     ggplot2::labs(x = "Interval Response", y = "Item") +
-    theme_itm(base_size = 12, hide_axis_text_y = FALSE)
+    theme_icm(base_size = 12, hide_axis_text_y = FALSE)
 
   return(plot)
 

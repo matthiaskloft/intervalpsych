@@ -11,3 +11,6 @@
 ^pkgdown$
 ^\.covrignore
 ^cran-comments\.md$
+^CLAUDE\.md$
+^CLAUDE\.md.save$
+^package_inconsistencies\.txt$

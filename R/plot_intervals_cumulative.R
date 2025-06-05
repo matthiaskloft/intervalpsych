@@ -190,7 +190,7 @@ ggplot_cumulative_intervals <-
         expand = ggplot2::expansion(mult = c(0, .01))
       ) +
       ggplot2::labs(x = "Response Value", y = "Density") +
-      theme_itm() +
+      theme_icm() +
       theme(
         plot.margin = margin(.2, .5, .2, .2, "cm"),
         panel.grid = element_blank(),

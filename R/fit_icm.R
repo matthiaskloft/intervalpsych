@@ -1,6 +1,6 @@
-#' Fit Item Response Theory Model
+#' Fit Interval Consensus Model
 #'
-#' This function fits an Item Response Theory (IRT) model using Stan.
+#' This function fits an Interval Consensus Model (ICM) using Stan.
 #'
 #' @param df_simplex A dataframe containing the simplex data.
 #' @param id_person A vector of person indices.
@@ -23,9 +23,9 @@
 #' df_simplex <- data.frame(matrix(runif(100), nrow=10))
 #' id_person <- rep(1:5, each=2)
 #' id_item <- rep(1:2, times=5)
-#' fit <- fit_itm(df_simplex, id_person, id_item)
+#' fit <- fit_icm(df_simplex, id_person, id_item)
 #' }
-fit_itm <-
+fit_icm <-
   function(df_simplex,
            id_person,
            id_item,

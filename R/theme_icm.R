@@ -10,7 +10,7 @@
 #' @import ggplot2
 #' @export
 #'
-theme_itm <- function(hide_axis_text_y = FALSE,
+theme_icm <- function(hide_axis_text_y = FALSE,
                       base_size = 12) {
   #showtext_auto()
   # theme

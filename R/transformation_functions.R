@@ -1,12 +1,24 @@
+#-------------------------------------------------------------------------------
+# Log-Ratio Transformations for Interval Responses
+#-------------------------------------------------------------------------------
+
 #' @title Isometric Log-Ratio (ILR) transformation for interval responses
 #' @description
 #' Transform 2-simplex data to the unbounded space so that they can be modeled by a bivariate-normal distribution.
 #' This is done via a modified multivariate logit transformation that preserves the symmetry of interval responses which are conceptualized in terms of a location and a width.
+#' 
+#' The ILR transformation equations are:
+#' \deqn{y_1 = \sqrt{\frac{1}{2}} \log\left(\frac{x_1}{x_3}\right)}
+#' \deqn{y_2 = \sqrt{\frac{2}{3}} \log\left(\frac{x_2}{\sqrt{x_1 x_3}}\right)}
+#' 
+#' where \eqn{(x_1, x_2, x_3)} is a 2-simplex and \eqn{(y_1, y_2)} are the transformed coordinates.
 #'
 #' @param simplex A numeric vector that is a 2-simplex (3 elements that sum to 1) or a dataframe where each of the rows is a 2-simplex
 #'
 #' @return A numeric vector with 2 unbounded elements or a dataframe where each of the rows is a numeric vector with 2 unbounded elements
 #' @export
+#' @references
+#' Smithson, M., & Broomell, S. B. (2024). Compositional data analysis tutorial. Psychological Methods, 29(2), 362–378.
 #'
 #' @examples
 #' simplex <- data.frame(rbind(c(.1, .2, .7), c(.4, .5, .1)))
@@ -86,6 +98,13 @@ ilr <- function(simplex) {
 #' @title Inverse Isometric Log-Ratio (ILR) transformation for interval responses
 #' @description
 #' Transform unbounded data back to the 2-simplex space.
+#' 
+#' The inverse ILR transformation equations are:
+#' \deqn{x_1 = \frac{\exp(\sqrt{2} y_1)}{\exp(\sqrt{2} y_1) + \exp(\sqrt{\frac{3}{2}} y_2 + \frac{y_1}{\sqrt{2}}) + 1}}
+#' \deqn{x_2 = \frac{\exp(\sqrt{\frac{3}{2}} y_2 + \frac{y_1}{\sqrt{2}})}{\exp(\sqrt{2} y_1) + \exp(\sqrt{\frac{3}{2}} y_2 + \frac{y_1}{\sqrt{2}}) + 1}}
+#' \deqn{x_3 = \frac{1}{\exp(\sqrt{2} y_1) + \exp(\sqrt{\frac{3}{2}} y_2 + \frac{y_1}{\sqrt{2}}) + 1}}
+#' 
+#' where \eqn{(y_1, y_2)} are the unbounded coordinates and \eqn{(x_1, x_2, x_3)} is the resulting 2-simplex.
 #'
 #' @param bvn A numeric vector containing an unbounded interval location and width or
 #' a dataframe where each of the rows consists of such a vector.
@@ -94,6 +113,8 @@ ilr <- function(simplex) {
 #' the rows consists of such a vector.
 #'
 #' @export
+#' @references
+#' Smithson, M., & Broomell, S. B. (2024). Compositional data analysis tutorial. Psychological Methods, 29(2), 362–378.
 #'
 #' @examples
 #' simplex <- data.frame(rbind(c(0, .2), c(-2, .4)))
@@ -170,7 +191,197 @@ inv_ilr <- function(bvn) {
 # sum(inv_ilr(c(0,1)))
 
 
+#' @title Sum Log-Ratio (SLR) transformation for interval responses
+#' @description
+#' Transform 2-simplex data to the unbounded space using sum log-ratio transformation.
+#' This transformation provides an alternative to the ILR transformation for modeling interval data.
+#' 
+#' The SLR transformation equations are:
+#' \deqn{y_1 = \log\left(\frac{x_1}{x_3}\right)}
+#' \deqn{y_2 = \log\left(\frac{x_2}{x_1 + x_3}\right)}
+#' 
+#' where \eqn{(x_1, x_2, x_3)} is a 2-simplex and \eqn{(y_1, y_2)} are the transformed coordinates.
+#'
+#' @param simplex A numeric vector that is a 2-simplex (3 elements that sum to 1) or a dataframe where each of the rows is a 2-simplex
+#'
+#' @return A numeric vector with 2 unbounded elements or a dataframe where each of the rows is a numeric vector with 2 unbounded elements
+#' @export
+#' @references
+#' Smithson, M., & Broomell, S. B. (2024). Compositional data analysis tutorial. Psychological Methods, 29(2), 362–378.
+#'
+#' @examples
+#' simplex <- data.frame(rbind(c(.1, .2, .7), c(.4, .5, .1)))
+#' slr(simplex)
+#'
+#'
+slr <- function(simplex) {
+  if (!is.data.frame(simplex) & !is.matrix(simplex)) {
+    #### vector
 
+    n_elements <- length(simplex)
+
+    if (n_elements != 3) {
+      stop("Simplex must have 3 elements")
+    }
+
+    # run checks
+    check_simplex(simplex)
+
+    # calculate SLR
+    Y <- rep(NA, 2)
+    Y[1] = log(simplex[1] / simplex[3])
+    Y[2] = log(simplex[2] / (simplex[1] + simplex[3]))
+
+    names(Y) <- c("x_loc", "x_wid")
+
+    return(Y)
+
+
+  } else{
+    ### dataframe
+
+    # coerce to matrix
+    simplex <- as.matrix(simplex)
+
+    # get number of cols
+    n_elements <- ncol(simplex)
+
+    if (n_elements != 3) {
+      stop("Simplex must have 3 elements")
+    }
+
+    # run checks
+    for (i in 1:nrow(simplex)) {
+      check_simplex(simplex[i, ])
+    }
+
+    # calculate SLR
+    Y <- apply(
+      X = simplex,
+      MARGIN = 1,
+      FUN = function(X) {
+        Y <- rep(NA, 2)
+        Y[1] = log(X[1] / X[3])
+        Y[2] = log(X[2] / (X[1] + X[3]))
+
+        return(Y)
+      },
+      simplify = FALSE
+    )
+    Y <- do.call(what = "rbind", args = Y)
+
+    return(data.frame(x_loc = Y[, 1], x_wid = Y[, 2]))
+  }
+}
+
+## test examples
+# slr(c(.4,.2,.4))
+# slr(c(.3,.2,.5))
+# slr(c(.5,.2,.3))
+# slr(c(1/3,1/3,1/3))
+# simplex <- data.frame(rbind(c(.1, .2, .7), c(.4, .5, .1)))
+# slr(simplex)
+
+
+
+
+#' @title Inverse Sum Log-Ratio (SLR) transformation for interval responses
+#' @description
+#' Transform unbounded data back to the 2-simplex space using the inverse sum log-ratio transformation.
+#' 
+#' The inverse SLR transformation equations are:
+#' \deqn{x_1 = \frac{\exp(y_1)}{(\exp(y_1) + 1)(\exp(y_2) + 1)}}
+#' \deqn{x_2 = \frac{\exp(y_2)}{\exp(y_2) + 1}}
+#' \deqn{x_3 = \frac{1}{(\exp(y_1) + 1)(\exp(y_2) + 1)}}
+#' 
+#' where \eqn{(y_1, y_2)} are the unbounded coordinates and \eqn{(x_1, x_2, x_3)} is the resulting 2-simplex.
+#'
+#' @param bvn A numeric vector containing an unbounded interval location and width or
+#' a dataframe where each of the rows consists of such a vector.
+#'
+#' @return A numeric vector containing a 2-simplex or a dataframe where each of
+#' the rows consists of such a vector.
+#'
+#' @export
+#' @references
+#' Smithson, M., & Broomell, S. B. (2024). Compositional data analysis tutorial. Psychological Methods, 29(2), 362–378.
+#'
+#' @examples
+#' bvn <- data.frame(rbind(c(0, .2), c(-2, .4)))
+#' inv_slr(bvn)
+#'
+#'
+inv_slr <- function(bvn) {
+  if (!is.data.frame(bvn) & !is.matrix(bvn)) {
+    #### vector
+
+    # run checks
+    check_bvn(bvn)
+
+    # calculate inverse SLR
+    Y <- rep(NA, 3)
+    Y[1] <- exp(bvn[1]) / ((exp(bvn[1]) + 1) * (exp(bvn[2]) + 1))
+    Y[2] <- exp(bvn[2]) /  (exp(bvn[2]) + 1)
+    Y[3] <- 1 /           ((exp(bvn[1]) + 1) * (exp(bvn[2]) + 1))
+
+    names(Y) <- c("x_1", "x_2", "x_3")
+
+    return(Y)
+
+  } else {
+    ### dataframe
+
+    # coerce to matrix
+    bvn <- as.matrix(bvn)
+
+    # run checks
+    for (i in 1:nrow(bvn)) {
+      check_bvn(bvn[i, ])
+    }
+
+    # calculate inverse SLR
+    Y <- apply(
+      X = bvn,
+      MARGIN = 1,
+      FUN = function(X) {
+        Y <- rep(NA, 3)
+        Y[1] <- exp(X[1]) / ((exp(X[1]) + 1) * (exp(X[2]) + 1))
+        Y[2] <- exp(X[2]) /  (exp(X[2]) + 1)
+        Y[3] <- 1 /          ((exp(X[1]) + 1) * (exp(X[2]) + 1))
+
+        names(Y) <- c("x_1", "x_2", "x_3")
+
+        return(Y)
+      },
+      simplify = FALSE
+    )
+    Y <- do.call(what = "rbind", args = Y)
+
+    return(data.frame(
+      x_1 = Y[, 1],
+      x_2 = Y[, 2],
+      x_3 = Y[, 3]
+    ))
+  }
+}
+
+# # test examples
+# inv_slr(c(0,0))
+# inv_slr(c(1,0))
+# inv_slr(c(0,1))
+# inv_slr(c(-1,0))
+#
+# bvn <- data.frame(rbind(c(0, .2), c(-2, .4)))
+# a <- inv_slr(bvn)
+#
+# sum(inv_slr(c(0,0)))
+# sum(inv_slr(c(1,0)))
+# sum(inv_slr(c(0,1)))
+
+
+#-------------------------------------------------------------------------------
+# Interval Bounds to Simplex and Back
+#-------------------------------------------------------------------------------
 
 
 #' @title Convert from interval bounds to simplex

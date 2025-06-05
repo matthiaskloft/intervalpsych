@@ -2,7 +2,7 @@ test_that("plot.icm_stanfit works correctly", {
 
   suppressWarnings(
     fit <-
-      intervalpsych::fit_itm(
+      intervalpsych::fit_icm(
         df_simplex = extraDistr::rdirichlet(25, c(2,2,2)) |> as.data.frame(),
         id_person = rep(1:5,5),
         id_item = rep(1:5, each = 5),

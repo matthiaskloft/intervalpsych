@@ -7,6 +7,9 @@ template:
   theme-dark: arrow-dark
   math-rendering: mathjax
 
+exclude: |
+  CLAUDE.md
+
 reference:
 
 - title: Transformation functions
@@ -16,6 +19,8 @@ reference:
   contents:
   - ilr
   - inv_ilr
+  - slr
+  - inv_slr
   - itvl_to_splx
   - splx_to_itvl
   - remove_zeros
@@ -26,16 +31,18 @@ reference:
   contents:
   - plot_intervals
   - plot_intervals_cumulative
-  - theme_itm
+  - theme_icm
 
 - title: Model fitting
 
   desc: >
     Fit models to interval responses.
   contents:
-  - fit_itm
+  - fit_icm
   - extract_consensus
   - plot_consensus
+  - plot.icm_stanfit
+  - summary.icm_stanfit
 
 - title: Example data
 
