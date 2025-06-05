@@ -1,9 +1,9 @@
 pandoc: 3.1.11
-pkgdown: 2.1.1
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
-  articles/Interval-Truth-Model: Interval-Truth-Model.html
-last_built: 2025-03-14T10:58Z
+  articles/Interval-Consensus-Model: Interval-Consensus-Model.html
+last_built: 2025-06-05T12:20Z
 urls:
   reference: https://matthiaskloft.github.io/intervalpsych/reference
   article: https://matthiaskloft.github.io/intervalpsych/articles
