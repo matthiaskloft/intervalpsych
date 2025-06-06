@@ -27,3 +27,19 @@ If the method is "median_bounds", the function calculates the median of the lowe
 
 If the method is "draws_distribution", the function checks the number of draws and warns if it is less than 1000. It then computes a consensus distribution for each item and generates a gradient interval plot.
 }
+\examples{
+\dontrun{
+# Fit ICM model first
+df_simplex <- data.frame(matrix(runif(100), nrow=10))
+id_person <- rep(1:5, each=2)
+id_item <- rep(1:2, times=5)
+fit <- fit_icm(df_simplex, id_person, id_item)
+
+# Plot consensus intervals using median bounds
+plot_consensus(fit, method = "median_bounds")
+
+# Plot consensus intervals using draws distribution
+plot_consensus(fit, method = "draws_distribution", CI = 0.95)
+}
+
+}

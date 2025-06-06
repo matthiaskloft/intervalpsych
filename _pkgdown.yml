@@ -9,6 +9,7 @@ template:
 
 exclude: |
   CLAUDE.md
+  NEWS.md
 
 reference:
 

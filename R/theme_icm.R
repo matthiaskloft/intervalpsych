@@ -7,6 +7,28 @@
 #'
 #' @return A ggplot2 theme object.
 #'
+#' @examples
+#' \dontrun{
+#' # Create sample interval data
+#' df_intervals <- data.frame(
+#'   lower = c(0.1, 0.3, 0.2, 0.4),
+#'   upper = c(0.5, 0.7, 0.6, 0.8)
+#' )
+#' item_labels <- c("Item A", "Item B", "Item C", "Item D")
+#' 
+#' # Basic usage
+#' plot_intervals(df_intervals, item_labels) +
+#'   theme_icm()
+#' 
+#' # Hide y-axis text
+#' plot_intervals(df_intervals, item_labels) +
+#'   theme_icm(hide_axis_text_y = TRUE)
+#' 
+#' # Custom base size
+#' plot_intervals(df_intervals, item_labels) +
+#'   theme_icm(base_size = 14)
+#' }
+#'
 #' @import ggplot2
 #' @export
 #'

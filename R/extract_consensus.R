@@ -14,6 +14,17 @@
 #' This function extracts parameter estimates for the consensus intervals from a
 #' fitted Interval Consensus Model Stan fit object of class `icm_stanfit`.
 #'
+#' @examples
+#' \dontrun{
+#' # Fit ICM model first
+#' df_simplex <- data.frame(matrix(runif(100), nrow=10))
+#' id_person <- rep(1:5, each=2)
+#' id_item <- rep(1:2, times=5)
+#' fit <- fit_icm(df_simplex, id_person, id_item)
+#' 
+#' # Extract consensus intervals
+#' consensus <- extract_consensus(fit)
+#' }
 #'
 #' @importFrom rstan extract
 #' @importFrom posterior rvar

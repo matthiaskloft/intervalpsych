@@ -44,3 +44,24 @@ A ggplot object representing the cumulative interval plot.
 \description{
 This function generates a cumulative interval plot based on the provided lower and upper bounds, cluster IDs, and other optional parameters.
 }
+\examples{
+\dontrun{
+# Example data
+lower_bounds <- c(0.1, 0.3, 0.2)
+upper_bounds <- c(0.5, 0.7, 0.6)
+cluster_ids <- c(1, 1, 2)
+truth_values <- c(0.3, 0.5, 0.4)
+
+# Create cumulative interval plot
+plot_intervals_cumulative(
+  lower = lower_bounds,
+  upper = upper_bounds,
+  cluster_id = cluster_ids,
+  truth = truth_values,
+  min = 0,
+  max = 1,
+  weighted = TRUE
+)
+}
+
+}
