@@ -21,3 +21,6 @@ interval_responses <- data.frame(rbind(c(.1,.5), c(.4,.7)))
 itvl_to_splx(interval_responses, min = 0, max = 1)
 
 }
+\seealso{
+\code{\link[=splx_to_itvl]{splx_to_itvl()}} for the inverse transformation.
+}

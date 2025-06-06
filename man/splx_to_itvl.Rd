@@ -22,3 +22,6 @@ splx_to_itvl(responses, min = 0, max = 1)
 
 
 }
+\seealso{
+\code{\link[=itvl_to_splx]{itvl_to_splx()}} for the inverse transformation.
+}

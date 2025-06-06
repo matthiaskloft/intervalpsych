@@ -1,0 +1,172 @@
+---
+title: "Interval Consensus Model"
+subtitle: "Estimation of Weighted Consensus Intervals for Interval Ratings"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Interval Consensus Model}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../man/figures/README-",
+  out.width = "90%",
+  fig.width = 10,
+  fig.height = 7,
+  message = FALSE
+)
+```
+
+```{r setup}
+library(intervalpsych)
+```
+
+
+We want to fit the Interval Consensus Model to the Verbal Quantifiers dataset.
+
+First, we load the verbal quantifiers dataset:
+```{r}
+library(dplyr)
+library(kableExtra)
+
+data(quantifiers)
+
+quantifiers <- quantifiers |>
+  # exclude control items
+  dplyr::filter(!name_en %in% c("always", "never", "fifty-fifty chance")) |>
+  # sample 100 respondents
+  dplyr::filter(id_person %in% sample(
+    size = 30,
+    replace = FALSE,
+    unique(quantifiers$id_person)
+  )) |>
+  # exclude missing values
+  dplyr::filter(!is.na(x_L) & !is.na(x_U)) |>
+  # recompute IDs
+  dplyr::mutate(
+    id_person = factor(id_person) |> as.numeric(),
+    id_item = factor(id_item) |> as.numeric()
+  )
+
+head(quantifiers) |> 
+  kable(digits = 2) |> 
+  kable_styling()
+```
+
+
+What does the dataset look like? We can visualize the interval responses using the `plot_intervals_cumulative` function:
+
+```{r message=FALSE}
+#| fig.alt: >
+#|  Cumulative distribution of interval responses.
+
+plot_intervals_cumulative(
+  lower = quantifiers$x_L,
+  upper = quantifiers$x_U,
+  min = quantifiers$scale_min,
+  max = quantifiers$scale_max,
+  cluster_id = quantifiers$name_en,
+  weighted = TRUE
+)
+```
+
+
+
+
+Next, we need to convert the interval responses to the simplex format:
+
+```{r}
+quantifiers <- cbind(
+  quantifiers, 
+  itvl_to_splx(quantifiers[,c("x_L","x_U")], min = quantifiers$scale_min, max = quantifiers$scale_max))
+
+head(quantifiers[,9:13]) |> 
+  round(2) |>
+  kable() |> 
+  kable_styling()
+```
+
+
+Let's check if we can apply the Isometric Log-Ratio transformation:
+```{r}
+try(ilr(quantifiers[,c("x_1","x_2","x_3")]))
+```
+
+It seems we have components in our simplex data that are zero. So we first have
+to deal with these zero components. We can do this by adding a padding constant:
+
+```{r}
+quantifiers[, c("x_1", "x_2", "x_3")] <- 
+  remove_zeros(quantifiers[, c("x_1", "x_2", "x_3")], padding = 0.01)
+
+head(quantifiers[,9:13]) |> 
+  round(2) |>
+  kable() |> 
+  kable_styling()
+```
+
+```{r}
+fit <-
+  fit_icm(
+    df_simplex = quantifiers[, c("x_1", "x_2", "x_3")],
+    id_person = quantifiers$id_person,
+    id_item = quantifiers$id_item,
+    item_labels = quantifiers |> 
+      dplyr::distinct(id_item, name_en) |> 
+      dplyr::pull(name_en),
+    link = "ilr",
+    padding = .01,
+    n_chains = 4,
+    n_cores = 4,
+    iter_sampling = 500,
+    iter_warmup = 300,
+    adapt_delta = .9,
+    verbose = TRUE
+  )
+```
+
+Now we can extract the estimated cosensus intervals from the fit object.
+The function returns a list containing the posterior samples and a summary table of the consensus intervals stemming from the posterior medians.
+```{r}
+consensus <- extract_consensus(fit, print_summary = FALSE)
+attributes(consensus)
+```
+
+
+If we want to get a summary of the consensus intervals, we can use the `summary` function, which is a wrapper function around `extract_consensus`.
+```{r}
+summary(fit) |>
+  round(2) |> 
+  kable() |> 
+  kable_styling()
+```
+
+We can also plot the estimated consensus intervals. The generic function `plot` calls the function `plot_consensus` with the default method `median_bounds`.
+```{r}
+#| fig.alt: >
+#|   Plot of the estimated consensus intervals.
+
+plot(fit, method = "median_bounds")
+```
+
+We can call the function `plot_consensus` directly for the alternative plotting method `draws_gradient`.
+This method plots the consensus intervals based on the posterior draws. For every posterior draw, a sample is drawn from a uniform distribution using the respective interval bounds of the posterior draw as minimum and maximum. The result is an rvar containing the values from the respective consensus interval, which is visualized in the plot.
+
+An alternative method is `draws_gradient` which plots the consensus intervals based on the posterior draws. For every posterior draw, a sample is drawn from a uniform distribution using the respective interval bounds of the posterior draw as minimum and maximum. The result is an rvar containing the values from the respective consensus interval, which is visualized in the plot.
+The argument `CI` specifies the credible interval for this distribution and `CI_gradient` specifies the credible interval outside which the uncertainty is visualized by a gradient.
+```{r}
+#| fig.alt: >
+#|   Plot of the estimated consensus intervals.
+
+plot_consensus(fit, method = "draws_distribution", CI = .95)
+```
+
+```{r}
+#| fig.alt: >
+#|   Plot of the estimated consensus intervals.
+
+plot_consensus(fit, method = "draws_distribution", CI = c(.5, .95))
+```

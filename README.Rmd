@@ -18,11 +18,19 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of intervalpsych is to help you with the analysis of interval responses.
+The **intervalpsych** package provides a toolbox for the analysis of interval responses in psychometrics and similar disciplines.
+Interval responses can be used to represent uncertainty or variability in responses to survey items, for example. 
+Besides transformation and plotting function, the package  also contains a wrapper to estimate the Interval Consensus Model (ICM; [Kloft, Siepe & Heck, 2024](https://doi.org/10.31234/osf.io/dzvw2)) in the probabilistic programming language [**Stan**](https://mc-stan.org/).
+Results of the model can be visualized and summarized using the functions provided in the package.
 
 ## Installation
 
-You can install the latest version of intervalpsych from [GitHub](https://github.com/) with:
+You can install the released version of **intervalpsych** from [CRAN](https://CRAN.R-project.org) with:
+```r
+install.packages("intervalpsych")
+```
+
+You can install the latest development version of **intervalpsych** from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -30,99 +38,32 @@ devtools::install_github("matthiaskloft/intervalpsych")
 ```
 
 
-# Fit the Interval Truth Model to the Verbal Quantifiers Dataset
+## Ressources
 
-First, we load the verbal quantifiers dataset:
-```{r}
-library(tidyverse)
-library(intervalpsych)
+The best way to get started is to visit the package website and the introductory vignette:
+
+- Website: [https://matthiaskloft.github.io/intervalpsych/](https://matthiaskloft.github.io/intervalpsych/)
+
+- Vignette: [Interval Consensus Model](https://matthiaskloft.github.io/intervalpsych/articles/Interval-Truth-Model.html)
+
+- [Open an Issue](https://github.com/matthiaskloft/intervalpsych/issues)
 
 
-data(quantifiers)
+## Citation
 
-quantifiers <- quantifiers |>
-  # exclude control items
-  dplyr::filter(!name_en %in% c("always", "never", "fifty-fifty chance")) |>
-  # sample 100 respondents
-  dplyr::filter(id_person %in% sample(
-    size = 100,
-    replace = FALSE,
-    unique(quantifiers$id_person)
-  )) |>
-  # exclude missing values
-  dplyr::filter(!is.na(x_L) & !is.na(x_U)) |>
-  # recompute IDs
-  mutate(
-    id_person = factor(id_person) |> as.numeric(),
-    id_item = factor(id_item) |> as.numeric()
-  )
+If you want to cite the package, please use the following citation:
 
-head(quantifiers)
+Kloft, M., Siepe, B. S., & Heck, D. W. (2024, October 25). The Interval Consensus Model: A Consensus Model for Continuous Bounded Interval Responses. *PsyArXiv Preprint*. https://doi.org/10.31234/osf.io/dzvw2
+
+As a BibTeX entry:
+
+```bibtex
+@article{kloft2024,
+  title={The Interval Consensus Model: A Consensus Model for Continuous Bounded Interval Responses},
+  author={Kloft, Matthias and Siepe, Bj{\"o}rn S. and Heck, Daniel W.},
+  note={PsyArXiv Preprint},
+  year={2024},
+  doi={10.31234/osf.io/dzvw2},
+  url={https://doi.org/10.31234/osf.io/dzvw2}
+}
 ```
-
-
-First, we need to convert the interval responses to the simplex format:
-
-```{r}
-quantifiers <- cbind(
-  quantifiers, 
-  itvl_to_splx(quantifiers[,c("x_L","x_U")], min = quantifiers$scale_min, max = quantifiers$scale_max))
-
-head(quantifiers[,9:13])
-```
-
-
-Let's check if we can apply the Isometric Log-Ratio transformation:
-```{r}
-try(ilr(quantifiers[,c("x_1","x_2","x_3")]))
-```
-
-It seems we have components in our simplex data that are zero. So we first have
-to deal with these zero components. We can do this by adding a padding constant:
-
-```{r}
-quantifiers[, c("x_1", "x_2", "x_3")] <- 
-  remove_zeros(quantifiers[, c("x_1", "x_2", "x_3")], padding = 0.01)
-
-head(quantifiers[,9:13])
-```
-
-```{r}
-fit <-
-  fit_itm(
-    df_simplex = quantifiers[, c("x_1", "x_2", "x_3")],
-    id_person = quantifiers$id_person,
-    id_item = quantifiers$id_item,
-    item_labels = quantifiers |> 
-      distinct(id_item, name_en) |> 
-      pull(name_en),
-    n_chains = 2,
-    n_cores = 2,
-    iter_sampling = 300,
-    iter_warmup = 300,
-    adapt_delta = .95
-  )
-```
-
-Now we can extract the estimated cosensus intervals from the fit object:
-```{r}
-consensus <- extract_consensus(fit)
-```
-
-```{r}
-plot_intervals(
-  df_interval_bounds = consensus$summary[,c("T_L_median", "T_U_median")],
-  item_labels = rownames(consensus$summary))
-```
-
-
-
-
-
-
-
-
-
-
-
-

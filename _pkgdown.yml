@@ -1,0 +1,52 @@
+url: https://matthiaskloft.github.io/intervalpsych/
+template:
+  light-switch: yes
+  bootstrap: 5
+  bootswatch: litera
+  theme: arrow-light
+  theme-dark: arrow-dark
+  math-rendering: mathjax
+
+exclude: |
+  CLAUDE.md
+
+reference:
+
+- title: Transformation functions
+
+  desc: >
+    Transformation functions for interval data.
+  contents:
+  - ilr
+  - inv_ilr
+  - slr
+  - inv_slr
+  - itvl_to_splx
+  - splx_to_itvl
+  - remove_zeros
+
+- title: Plotting functions
+  desc: >
+    Plotting functions for interval data.
+  contents:
+  - plot_intervals
+  - plot_intervals_cumulative
+  - theme_icm
+
+- title: Model fitting
+
+  desc: >
+    Fit models to interval responses.
+  contents:
+  - fit_icm
+  - extract_consensus
+  - plot_consensus
+  - plot.icm_stanfit
+  - summary.icm_stanfit
+
+- title: Example data
+
+  desc: >
+    Example data sets for interval data.
+  contents:
+  - quantifiers

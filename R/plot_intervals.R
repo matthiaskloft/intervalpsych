@@ -43,6 +43,7 @@ plot_intervals <- function(df_interval_bounds, item_labels = NULL) {
     ggplot2::ggplot() +
     ggplot2::geom_errorbarh(
       ggplot2::aes(y = .data$item, xmin = .data$lower, xmax = .data$upper),
+      height = .5,
       linewidth = .5) +
     ggplot2::scale_x_continuous(
       limits = c(0, 1),
@@ -51,7 +52,7 @@ plot_intervals <- function(df_interval_bounds, item_labels = NULL) {
       expand = ggplot2::expansion(0, 0)
     ) +
     ggplot2::labs(x = "Interval Response", y = "Item") +
-    theme_itm(base_size = 12, hide_axis_text_y = FALSE)
+    theme_icm(base_size = 12, hide_axis_text_y = FALSE)
 
   return(plot)
 
