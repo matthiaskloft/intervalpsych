@@ -24,13 +24,15 @@ or Sum Log-Ratio (SLR) inverse transformations.
 These transformations are the inverse of the \code{\link[=ilr]{ilr()}} and \code{\link[=slr]{slr()}} transformations, respectively,
 and can be used to convert the unbounded location and width of intervals back to the compositional format.
 
-\emph{Inverse ILR}
+\strong{Inverse ILR}
+
 The inverse ILR transformation equations are:
 \deqn{x_1 = \frac{\exp(\sqrt{2} x_{loc})}{\exp(\sqrt{2} x_{loc}) + \exp(\sqrt{\frac{3}{2}} x_{wid} + \frac{x_{loc}}{\sqrt{2}}) + 1}}
 \deqn{x_2 = \frac{\exp(\sqrt{\frac{3}{2}} x_{wid} + \frac{x_{loc}}{\sqrt{2}})}{\exp(\sqrt{2} x_{loc}) + \exp(\sqrt{\frac{3}{2}} x_{wid} + \frac{x_{loc}}{\sqrt{2}}) + 1}}
 \deqn{x_3 = \frac{1}{\exp(\sqrt{2} x_{loc}) + \exp(\sqrt{\frac{3}{2}} x_{wid} + \frac{x_{loc}}{\sqrt{2}}) + 1}}
 
-\emph{Inverse SLR}
+\strong{Inverse SLR}
+
 The inverse SLR transformation equations are:
 \deqn{x_1 = \frac{\exp(x_{loc})}{(\exp(x_{loc}) + 1)(\exp(x_{wid}) + 1)}}
 \deqn{x_2 = \frac{\exp(x_{wid})}{\exp(x_{wid}) + 1}}

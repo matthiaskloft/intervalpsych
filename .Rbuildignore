@@ -8,6 +8,7 @@
 ^pkgdown$
 ^\.github$
 ^vignettes/articles$
+vignettes/
 ^pkgdown$
 ^\.covrignore
 ^cran-comments\.md$

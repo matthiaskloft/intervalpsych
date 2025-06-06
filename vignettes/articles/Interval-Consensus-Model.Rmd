@@ -1,7 +1,7 @@
 ---
 title: "Interval Consensus Model"
 subtitle: "Estimation of Weighted Consensus Intervals for Interval Ratings"
-output: rmarkdown::html_vignette
+output: md_document
 vignette: >
   %\VignetteIndexEntry{Interval Consensus Model}
   %\VignetteEngine{knitr::rmarkdown}
@@ -170,3 +170,13 @@ plot_consensus(fit, method = "draws_distribution", CI = .95)
 
 plot_consensus(fit, method = "draws_distribution", CI = c(.5, .95))
 ```
+
+```{r eval=FALSE, include=FALSE}
+# render markdown to "vignettes" folder
+library(here)
+# rmarkdown::render(input = here::here("vignettes","articles","Interval-Consensus-Model.Rmd"),
+#                   output_file = "Interval-Consensus-Model.Rmd",
+#                   output_dir = here("vignettes"),
+#                   clean = TRUE)
+```
+
