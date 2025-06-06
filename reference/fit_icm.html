@@ -44,7 +44,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Fit Interval Consensus Model</h1>
-      <small class="dont-index">Source: <a href="https://github.com/matthiaskloft/intervalpsych/blob/development/R/fit_icm.R" class="external-link"><code>R/fit_icm.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/matthiaskloft/intervalpsych/blob/main/R/fit_icm.R" class="external-link"><code>R/fit_icm.R</code></a></small>
       <div class="d-none name"><code>fit_icm.Rd</code></div>
     </div>
 
@@ -127,7 +127,62 @@ The model will reverse the padding when transforming results back to the origina
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A fitted Stan model object.</p>
+    <p>A fitted Stan model object of class <code>icm_stanfit</code> containing the following components:</p><dl><dt>stan_model</dt>
+<dd><p>The compiled Stan model object</p></dd>
+
+<dt>stan_fit</dt>
+<dd><p>The fitted Stan model with posterior samples for the following parameters:</p></dd>
+
+<dt>stan_data</dt>
+<dd><p>The data list passed to Stan</p></dd>
+
+<dt>item_labels</dt>
+<dd><p>Vector of item labels</p></dd>
+
+
+</dl><p>The <code>stan_fit</code> component contains posterior samples for these ICM parameters:</p><dl><dt>Person Parameters:</dt>
+<dd>
+<ul><li><p><code>E_loc</code> - Person competence for location (I×1 vector)</p></li>
+<li><p><code>E_wid</code> - Person competence for width (I×1 vector)</p></li>
+<li><p><code>a_loc</code> - Person scaling bias for location (I×1 vector)</p></li>
+<li><p><code>b_loc</code> - Person shifting bias for location (I×1 vector)</p></li>
+<li><p><code>b_wid</code> - Person shifting bias for width (I×1 vector)</p></li>
+<li><p><code>rho_E</code> - Correlation between person competences for location and width</p></li>
+</ul></dd>
+
+<dt>Item Parameters:</dt>
+<dd>
+<ul><li><p><code>Tr_loc</code> - Item consensus location in transformed space (J×1 vector)</p></li>
+<li><p><code>Tr_wid</code> - Item consensus width in transformed space (J×1 vector)</p></li>
+<li><p><code>Tr_loc_splx</code> - Item consensus location in simplex space (J×1 vector)</p></li>
+<li><p><code>Tr_wid_splx</code> - Item consensus width in simplex space (J×1 vector)</p></li>
+<li><p><code>Tr_L</code> - Item consensus lower bound (J×1 vector)</p></li>
+<li><p><code>Tr_U</code> - Item consensus upper bound (J×1 vector)</p></li>
+<li><p><code>Tr_splx</code> - Item consensus simplex representation (J×3 matrix)</p></li>
+<li><p><code>lambda_loc</code> - Item difficulty/discernibility for location (J×1 vector)</p></li>
+<li><p><code>lambda_wid</code> - Item difficulty/discernibility for width (J×1 vector)</p></li>
+<li><p><code>omega</code> - Item residual correlations between location and width (J×1 vector)</p></li>
+<li><p><code>rho_lambda</code> - Correlation between item difficulties for location and width</p></li>
+</ul></dd>
+
+<dt>Hyperparameters:</dt>
+<dd>
+<ul><li><p><code>mu_E</code> - Hyperprior means for person competences (2×1 vector)</p></li>
+<li><p><code>sigma_I</code> - Hyperprior scales for person parameters (5×1 vector)</p></li>
+<li><p><code>sigma_lambda</code> - Hyperprior scales for item difficulties (2×1 vector)</p></li>
+</ul></dd>
+
+<dt>Posterior Predictive Checks:</dt>
+<dd>
+<ul><li><p><code>Y_ppc_loc</code> - Predicted responses for location (N×1 vector)</p></li>
+<li><p><code>Y_ppc_wid</code> - Predicted responses for width (N×1 vector)</p></li>
+<li><p><code>Y_ppc_splx</code> - Predicted responses in simplex space (N×3 matrix)</p></li>
+<li><p><code>Y_ppc_loc_splx</code> - Predicted location responses in simplex space (N×1 vector)</p></li>
+<li><p><code>Y_ppc_wid_splx</code> - Predicted width responses in simplex space (N×1 vector)</p></li>
+</ul></dd>
+
+
+</dl><p>Where I = number of persons, J = number of items, N = number of observations.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
