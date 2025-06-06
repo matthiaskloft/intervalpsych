@@ -62,7 +62,7 @@
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">"devtools::test()"</span></span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># Run specific test file</span></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">"testthat::test_file('tests/testthat/test-fit_itm.R')"</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">"testthat::test_file('tests/testthat/test-fit_icm.R')"</span></span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co"># Check package</span></span>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">"devtools::check()"</span></span></code></pre></div>
@@ -95,30 +95,32 @@
 <div class="section level3">
 <h3 id="core-components">Core Components<a class="anchor" aria-label="anchor" href="#core-components"></a></h3>
 <ol style="list-style-type: decimal"><li><p><strong>Stan Model</strong> (<code>inst/stan/</code>): Implements the Interval Consensus Model with transformation functions between simplex and bivariate normal representations</p></li>
-<li><p><strong>Model Fitting</strong> (<code>R/fit_itm.R</code>): Main wrapper function <code>fit_itm()</code> for fitting ICM using rstan with ILR link function, returns <code>icm_stanfit</code> objects</p></li>
+<li><p><strong>Model Fitting</strong> (<code>R/fit_icm.R</code>): Main wrapper function <code><a href="reference/fit_icm.html">fit_icm()</a></code> for fitting ICM using rstan with ILR or SLR link function, returns <code>icm_stanfit</code> objects</p></li>
 <li>
 <p><strong>Data Transformations</strong> (<code>R/transformation_functions.R</code>):</p>
 <ul><li>
-<code><a href="reference/ilr.html">ilr()</a></code>/<code><a href="reference/inv_ilr.html">inv_ilr()</a></code>: Isometric log-ratio transformations</li>
+<code><a href="reference/log_ratio_transformations.html">ilr()</a></code>/<code><a href="reference/inv_log_ratio_transformations.html">inv_ilr()</a></code>: Isometric log-ratio transformations</li>
+<li>
+<code><a href="reference/log_ratio_transformations.html">slr()</a></code>/<code><a href="reference/inv_log_ratio_transformations.html">inv_slr()</a></code>: Sum log-ratio transformations</li>
 <li>
 <code><a href="reference/itvl_to_splx.html">itvl_to_splx()</a></code>/<code><a href="reference/splx_to_itvl.html">splx_to_itvl()</a></code>: Interval to simplex conversions</li>
 <li>
 <code><a href="reference/remove_zeros.html">remove_zeros()</a></code>: Handle zero components in simplex data</li>
 </ul></li>
 <li><p><strong>Visualization</strong> (<code>R/plot_*.R</code>): Specialized plotting functions for interval data and model results using ggplot2/ggdist</p></li>
-<li><p><strong>Stan Integration</strong> (<code>R/stanmodels.R</code>, <code>src/</code>): Generated Stan model objects, uses <code>stanmodels$icm_ilr</code></p></li>
+<li><p><strong>Stan Integration</strong> (<code>R/stanmodels.R</code>, <code>src/</code>): Generated Stan model objects, uses <code>stanmodels$icm_ilr</code> and <code>stanmodels$icm_slr</code></p></li>
 </ol></div>
 <div class="section level3">
 <h3 id="data-flow">Data Flow<a class="anchor" aria-label="anchor" href="#data-flow"></a></h3>
 <ol style="list-style-type: decimal"><li>Raw interval data → Simplex representation (<code><a href="reference/itvl_to_splx.html">itvl_to_splx()</a></code>)</li>
 <li>Remove zero components (<code><a href="reference/remove_zeros.html">remove_zeros()</a></code>) if needed</li>
-<li>Simplex data → ILR transformation → Bayesian estimation via Stan (<code>fit_itm()</code>)</li>
+<li>Simplex data → ILR/SLR transformation → Bayesian estimation via Stan (<code><a href="reference/fit_icm.html">fit_icm()</a></code>)</li>
 <li>Extract consensus intervals (<code><a href="reference/extract_consensus.html">extract_consensus()</a></code>)</li>
 <li>Visualization (<code><a href="reference/plot_consensus.html">plot_consensus()</a></code>) and summarization (<code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>)</li>
 </ol></div>
 <div class="section level3">
 <h3 id="key-function-signatures">Key Function Signatures<a class="anchor" aria-label="anchor" href="#key-function-signatures"></a></h3>
-<ul><li><code>fit_itm(df_simplex, id_person, id_item, item_labels = NULL, link = "ilr", ...)</code></li>
+<ul><li><code>fit_icm(df_simplex, id_person, id_item, item_labels = NULL, link = "ilr", ...)</code></li>
 <li>Returns objects of class <code>icm_stanfit</code> with components: <code>stan_model</code>, <code>stan_fit</code>, <code>stan_data</code>, <code>item_labels</code>
 </li>
 </ul></div>
@@ -159,7 +161,7 @@
 </ul></div>
 <div class="section level2">
 <h2 id="stan-model-development">Stan Model Development<a class="anchor" aria-label="anchor" href="#stan-model-development"></a></h2>
-<p>When modifying Stan models: 1. Recompile with <code>devtools::load_all()</code> or reinstall package 2. Stan models are automatically compiled on package load 3. Use <code>stanmodels$icm_ilr</code> to access compiled model object 4. Current implementation uses ILR link function exclusively</p>
+<p>When modifying Stan models: 1. Recompile with <code>devtools::load_all()</code> or reinstall package 2. Stan models are automatically compiled on package load 3. Use <code>stanmodels$icm_ilr</code> or <code>stanmodels$icm_slr</code> to access compiled model objects 4. Current implementation supports both ILR and SLR link functions</p>
 </div>
 </div>
 
