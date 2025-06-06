@@ -81,13 +81,13 @@ where \((x_{loc}, x_{wid})\) are the unbounded coordinates and \((x_1, x_2, x_3)
 or Sum Log-Ratio (SLR) inverse transformations.
 These transformations are the inverse of the <code><a href="log_ratio_transformations.html">ilr()</a></code> and <code><a href="log_ratio_transformations.html">slr()</a></code> transformations, respectively,
 and can be used to convert the unbounded location and width of intervals back to the compositional format.</p>
-<p><em>Inverse ILR</em>
-The inverse ILR transformation equations are:
+<p><strong>Inverse ILR</strong></p>
+<p>The inverse ILR transformation equations are:
 $$x_1 = \frac{\exp(\sqrt{2} x_{loc})}{\exp(\sqrt{2} x_{loc}) + \exp(\sqrt{\frac{3}{2}} x_{wid} + \frac{x_{loc}}{\sqrt{2}}) + 1}$$
 $$x_2 = \frac{\exp(\sqrt{\frac{3}{2}} x_{wid} + \frac{x_{loc}}{\sqrt{2}})}{\exp(\sqrt{2} x_{loc}) + \exp(\sqrt{\frac{3}{2}} x_{wid} + \frac{x_{loc}}{\sqrt{2}}) + 1}$$
 $$x_3 = \frac{1}{\exp(\sqrt{2} x_{loc}) + \exp(\sqrt{\frac{3}{2}} x_{wid} + \frac{x_{loc}}{\sqrt{2}}) + 1}$$</p>
-<p><em>Inverse SLR</em>
-The inverse SLR transformation equations are:
+<p><strong>Inverse SLR</strong></p>
+<p>The inverse SLR transformation equations are:
 $$x_1 = \frac{\exp(x_{loc})}{(\exp(x_{loc}) + 1)(\exp(x_{wid}) + 1)}$$
 $$x_2 = \frac{\exp(x_{wid})}{\exp(x_{wid}) + 1}$$
 $$x_3 = \frac{1}{(\exp(x_{loc}) + 1)(\exp(x_{wid}) + 1)}$$</p>
