@@ -18,7 +18,60 @@
 #' @param adapt_delta A numeric value specifying the target acceptance rate. Default is 0.9.
 #' @param ... Additional arguments passed to the \code{\link[rstan:sampling]{rstan::sampling}} function.
 #'
-#' @return A fitted Stan model object.
+#' @return A fitted Stan model object of class `icm_stanfit` containing the following components:
+#' \describe{
+#'   \item{stan_model}{The compiled Stan model object}
+#'   \item{stan_fit}{The fitted Stan model with posterior samples for the following parameters:}
+#'   \item{stan_data}{The data list passed to Stan}
+#'   \item{item_labels}{Vector of item labels}
+#' }
+#' 
+#' The `stan_fit` component contains posterior samples for these ICM parameters:
+#' \describe{
+#'   \item{Person Parameters:}{
+#'     \itemize{
+#'       \item `E_loc` - Person competence for location (I×1 vector)
+#'       \item `E_wid` - Person competence for width (I×1 vector)  
+#'       \item `a_loc` - Person scaling bias for location (I×1 vector)
+#'       \item `b_loc` - Person shifting bias for location (I×1 vector)
+#'       \item `b_wid` - Person shifting bias for width (I×1 vector)
+#'       \item `rho_E` - Correlation between person competences for location and width
+#'     }
+#'   }
+#'   \item{Item Parameters:}{
+#'     \itemize{
+#'       \item `Tr_loc` - Item consensus location in transformed space (J×1 vector)
+#'       \item `Tr_wid` - Item consensus width in transformed space (J×1 vector)
+#'       \item `Tr_loc_splx` - Item consensus location in simplex space (J×1 vector)
+#'       \item `Tr_wid_splx` - Item consensus width in simplex space (J×1 vector)
+#'       \item `Tr_L` - Item consensus lower bound (J×1 vector)
+#'       \item `Tr_U` - Item consensus upper bound (J×1 vector)
+#'       \item `Tr_splx` - Item consensus simplex representation (J×3 matrix)
+#'       \item `lambda_loc` - Item difficulty/discernibility for location (J×1 vector)
+#'       \item `lambda_wid` - Item difficulty/discernibility for width (J×1 vector)
+#'       \item `omega` - Item residual correlations between location and width (J×1 vector)
+#'       \item `rho_lambda` - Correlation between item difficulties for location and width
+#'     }
+#'   }
+#'   \item{Hyperparameters:}{
+#'     \itemize{
+#'       \item `mu_E` - Hyperprior means for person competences (2×1 vector)
+#'       \item `sigma_I` - Hyperprior scales for person parameters (5×1 vector)
+#'       \item `sigma_lambda` - Hyperprior scales for item difficulties (2×1 vector)
+#'     }
+#'   }
+#'   \item{Posterior Predictive Checks:}{
+#'     \itemize{
+#'       \item `Y_ppc_loc` - Predicted responses for location (N×1 vector)
+#'       \item `Y_ppc_wid` - Predicted responses for width (N×1 vector)
+#'       \item `Y_ppc_splx` - Predicted responses in simplex space (N×3 matrix)
+#'       \item `Y_ppc_loc_splx` - Predicted location responses in simplex space (N×1 vector)
+#'       \item `Y_ppc_wid_splx` - Predicted width responses in simplex space (N×1 vector)
+#'     }
+#'   }
+#' }
+#' 
+#' Where I = number of persons, J = number of items, N = number of observations.
 #' @export
 #' @references
 #' Kloft, M., Siepe, B. S., & Heck, D. W. (2024). The Interval Truth Model: A Consensus Model for Continuous Bounded Interval Responses. https://doi.org/10.31234/osf.io/dzvw2

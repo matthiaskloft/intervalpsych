@@ -45,7 +45,6 @@ LinkingTo:
 SystemRequirements: GNU make
 LazyData: true
 Suggests:
-    extraDistr,
     kableExtra,
     knitr,
     rmarkdown,
