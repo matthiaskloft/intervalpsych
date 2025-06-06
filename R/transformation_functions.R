@@ -10,12 +10,14 @@
 #' or Sum Log-Ratio (SLR) transformations so that they can be modeled by a bivariate-normal distribution.
 #' These transformations preserve the dimensional conceptualization of the interval responses in terms of a location and a width.
 #'
-#' *ILR*
+#' **ILR**
+#'
 #' The ILR transformation equations are:
 #' \deqn{x_{loc} = \sqrt{\frac{1}{2}} \log\left(\frac{x_1}{x_3}\right)}
 #' \deqn{x_{wid} = \sqrt{\frac{2}{3}} \log\left(\frac{x_2}{\sqrt{x_1 x_3}}\right)}
 #'
-#' *SLR*
+#' **SLR**
+#'
 #' The SLR transformation equations are:
 #' \deqn{x_{loc} = \log\left(\frac{x_1}{x_3}\right)}
 #' \deqn{x_{wid} = \log\left(\frac{x_2}{x_1 + x_3}\right)}
