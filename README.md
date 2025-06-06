@@ -4,6 +4,7 @@
 # intervalpsych
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 The **intervalpsych** package provides a toolbox for the analysis of
@@ -41,7 +42,7 @@ introductory vignette:
 
 - Website: <https://matthiaskloft.github.io/intervalpsych/>
 
-- Vignette: [Interval Truth
+- Vignette: [Interval Consensus
   Model](https://matthiaskloft.github.io/intervalpsych/articles/Interval-Truth-Model.html)
 
 - [Open an Issue](https://github.com/matthiaskloft/intervalpsych/issues)
@@ -51,7 +52,7 @@ introductory vignette:
 If you want to cite the package, please use the following citation:
 
 Kloft, M., Siepe, B. S., & Heck, D. W. (2024, October 25). The Interval
-Truth Model: A Consensus Model for Continuous Bounded Interval
+Consensus Model: A Consensus Model for Continuous Bounded Interval
 Responses. *PsyArXiv Preprint*. <https://doi.org/10.31234/osf.io/dzvw2>
 
 As a BibTeX entry:

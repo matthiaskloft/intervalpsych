@@ -2,27 +2,43 @@
 # Log-Ratio Transformations for Interval Responses
 #-------------------------------------------------------------------------------
 
-#' @title Isometric Log-Ratio (ILR) transformation for interval responses
+#' @title Log-Ratio transformations for interval responses
+#' @name log_ratio_transformations
+#' @rdname log_ratio_transformations
 #' @description
-#' Transform 2-simplex data to the unbounded space so that they can be modeled by a bivariate-normal distribution.
-#' This is done via a modified multivariate logit transformation that preserves the symmetry of interval responses which are conceptualized in terms of a location and a width.
-#' 
+#' Transform 2-simplex data to the unbounded space using either Isometric Log-Ratio (ILR)
+#' or Sum Log-Ratio (SLR) transformations so that they can be modeled by a bivariate-normal distribution.
+#' These transformations preserve the dimensional conceptualization of the interval responses in terms of a location and a width.
+#'
+#' *ILR*
 #' The ILR transformation equations are:
-#' \deqn{y_1 = \sqrt{\frac{1}{2}} \log\left(\frac{x_1}{x_3}\right)}
-#' \deqn{y_2 = \sqrt{\frac{2}{3}} \log\left(\frac{x_2}{\sqrt{x_1 x_3}}\right)}
-#' 
-#' where \eqn{(x_1, x_2, x_3)} is a 2-simplex and \eqn{(y_1, y_2)} are the transformed coordinates.
+#' \deqn{x_{loc} = \sqrt{\frac{1}{2}} \log\left(\frac{x_1}{x_3}\right)}
+#' \deqn{x_{wid} = \sqrt{\frac{2}{3}} \log\left(\frac{x_2}{\sqrt{x_1 x_3}}\right)}
+#'
+#' *SLR*
+#' The SLR transformation equations are:
+#' \deqn{x_{loc} = \log\left(\frac{x_1}{x_3}\right)}
+#' \deqn{x_{wid} = \log\left(\frac{x_2}{x_1 + x_3}\right)}
+#'
+#' where \eqn{(x_1, x_2, x_3)} is a 2-simplex and \eqn{(x_{loc}, x_{wid})} are the transformed values representing the unbounded location and width.
 #'
 #' @param simplex A numeric vector that is a 2-simplex (3 elements that sum to 1) or a dataframe where each of the rows is a 2-simplex
 #'
 #' @return A numeric vector with 2 unbounded elements or a dataframe where each of the rows is a numeric vector with 2 unbounded elements
+#'
+#' @seealso [inv_ilr()], [inv_slr()] for the inverse transformations.
+#'
 #' @export
 #' @references
 #' Smithson, M., & Broomell, S. B. (2024). Compositional data analysis tutorial. Psychological Methods, 29(2), 362–378.
 #'
 #' @examples
+#' # ILR transformation
 #' simplex <- data.frame(rbind(c(.1, .2, .7), c(.4, .5, .1)))
 #' ilr(simplex)
+#'
+#' # SLR transformation
+#' slr(simplex)
 #'
 #'
 ilr <- function(simplex) {
@@ -95,16 +111,28 @@ ilr <- function(simplex) {
 
 
 
-#' @title Inverse Isometric Log-Ratio (ILR) transformation for interval responses
+#' @title Inverse Log-Ratio transformations for interval responses
+#' @name inv_log_ratio_transformations
+#' @rdname inv_log_ratio_transformations
 #' @description
-#' Transform unbounded data back to the 2-simplex space.
-#' 
+#' Transform unbounded data back to the 2-simplex space using either Isometric Log-Ratio (ILR)
+#' or Sum Log-Ratio (SLR) inverse transformations.
+#' These transformations are the inverse of the [ilr()] and [slr()] transformations, respectively,
+#' and can be used to convert the unbounded location and width of intervals back to the compositional format.
+#'
+#' *Inverse ILR*
 #' The inverse ILR transformation equations are:
-#' \deqn{x_1 = \frac{\exp(\sqrt{2} y_1)}{\exp(\sqrt{2} y_1) + \exp(\sqrt{\frac{3}{2}} y_2 + \frac{y_1}{\sqrt{2}}) + 1}}
-#' \deqn{x_2 = \frac{\exp(\sqrt{\frac{3}{2}} y_2 + \frac{y_1}{\sqrt{2}})}{\exp(\sqrt{2} y_1) + \exp(\sqrt{\frac{3}{2}} y_2 + \frac{y_1}{\sqrt{2}}) + 1}}
-#' \deqn{x_3 = \frac{1}{\exp(\sqrt{2} y_1) + \exp(\sqrt{\frac{3}{2}} y_2 + \frac{y_1}{\sqrt{2}}) + 1}}
-#' 
-#' where \eqn{(y_1, y_2)} are the unbounded coordinates and \eqn{(x_1, x_2, x_3)} is the resulting 2-simplex.
+#' \deqn{x_1 = \frac{\exp(\sqrt{2} x_{loc})}{\exp(\sqrt{2} x_{loc}) + \exp(\sqrt{\frac{3}{2}} x_{wid} + \frac{x_{loc}}{\sqrt{2}}) + 1}}
+#' \deqn{x_2 = \frac{\exp(\sqrt{\frac{3}{2}} x_{wid} + \frac{x_{loc}}{\sqrt{2}})}{\exp(\sqrt{2} x_{loc}) + \exp(\sqrt{\frac{3}{2}} x_{wid} + \frac{x_{loc}}{\sqrt{2}}) + 1}}
+#' \deqn{x_3 = \frac{1}{\exp(\sqrt{2} x_{loc}) + \exp(\sqrt{\frac{3}{2}} x_{wid} + \frac{x_{loc}}{\sqrt{2}}) + 1}}
+#'
+#' *Inverse SLR*
+#' The inverse SLR transformation equations are:
+#' \deqn{x_1 = \frac{\exp(x_{loc})}{(\exp(x_{loc}) + 1)(\exp(x_{wid}) + 1)}}
+#' \deqn{x_2 = \frac{\exp(x_{wid})}{\exp(x_{wid}) + 1}}
+#' \deqn{x_3 = \frac{1}{(\exp(x_{loc}) + 1)(\exp(x_{wid}) + 1)}}
+#'
+#' where \eqn{(x_{loc}, x_{wid})} are the unbounded coordinates and \eqn{(x_1, x_2, x_3)} is the resulting 2-simplex.
 #'
 #' @param bvn A numeric vector containing an unbounded interval location and width or
 #' a dataframe where each of the rows consists of such a vector.
@@ -112,13 +140,19 @@ ilr <- function(simplex) {
 #' @return A numeric vector containing a 2-simplex or a dataframe where each of
 #' the rows consists of such a vector.
 #'
+#' @seealso [ilr()], [slr()] for the forward transformations.
+#'
 #' @export
 #' @references
 #' Smithson, M., & Broomell, S. B. (2024). Compositional data analysis tutorial. Psychological Methods, 29(2), 362–378.
 #'
 #' @examples
-#' simplex <- data.frame(rbind(c(0, .2), c(-2, .4)))
-#' inv_ilr(simplex)
+#' # Inverse ILR transformation
+#' bvn <- data.frame(rbind(c(0, .2), c(-2, .4)))
+#' inv_ilr(bvn)
+#'
+#' # Inverse SLR transformation
+#' inv_slr(bvn)
 #'
 #'
 inv_ilr <- function(bvn) {
@@ -191,29 +225,8 @@ inv_ilr <- function(bvn) {
 # sum(inv_ilr(c(0,1)))
 
 
-#' @title Sum Log-Ratio (SLR) transformation for interval responses
-#' @description
-#' Transform 2-simplex data to the unbounded space using sum log-ratio transformation.
-#' This transformation provides an alternative to the ILR transformation for modeling interval data.
-#' 
-#' The SLR transformation equations are:
-#' \deqn{y_1 = \log\left(\frac{x_1}{x_3}\right)}
-#' \deqn{y_2 = \log\left(\frac{x_2}{x_1 + x_3}\right)}
-#' 
-#' where \eqn{(x_1, x_2, x_3)} is a 2-simplex and \eqn{(y_1, y_2)} are the transformed coordinates.
-#'
-#' @param simplex A numeric vector that is a 2-simplex (3 elements that sum to 1) or a dataframe where each of the rows is a 2-simplex
-#'
-#' @return A numeric vector with 2 unbounded elements or a dataframe where each of the rows is a numeric vector with 2 unbounded elements
+#' @rdname log_ratio_transformations
 #' @export
-#' @references
-#' Smithson, M., & Broomell, S. B. (2024). Compositional data analysis tutorial. Psychological Methods, 29(2), 362–378.
-#'
-#' @examples
-#' simplex <- data.frame(rbind(c(.1, .2, .7), c(.4, .5, .1)))
-#' slr(simplex)
-#'
-#'
 slr <- function(simplex) {
   if (!is.data.frame(simplex) & !is.matrix(simplex)) {
     #### vector
@@ -285,32 +298,8 @@ slr <- function(simplex) {
 
 
 
-#' @title Inverse Sum Log-Ratio (SLR) transformation for interval responses
-#' @description
-#' Transform unbounded data back to the 2-simplex space using the inverse sum log-ratio transformation.
-#' 
-#' The inverse SLR transformation equations are:
-#' \deqn{x_1 = \frac{\exp(y_1)}{(\exp(y_1) + 1)(\exp(y_2) + 1)}}
-#' \deqn{x_2 = \frac{\exp(y_2)}{\exp(y_2) + 1}}
-#' \deqn{x_3 = \frac{1}{(\exp(y_1) + 1)(\exp(y_2) + 1)}}
-#' 
-#' where \eqn{(y_1, y_2)} are the unbounded coordinates and \eqn{(x_1, x_2, x_3)} is the resulting 2-simplex.
-#'
-#' @param bvn A numeric vector containing an unbounded interval location and width or
-#' a dataframe where each of the rows consists of such a vector.
-#'
-#' @return A numeric vector containing a 2-simplex or a dataframe where each of
-#' the rows consists of such a vector.
-#'
+#' @rdname inv_log_ratio_transformations
 #' @export
-#' @references
-#' Smithson, M., & Broomell, S. B. (2024). Compositional data analysis tutorial. Psychological Methods, 29(2), 362–378.
-#'
-#' @examples
-#' bvn <- data.frame(rbind(c(0, .2), c(-2, .4)))
-#' inv_slr(bvn)
-#'
-#'
 inv_slr <- function(bvn) {
   if (!is.data.frame(bvn) & !is.matrix(bvn)) {
     #### vector
@@ -391,6 +380,7 @@ inv_slr <- function(bvn) {
 #' @param min Minimum of the original response scale.
 #' @param max Maximum of the original response scale.
 #'
+#' @seealso [splx_to_itvl()] for the inverse transformation.
 #'
 #' @export
 #'
@@ -460,6 +450,7 @@ itvl_to_splx <- function(interval_bounds,
 #' @param min Minimum of the original response scale.
 #' @param max Maximum of the original response scale.
 #'
+#' @seealso [itvl_to_splx()] for the inverse transformation.
 #'
 #' @export
 #'

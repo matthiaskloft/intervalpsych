@@ -10,6 +10,7 @@ fit_icm(
   id_item,
   item_labels = NULL,
   link = "ilr",
+  padding = 0,
   iter_sampling = 500,
   iter_warmup = 500,
   n_chains = 4,
@@ -28,7 +29,11 @@ fit_icm(
 \item{item_labels}{A vector of item labels. Can be long format matching id_item or
 a vector of unique labels in ascending order. Default is NULL.}
 
-\item{link}{A character string specifying the link function. The only option as of now is "ilr", the Isometric Log-Ratio function.}
+\item{link}{A character string specifying the link function. Options are "ilr" (Isometric Log-Ratio) or "slr" (Sum Log-Ratio).
+See also \code{\link[=ilr]{ilr()}} and \code{\link[=slr]{slr()}} for details. Default is "ilr".}
+
+\item{padding}{Padding constant that was used to remove zero-components from the simplex. Default is 0.
+The model will reverse the padding when transforming results back to the original interval response scale. See also \code{\link[=remove_zeros]{remove_zeros()}} for details.}
 
 \item{iter_sampling}{An integer specifying the number of sampling iterations. Default is 500.}
 
@@ -46,7 +51,7 @@ a vector of unique labels in ascending order. Default is NULL.}
 A fitted Stan model object.
 }
 \description{
-This function fits an Interval Consensus Model (ICM) using Stan.
+This function fits the Interval Consensus Model (ICM, Kloft et al., 2024) using Stan.
 }
 \examples{
 \dontrun{
@@ -55,4 +60,7 @@ id_person <- rep(1:5, each=2)
 id_item <- rep(1:2, times=5)
 fit <- fit_icm(df_simplex, id_person, id_item)
 }
+}
+\references{
+Kloft, M., Siepe, B. S., & Heck, D. W. (2024). The Interval Truth Model: A Consensus Model for Continuous Bounded Interval Responses. https://doi.org/10.31234/osf.io/dzvw2
 }

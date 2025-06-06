@@ -2,49 +2,49 @@
 // Interval Consensus Model
 ////////////////////////////////////////////////////////////////////////////////
 functions {
-  // isometric log-ratio transformation, array to matrix
-  matrix ilr(array[] vector Y_splx) {
+  // sum log-ratio transformation, array to matrix
+  matrix slr(array[] vector Y_splx) {
 
     int N = size(Y_splx);
     matrix[N, 2] Y;
 
     vector[N] log_ratio_1 = log(to_vector(Y_splx[, 1]) ./ to_vector(Y_splx[, 3]));
-    vector[N] log_ratio_2 = log(to_vector(Y_splx[, 2]) ./ sqrt(to_vector(Y_splx[, 1]) .* to_vector(Y_splx[, 3])));
+    vector[N] log_ratio_2 = log(to_vector(Y_splx[, 2]) ./ (to_vector(Y_splx[, 1]) + to_vector(Y_splx[, 3])));
 
-    Y[, 1] = sqrt(1.0 / 2) * log_ratio_1;
-    Y[, 2] = sqrt(2.0 / 3) * log_ratio_2;
+    Y[, 1] = log_ratio_1;
+    Y[, 2] = log_ratio_2;
 
     return Y;
   }
-  // isometric log-ratio transformation, matrix to matrix
-  matrix ilr(matrix Y_splx) {
+  // sum log-ratio transformation, matrix to matrix
+  matrix slr(matrix Y_splx) {
 
     int N = rows(Y_splx);
     matrix[N, 2] Y;
 
     vector[N] log_ratio_1 = log(Y_splx[, 1] ./ Y_splx[, 3]);
-    vector[N] log_ratio_2 = log(Y_splx[, 2] ./ sqrt(Y_splx[, 1] .* Y_splx[, 3]));
+    vector[N] log_ratio_2 = log(Y_splx[, 2] ./ (Y_splx[, 1] + Y_splx[, 3]));
 
-    Y[, 1] = sqrt(1.0 / 2) * log_ratio_1;
-    Y[, 2] = sqrt(2.0 / 3) * log_ratio_2;
+    Y[, 1] = log_ratio_1;
+    Y[, 2] = log_ratio_2;
 
     return Y;
   }
 
-    // inverse isometric log-ratio transformation, matrix to matrix
-    matrix inv_ilr(matrix Y, real padding) {
+    // inverse sum log-ratio transformation, matrix to matrix
+    matrix inv_slr(matrix Y, real padding) {
 
     int N = rows(Y);
     matrix[N, 3] Y_splx;
     // scale maximum for back transformation to simplex
     real scale_max = 1 + padding * 3.0;
 
-    vector[N] Sum = exp(sqrt(2) .* Y[,1]) +
-                    exp(sqrt(3.0/2) .* Y[,2] + Y[,1] ./ sqrt(2)) +
-                    1;
-    Y_splx[ ,1] = exp(sqrt(2) .* Y[,1])                        ./ Sum .* scale_max - padding;
-    Y_splx[ ,2] = exp(sqrt(3.0/2) .* Y[,2] + Y[,1] ./ sqrt(2)) ./ Sum .* scale_max - padding;
-    Y_splx[ ,3] = 1                                            ./ Sum .* scale_max - padding;
+    vector[N] exp_y1 = exp(Y[,1]);
+    vector[N] exp_y2 = exp(Y[,2]);
+
+    Y_splx[ ,1] = exp_y1 ./ ((exp_y1 + 1) .* (exp_y2 + 1)) .* scale_max - padding;
+    Y_splx[ ,2] = exp_y2 ./ (exp_y2 + 1) .* scale_max - padding;
+    Y_splx[ ,3] = 1 ./ ((exp_y1 + 1) .* (exp_y2 + 1)) .* scale_max - padding;
 
     return Y_splx;
   }
@@ -65,11 +65,11 @@ data{
 transformed data {
   // scale maximum for back transformation to simplex
   real scale_max = 1 + padding * 3;
-  // arrray to array
+  // arrray to array, sum log-ratio
   array[N] vector[2] Y;
   for (n in 1:N){
-    Y[n,1] = sqrt(1.0/2) * log(Y_splx[n,1] / Y_splx[n,3]);
-    Y[n,2] = sqrt(2.0/3) * log(Y_splx[n,2] / sqrt(Y_splx[n,1] * Y_splx[n,3]));
+    Y[n,1] = log(Y_splx[n,1] / Y_splx[n,3]);
+    Y[n,2] = log(Y_splx[n,2] / (Y_splx[n,1] + Y_splx[n,3]));
   }
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -128,7 +128,7 @@ transformed parameters{
   Tr_splx_model[,2] = Tr_wid_beta;
   Tr_splx_model[,3] = 1 - Tr_splx_model[,1] - Tr_splx_model[,2];
   // transform simplex to bivariate normal
-  matrix[J,2] Tr_bvn = ilr(Tr_splx_model);
+  matrix[J,2] Tr_bvn = slr(Tr_splx_model);
   // final bivariate locations and widths
   Tr_loc             = Tr_bvn[,1];  // latent consensus
   Tr_wid             = Tr_bvn[,2];  // latent consensus
@@ -228,7 +228,7 @@ model{
     // Posterior Predicted Values for unbounded location and width
     Y_ppc_loc = Y_ppc[,1];
     Y_ppc_wid = Y_ppc[,2];
-    Y_ppc_splx = inv_ilr(Y_ppc, padding);
+    Y_ppc_splx = inv_slr(Y_ppc, padding);
     Y_ppc_loc_splx = Y_ppc_splx[,1] + 0.5 .* Y_ppc_splx[,2];
     Y_ppc_wid_splx = Y_ppc_splx[,2];
   } // end block

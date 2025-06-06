@@ -12,10 +12,10 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/README-",
+  fig.path = "../man/figures/README-",
   out.width = "90%",
   fig.width = 10,
-  fig.height = 10,
+  fig.height = 7,
   message = FALSE
 )
 ```
@@ -62,7 +62,6 @@ What does the dataset look like? We can visualize the interval responses using t
 ```{r message=FALSE}
 #| fig.alt: >
 #|  Cumulative distribution of interval responses.
-
 
 plot_intervals_cumulative(
   lower = quantifiers$x_L,
@@ -118,11 +117,14 @@ fit <-
     item_labels = quantifiers |> 
       dplyr::distinct(id_item, name_en) |> 
       dplyr::pull(name_en),
-    n_chains = 2,
-    n_cores = 2,
-    iter_sampling = 1000,
+    link = "ilr",
+    padding = .01,
+    n_chains = 4,
+    n_cores = 4,
+    iter_sampling = 500,
     iter_warmup = 300,
-    adapt_delta = .95
+    adapt_delta = .9,
+    verbose = TRUE
   )
 ```
 
@@ -165,6 +167,6 @@ plot_consensus(fit, method = "draws_distribution", CI = .95)
 ```{r}
 #| fig.alt: >
 #|   Plot of the estimated consensus intervals.
-# <!-- # <!-- # <!-- #  --> --> -->
-plot_consensus(fit, method = "draws_distribution", CI = c(.5,.95))
+
+plot_consensus(fit, method = "draws_distribution", CI = c(.5, .95))
 ```

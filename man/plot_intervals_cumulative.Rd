@@ -30,13 +30,13 @@ plot_intervals_cumulative(
 
 \item{max}{The maximum value for the x-axis.}
 
-\item{facet_wrap}{A logical value indicating whether to use facet wrapping. Default is FALSE.}
+\item{facet_wrap}{A logical value indicating whether to use facet wrapping. Default is NULL.}
 
 \item{weighted}{An optional vector of weights for the intervals.}
 
 \item{show_quantiles}{A logical value indicating whether to show quantiles on the plot. Default is TRUE.}
 
-\item{ncol}{The number of columns for facet wrapping. Default is 2.}
+\item{ncol}{The number of columns for facet wrapping. Default is 3.}
 }
 \value{
 A ggplot object representing the cumulative interval plot.

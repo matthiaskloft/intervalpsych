@@ -14,7 +14,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Rscript -e "devtools::test()"
 
 # Run specific test file
-Rscript -e "testthat::test_file('tests/testthat/test-fit_itm.R')"
+Rscript -e "testthat::test_file('tests/testthat/test-fit_icm.R')"
 
 # Check package
 Rscript -e "devtools::check()"
@@ -50,28 +50,29 @@ Rscript -e "devtools::build_vignettes()"
 
 1. **Stan Model** (`inst/stan/`): Implements the Interval Consensus Model with transformation functions between simplex and bivariate normal representations
 
-2. **Model Fitting** (`R/fit_itm.R`): Main wrapper function `fit_itm()` for fitting ICM using rstan with ILR link function, returns `icm_stanfit` objects
+2. **Model Fitting** (`R/fit_icm.R`): Main wrapper function `fit_icm()` for fitting ICM using rstan with ILR or SLR link function, returns `icm_stanfit` objects
 
 3. **Data Transformations** (`R/transformation_functions.R`): 
    - `ilr()`/`inv_ilr()`: Isometric log-ratio transformations
+   - `slr()`/`inv_slr()`: Sum log-ratio transformations
    - `itvl_to_splx()`/`splx_to_itvl()`: Interval to simplex conversions
    - `remove_zeros()`: Handle zero components in simplex data
 
 4. **Visualization** (`R/plot_*.R`): Specialized plotting functions for interval data and model results using ggplot2/ggdist
 
-5. **Stan Integration** (`R/stanmodels.R`, `src/`): Generated Stan model objects, uses `stanmodels$icm_ilr`
+5. **Stan Integration** (`R/stanmodels.R`, `src/`): Generated Stan model objects, uses `stanmodels$icm_ilr` and `stanmodels$icm_slr`
 
 ### Data Flow
 
 1. Raw interval data → Simplex representation (`itvl_to_splx()`)
 2. Remove zero components (`remove_zeros()`) if needed
-3. Simplex data → ILR transformation → Bayesian estimation via Stan (`fit_itm()`)
+3. Simplex data → ILR/SLR transformation → Bayesian estimation via Stan (`fit_icm()`)
 4. Extract consensus intervals (`extract_consensus()`)
 5. Visualization (`plot_consensus()`) and summarization (`summary()`)
 
 ### Key Function Signatures
 
-- `fit_itm(df_simplex, id_person, id_item, item_labels = NULL, link = "ilr", ...)`
+- `fit_icm(df_simplex, id_person, id_item, item_labels = NULL, link = "ilr", ...)`
 - Returns objects of class `icm_stanfit` with components: `stan_model`, `stan_fit`, `stan_data`, `item_labels`
 
 ### Dependencies
@@ -104,5 +105,5 @@ Uses testthat (edition 3) with comprehensive input validation tests. Test files 
 When modifying Stan models:
 1. Recompile with `devtools::load_all()` or reinstall package
 2. Stan models are automatically compiled on package load
-3. Use `stanmodels$icm_ilr` to access compiled model object
-4. Current implementation uses ILR link function exclusively
+3. Use `stanmodels$icm_ilr` or `stanmodels$icm_slr` to access compiled model objects
+4. Current implementation supports both ILR and SLR link functions

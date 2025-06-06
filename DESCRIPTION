@@ -1,6 +1,9 @@
 Package: intervalpsych
 Title: Working with Interval Data in Psychometrics
 Version: 0.0.0.9000
+Author: Matthias Kloft [aut, cre, cph] (<https://orcid.org/0000-0003-1845-6957>),
+  Björn S. Siepe [aut] (<https://orcid.org/0000-0002-9558-4648>)
+Maintainer: Matthias Kloft <kloft@uni-marburg.de>
 Authors@R:
     c(person("Matthias", "Kloft",
   email = "kloft@uni-marburg.de",
@@ -10,7 +13,6 @@ Authors@R:
   email = "bjoernsiepe@gmail.com",
   role = c("aut"),
   comment = c(ORCID = "0000-0002-9558-4648")))
-Maintainer: Matthias Kloft <kloft@uni-marburg.de>
 Description: Preprocessing, modeling, and visualizing interval-valued data in psychometrics and surrounding disciplines. This package provides functions to transform interval-valued responses and to estimate item response theory models for the aggregation of such response data. Additionally, results of these models can be visualized and summarized using convenience functions.
 License: GPL (>= 3)
 Encoding: UTF-8
@@ -50,3 +52,4 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Config/Needs/website: rmarkdown
+VignetteBuilder: knitr

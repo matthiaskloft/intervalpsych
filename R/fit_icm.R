@@ -1,13 +1,16 @@
 #' Fit Interval Consensus Model
 #'
-#' This function fits an Interval Consensus Model (ICM) using Stan.
+#' This function fits the Interval Consensus Model (ICM, Kloft et al., 2024) using Stan.
 #'
 #' @param df_simplex A dataframe containing the simplex data.
 #' @param id_person A vector of person indices.
 #' @param id_item A vector of item indices.
 #' @param item_labels A vector of item labels. Can be long format matching id_item or
 #' a vector of unique labels in ascending order. Default is NULL.
-#' @param link A character string specifying the link function. The only option as of now is "ilr", the Isometric Log-Ratio function.
+#' @param link A character string specifying the link function. Options are "ilr" (Isometric Log-Ratio) or "slr" (Sum Log-Ratio).
+#' See also [ilr()] and [slr()] for details. Default is "ilr".
+#' @param padding Padding constant that was used to remove zero-components from the simplex. Default is 0.
+#' The model will reverse the padding when transforming results back to the original interval response scale. See also [remove_zeros()] for details.
 #' @param iter_sampling An integer specifying the number of sampling iterations. Default is 500.
 #' @param iter_warmup An integer specifying the number of warmup iterations. Default is 500.
 #' @param n_chains An integer specifying the number of Markov chains. Default is 4.
@@ -17,6 +20,8 @@
 #'
 #' @return A fitted Stan model object.
 #' @export
+#' @references
+#' Kloft, M., Siepe, B. S., & Heck, D. W. (2024). The Interval Truth Model: A Consensus Model for Continuous Bounded Interval Responses. https://doi.org/10.31234/osf.io/dzvw2
 #'
 #' @examples
 #' \dontrun{
@@ -31,6 +36,7 @@ fit_icm <-
            id_item,
            item_labels = NULL,
            link = "ilr",
+           padding = 0,
            iter_sampling = 500,
            iter_warmup = 500,
            n_chains = 4,
@@ -41,9 +47,9 @@ fit_icm <-
     ### Data Checks ------------------------------------------------------------
 
     # check that a valid link was specified
-    link_functions <- c("ilr")
+    link_functions <- c("ilr", "slr")
     if (!link %in% link_functions) {
-      stop("Error: link must be either 'ilr' or 'clr'!")
+      stop("Error: link must be either 'ilr' or 'slr'!")
     }
 
     # check if simplex is a dataframe
@@ -95,7 +101,10 @@ fit_icm <-
       check_simplex(as.matrix(df_simplex)[i, ])
     }
 
-
+    # check padding constant is a real number between 0 and 1
+    if (!is.numeric(padding) || length(padding) != 1 || padding < 0 || padding > 1) {
+      stop("Error: padding must be a real number between 0 and 1!")
+    }
 
 
     ### Recompute indices and labels -------------------------------------------
@@ -118,13 +127,16 @@ fit_icm <-
       ii = id_person,
       jj = id_item,
       nn = 1:nrow(df_simplex),
-      Y_splx = df_simplex
+      Y_splx = df_simplex,
+      padding = padding
     )
 
     ### Stan Model --------------------------------------------------------------
 
-    if(link == "ilr") {
+    if (link == "ilr") {
       stan_model <- stanmodels$icm_ilr
+    } else if (link == "slr") {
+      stan_model <- stanmodels$icm_slr
     }
 
     ### Run Sampler Stan Model -------------------------------------------------

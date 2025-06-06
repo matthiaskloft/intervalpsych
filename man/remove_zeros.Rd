@@ -4,20 +4,23 @@
 \alias{remove_zeros}
 \title{Remove Zeros from Simplex}
 \usage{
-remove_zeros(simplex, method = "simple_replacement", padding = 0.01)
+remove_zeros(simplex, method = "rescaling", padding = 0.01)
 }
 \arguments{
 \item{simplex}{A numeric matrix, data frame, or vector representing the simplex. Each row should sum to one and all elements should be between 0 and 1.}
 
-\item{method}{A character string specifying the method to remove zeros. Currently, only "simple_replacement" is supported. Default is "simple_replacement".}
+\item{method}{A character string specifying the method to remove zeros. Currently, only "rescaling" is supported. Default is "rescaling".}
 
-\item{padding}{A numeric value to add to each element of the simplex when using the "simple_replacement" method. Default is 0.01.}
+\item{padding}{A numeric value to add to each element of the simplex when using the "rescaling" method. Default is 0.01.}
 }
 \value{
 A numeric matrix with the same dimensions as the input \code{simplex}, with zeros removed according to the specified method.
 }
 \description{
 This function removes zeros from a simplex (a matrix or vector where each row sums to one and all elements are between 0 and 1) using a specified method.
+}
+\details{
+The rescaling methods adds a small value (padding) to each element of the simplex and then rescales the rows so that they still sum to one:
 }
 \examples{
 # Example usage:

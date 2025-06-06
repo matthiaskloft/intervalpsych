@@ -1,0 +1,27 @@
+* using log directory ‘/mnt/c/Users/Matze/Documents/GitHub/Interval_Projects/intervalpsych/..Rcheck’
+* using R version 4.5.0 (2025-04-11)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using options ‘--no-manual --no-vignettes’
+* checking for file ‘./DESCRIPTION’ ... OK
+* this is package ‘intervalpsych’ version ‘0.0.0.9000’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available:
+  'ggokabeito', 'RcppParallel', 'rstan', 'rstantools', 'BH',
+  'RcppEigen', 'StanHeaders'
+
+Packages suggested but not available for checking:
+  'extraDistr', 'kableExtra', 'knitr', 'rmarkdown'
+
+VignetteBuilder package required for checking but not installed: ‘knitr’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR

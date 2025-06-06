@@ -9,7 +9,6 @@
 #' @return A list containing:
 #' \item{df_rvar}{A data frame with extracted posterior samples as random variables.}
 #' \item{summary}{A summary data frame with median and credible intervals for the extracted parameters.}
-#' \item{item_labels}{A character vector of item labels.}
 #'
 #' @details
 #' This function extracts parameter estimates for the consensus intervals from a

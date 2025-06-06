@@ -2,12 +2,12 @@
 
 #include <Rcpp.h>
 using namespace Rcpp ;
-#include "stanExports_icm_ilr.h"
+#include "stanExports_icm_slr.h"
 
-RCPP_MODULE(stan_fit4icm_ilr_mod) {
+RCPP_MODULE(stan_fit4icm_slr_mod) {
 
 
-    class_<rstan::stan_fit<stan_model, boost::random::ecuyer1988> >("rstantools_model_icm_ilr")
+    class_<rstan::stan_fit<stan_model, boost::random::ecuyer1988> >("rstantools_model_icm_slr")
 
     .constructor<SEXP,SEXP,SEXP>()
 

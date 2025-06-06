@@ -11,7 +11,8 @@ plot_consensus(icm_stanfit, method = "median_bounds", CI = 0.95)
 
 \item{method}{A character string specifying the plotting method. Options are "median_bounds" (default) or "draws_distribution".}
 
-\item{CI}{A numeric value specifying the confidence interval for the median bounds method. Default is 0.95.}
+\item{CI}{A numeric value specifying the confidence interval for the "draws_distribution" method. Default is 0.95.
+This can also be a vector of length 2 for multiple confidence intervals.}
 }
 \value{
 A ggplot2 object representing the interval plot.

@@ -3,10 +3,14 @@
 #' This function removes zeros from a simplex (a matrix or vector where each row sums to one and all elements are between 0 and 1) using a specified method.
 #'
 #' @param simplex A numeric matrix, data frame, or vector representing the simplex. Each row should sum to one and all elements should be between 0 and 1.
-#' @param method A character string specifying the method to remove zeros. Currently, only "simple_replacement" is supported. Default is "simple_replacement".
-#' @param padding A numeric value to add to each element of the simplex when using the "simple_replacement" method. Default is 0.01.
+#' @param method A character string specifying the method to remove zeros. Currently, only "rescaling" is supported. Default is "rescaling".
+#' @param padding A numeric value to add to each element of the simplex when using the "rescaling" method. Default is 0.01.
 #'
 #' @return A numeric matrix with the same dimensions as the input `simplex`, with zeros removed according to the specified method.
+#'
+#' @details
+#' The rescaling methods adds a small value (padding) to each element of the simplex and then rescales the rows so that they still sum to one:
+# \deqn{simplex' = \frac{simplex + padding}{rowSums(simplex + padding)}}
 #'
 #' @examples
 #' # Example usage:
@@ -15,12 +19,12 @@
 #'
 #' @export
 remove_zeros <- function(simplex,
-                         method = "simple_replacement",
+                         method = "rescaling",
                          padding = .01) {
 
   ### Check method
 
-  available_methods <- c("simple_replacement")
+  available_methods <- c("rescaling")
 
   if (!method %in% available_methods) {
     stop("Error: method must be one of ", paste(available_methods, collapse = ", "))
@@ -63,7 +67,7 @@ remove_zeros <- function(simplex,
   ### Remove Zeros -------------------------------------------------------------
 
   # simple replacement
-  if (method == "simple_replacement") {
+  if (method == "rescaling") {
     simplex <- (simplex + padding)
     simplex <- simplex / rowSums(simplex)
 

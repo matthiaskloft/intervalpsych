@@ -1,10 +1,10 @@
 # error for invalid method
 test_that("remove_zeros throws an error for invalid method", {
-  expect_error(remove_zeros(c(0.2, 0.3, 0.5), method = "invalid_method"), "Error: method must be one of simple_replacement")
+  expect_error(remove_zeros(c(0.2, 0.3, 0.5), method = "invalid_method"), "Error: method must be one of rescaling")
 })
 
 
-method <- "simple_replacement"
+method <- "rescaling"
 
 test_that("remove_zeros works with a vector input", {
   simplex <- c(0.2, 0.3, 0.5)

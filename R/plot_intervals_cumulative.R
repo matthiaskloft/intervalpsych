@@ -243,10 +243,10 @@ ggplot_cumulative_intervals <-
 #' @param truth A numeric vector of ground truth values. Default is NA.
 #' @param min The minimum value for the x-axis.
 #' @param max The maximum value for the x-axis.
-#' @param facet_wrap A logical value indicating whether to use facet wrapping. Default is FALSE.
+#' @param facet_wrap A logical value indicating whether to use facet wrapping. Default is NULL.
 #' @param weighted An optional vector of weights for the intervals.
 #' @param show_quantiles A logical value indicating whether to show quantiles on the plot. Default is TRUE.
-#' @param ncol The number of columns for facet wrapping. Default is 2.
+#' @param ncol The number of columns for facet wrapping. Default is 3.
 #'
 #' @return A ggplot object representing the cumulative interval plot.
 #'

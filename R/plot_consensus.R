@@ -4,7 +4,8 @@
 #'
 #' @param icm_stanfit An object of class 'icm_stanfit' containing the Stanfit results.
 #' @param method A character string specifying the plotting method. Options are "median_bounds" (default) or "draws_distribution".
-#' @param CI A numeric value specifying the confidence interval for the median bounds method. Default is 0.95.
+#' @param CI A numeric value specifying the confidence interval for the "draws_distribution" method. Default is 0.95.
+#' This can also be a vector of length 2 for multiple confidence intervals.
 #'
 #' @return A ggplot2 object representing the interval plot.
 #'
