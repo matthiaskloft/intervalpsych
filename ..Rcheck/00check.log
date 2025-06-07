@@ -1,4 +1,4 @@
-* using log directory ‘/mnt/c/Users/Matze/Documents/GitHub/Interval_Projects/intervalpsych/..Rcheck’
+* using log directory ‘/mnt/c/Users/Matze/Documents/GitHub/Interval_Response_Projects/intervalpsych/..Rcheck’
 * using R version 4.5.0 (2025-04-11)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
@@ -6,22 +6,37 @@
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
 * running under: Ubuntu 24.04.2 LTS
 * using session charset: UTF-8
-* using options ‘--no-manual --no-vignettes’
+* using option ‘--as-cran’
 * checking for file ‘./DESCRIPTION’ ... OK
 * this is package ‘intervalpsych’ version ‘0.0.0.9000’
 * package encoding: UTF-8
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: ‘Matthias Kloft <kloft@uni-marburg.de>’
+
+New submission
+
+Version contains large components (0.0.0.9000)
+
+Package has a VignetteBuilder field but no prebuilt vignette index.
+
+The build time stamp is missing.
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
 Packages required but not available:
-  'ggokabeito', 'RcppParallel', 'rstan', 'rstantools', 'BH',
-  'RcppEigen', 'StanHeaders'
+  'dplyr', 'ggdist', 'ggokabeito', 'ggplot2', 'posterior', 'purrr',
+  'Rcpp', 'RcppParallel', 'rstan', 'rstantools', 'BH', 'RcppEigen',
+  'StanHeaders'
 
-Packages suggested but not available for checking:
-  'extraDistr', 'kableExtra', 'knitr', 'rmarkdown'
+Packages suggested but not available:
+  'kableExtra', 'knitr', 'rmarkdown', 'testthat'
 
 VignetteBuilder package required for checking but not installed: ‘knitr’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
 * DONE
-Status: 1 ERROR
+Status: 1 ERROR, 1 NOTE
