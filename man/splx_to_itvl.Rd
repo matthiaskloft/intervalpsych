@@ -13,6 +13,9 @@ splx_to_itvl(simplex, min = NULL, max = NULL)
 
 \item{max}{Maximum of the original response scale.}
 }
+\value{
+A numeric vector with 2 elements representing interval bounds if input is a vector, or a data frame where each row contains interval bounds if input is a data frame.
+}
 \description{
 Convert from simplex/compostional format to interval bound format
 }

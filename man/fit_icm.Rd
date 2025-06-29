@@ -107,13 +107,23 @@ Where I = number of persons, J = number of items, N = number of observations.
 This function fits the Interval Consensus Model (ICM, Kloft et al., 2024) using Stan.
 }
 \examples{
-\dontrun{
-df_simplex <- data.frame(matrix(runif(100), nrow=10))
-id_person <- rep(1:5, each=2)
-id_item <- rep(1:2, times=5)
-fit <- fit_icm(df_simplex, id_person, id_item)
+\donttest{
+# Create minimal example data
+df_simplex <- data.frame(
+  x1 = c(0.3, 0.4, 0.2, 0.5),
+  x2 = c(0.3, 0.2, 0.4, 0.2), 
+  x3 = c(0.4, 0.4, 0.4, 0.3)
+)
+id_person <- c(1, 1, 2, 2)
+id_item <- c(1, 2, 1, 2)
+
+# Fit ICM model (reduce iterations for faster example)
+fit <- fit_icm(df_simplex, id_person, id_item, 
+               iter_sampling = 100, iter_warmup = 100)
 }
 }
 \references{
-Kloft, M., Siepe, B. S., & Heck, D. W. (2024). The Interval Truth Model: A Consensus Model for Continuous Bounded Interval Responses. https://doi.org/10.31234/osf.io/dzvw2
+Kloft, M., Siepe, B. S., & Heck, D. W. (2024).
+The Interval Truth Model: A Consensus Model for Continuous Bounded Interval Responses.
+\doi{10.31234/osf.io/dzvw2}
 }

@@ -25,13 +25,13 @@
 #'   \item{stan_data}{The data list passed to Stan}
 #'   \item{item_labels}{Vector of item labels}
 #' }
-#' 
+#'
 #' The `stan_fit` component contains posterior samples for these ICM parameters:
 #' \describe{
 #'   \item{Person Parameters:}{
 #'     \itemize{
 #'       \item `E_loc` - Person competence for location (I×1 vector)
-#'       \item `E_wid` - Person competence for width (I×1 vector)  
+#'       \item `E_wid` - Person competence for width (I×1 vector)
 #'       \item `a_loc` - Person scaling bias for location (I×1 vector)
 #'       \item `b_loc` - Person shifting bias for location (I×1 vector)
 #'       \item `b_wid` - Person shifting bias for width (I×1 vector)
@@ -70,18 +70,28 @@
 #'     }
 #'   }
 #' }
-#' 
+#'
 #' Where I = number of persons, J = number of items, N = number of observations.
 #' @export
 #' @references
-#' Kloft, M., Siepe, B. S., & Heck, D. W. (2024). The Interval Truth Model: A Consensus Model for Continuous Bounded Interval Responses. https://doi.org/10.31234/osf.io/dzvw2
+#' Kloft, M., Siepe, B. S., & Heck, D. W. (2024).
+#' The Interval Truth Model: A Consensus Model for Continuous Bounded Interval Responses.
+#' \url{https://doi.org/10.31234/osf.io/dzvw2}
 #'
 #' @examples
-#' \dontrun{
-#' df_simplex <- data.frame(matrix(runif(100), nrow=10))
-#' id_person <- rep(1:5, each=2)
-#' id_item <- rep(1:2, times=5)
-#' fit <- fit_icm(df_simplex, id_person, id_item)
+#' \donttest{
+#' # Create minimal example data
+#' df_simplex <- data.frame(
+#'   x1 = c(0.3, 0.4, 0.2, 0.5),
+#'   x2 = c(0.3, 0.2, 0.4, 0.2), 
+#'   x3 = c(0.4, 0.4, 0.4, 0.3)
+#' )
+#' id_person <- c(1, 1, 2, 2)
+#' id_item <- c(1, 2, 1, 2)
+#' 
+#' # Fit ICM model (reduce iterations for faster example)
+#' fit <- fit_icm(df_simplex, id_person, id_item, 
+#'                iter_sampling = 100, iter_warmup = 100)
 #' }
 fit_icm <-
   function(df_simplex,

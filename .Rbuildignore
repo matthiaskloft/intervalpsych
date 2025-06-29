@@ -8,10 +8,12 @@
 ^pkgdown$
 ^\.github$
 ^vignettes/articles$
-vignettes/
+^vignettes/
 ^pkgdown$
 ^\.covrignore
 ^cran-comments\.md$
 ^CLAUDE\.md$
 ^CLAUDE\.md.save$
+^.claude$
 ^package_inconsistencies\.txt$
+intervalpsych-manual.tex

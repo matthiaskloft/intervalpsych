@@ -384,6 +384,8 @@ inv_slr <- function(bvn) {
 #' @param min Minimum of the original response scale.
 #' @param max Maximum of the original response scale.
 #'
+#' @return A numeric vector representing a 3-simplex if input is a vector, or a data frame where each row is a 3-simplex if input is a data frame.
+#'
 #' @seealso [splx_to_itvl()] for the inverse transformation.
 #'
 #' @export
@@ -453,6 +455,8 @@ itvl_to_splx <- function(interval_bounds,
 #'
 #' @param min Minimum of the original response scale.
 #' @param max Maximum of the original response scale.
+#'
+#' @return A numeric vector with 2 elements representing interval bounds if input is a vector, or a data frame where each row contains interval bounds if input is a data frame.
 #'
 #' @seealso [itvl_to_splx()] for the inverse transformation.
 #'

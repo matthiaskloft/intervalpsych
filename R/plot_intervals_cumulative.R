@@ -254,7 +254,6 @@ ggplot_cumulative_intervals <-
 #' @importFrom stats quantile
 #'
 #' @examples
-#' \dontrun{
 #' # Example data
 #' lower_bounds <- c(0.1, 0.3, 0.2)
 #' upper_bounds <- c(0.5, 0.7, 0.6)
@@ -271,7 +270,6 @@ ggplot_cumulative_intervals <-
 #'   max = 1,
 #'   weighted = TRUE
 #' )
-#' }
 #'
 #' @export
 #'

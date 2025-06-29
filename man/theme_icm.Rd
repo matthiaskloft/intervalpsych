@@ -18,7 +18,6 @@ A ggplot2 theme object.
 This function creates a custom ggplot2 theme for intervalpsych visualizations.
 }
 \examples{
-\dontrun{
 # Create sample interval data
 df_intervals <- data.frame(
   lower = c(0.1, 0.3, 0.2, 0.4),
@@ -37,6 +36,5 @@ plot_intervals(df_intervals, item_labels) +
 # Custom base size
 plot_intervals(df_intervals, item_labels) +
   theme_icm(base_size = 14)
-}
 
 }

@@ -8,7 +8,6 @@
 #' @return A ggplot2 theme object.
 #'
 #' @examples
-#' \dontrun{
 #' # Create sample interval data
 #' df_intervals <- data.frame(
 #'   lower = c(0.1, 0.3, 0.2, 0.4),
@@ -27,7 +26,6 @@
 #' # Custom base size
 #' plot_intervals(df_intervals, item_labels) +
 #'   theme_icm(base_size = 14)
-#' }
 #'
 #' @import ggplot2
 #' @export

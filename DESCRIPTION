@@ -1,19 +1,19 @@
 Package: intervalpsych
-Title: Working with Interval Data in Psychometrics
+Title: Analyzing Interval Data in Psychometrics
 Version: 0.0.0.9000
 Author: Matthias Kloft [aut, cre, cph] (<https://orcid.org/0000-0003-1845-6957>),
   Björn S. Siepe [aut] (<https://orcid.org/0000-0002-9558-4648>)
-Maintainer: Matthias Kloft <kloft@uni-marburg.de>
+Maintainer: Matthias Kloft <kloft.marburg@gmail.com>
 Authors@R:
     c(person("Matthias", "Kloft",
-  email = "kloft@uni-marburg.de",
+  email = "kloft.marburg@gmail.com",
   role = c("aut", "cre", "cph"),
   comment = c(ORCID = "0000-0003-1845-6957")),
   person("Björn S.", "Siepe",
   email = "bjoernsiepe@gmail.com",
   role = c("aut"),
   comment = c(ORCID = "0000-0002-9558-4648")))
-Description: Preprocessing, modeling, and visualizing interval-valued data in psychometrics and surrounding disciplines. This package provides functions to transform interval-valued responses and to estimate item response theory models for the aggregation of such response data. Additionally, results of these models can be visualized and summarized using convenience functions.
+Description: Implements the Interval Consensus Model (ICM) for analyzing continuous bounded interval-valued responses in psychometrics using 'Stan' for 'Bayesian' estimation. Provides functions for transforming interval data to simplex representations, fitting item response theory (IRT) models with isometric log-ratio (ILR) and sum log-ratio (SLR) link functions, and visualizing results. The package enables aggregation and analysis of interval-valued response data commonly found in psychological measurement and related disciplines. Based on Kloft et al. (2024) <doi:10.31234/osf.io/dzvw2>.
 License: GPL (>= 3)
 Encoding: UTF-8
 URL: https://matthiaskloft.github.io/intervalpsych/, https://github.com/matthiaskloft/intervalpsych
@@ -45,8 +45,6 @@ LinkingTo:
 SystemRequirements: GNU make
 LazyData: true
 Suggests:
-    kableExtra,
-    rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Config/Needs/website: rmarkdown

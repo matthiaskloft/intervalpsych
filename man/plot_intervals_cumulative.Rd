@@ -45,7 +45,6 @@ A ggplot object representing the cumulative interval plot.
 This function generates a cumulative interval plot based on the provided lower and upper bounds, cluster IDs, and other optional parameters.
 }
 \examples{
-\dontrun{
 # Example data
 lower_bounds <- c(0.1, 0.3, 0.2)
 upper_bounds <- c(0.5, 0.7, 0.6)
@@ -62,6 +61,5 @@ plot_intervals_cumulative(
   max = 1,
   weighted = TRUE
 )
-}
 
 }
