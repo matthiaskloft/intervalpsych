@@ -21,7 +21,7 @@
 #' }
 #' @references Kloft, M., & Heck, D. W. (2024). Discriminant validity of interval
 #' response formats: Investigating the dimensional structure of interval widths.
-#' **Educational and Psychological Measurement, 0** (0). https://doi.org/10.1177/00131644241283400
+#' **Educational and Psychological Measurement, 0** (0). \doi{doi:10.1177/00131644241283400}
 #'
 #' @source <https://osf.io/67vyj/>
 "quantifiers"

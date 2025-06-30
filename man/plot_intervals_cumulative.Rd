@@ -46,10 +46,10 @@ This function generates a cumulative interval plot based on the provided lower a
 }
 \examples{
 # Example data
-lower_bounds <- c(0.1, 0.3, 0.2)
-upper_bounds <- c(0.5, 0.7, 0.6)
-cluster_ids <- c(1, 1, 2)
-truth_values <- c(0.3, 0.5, 0.4)
+lower_bounds <- c(0.01, 0.3, 0.02, 0.4)
+upper_bounds <- c(0.5, 0.96, 0.6, 0.8)
+cluster_ids <- c(1, 1, 2, 2)
+truth_values <- c(0.3, 0.3, 0.6, 0.6)
 
 # Create cumulative interval plot
 plot_intervals_cumulative(
@@ -59,7 +59,7 @@ plot_intervals_cumulative(
   truth = truth_values,
   min = 0,
   max = 1,
-  weighted = TRUE
+  weighted = FALSE
 )
 
 }

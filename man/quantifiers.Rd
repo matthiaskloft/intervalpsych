@@ -37,6 +37,6 @@ interval bound, respectively, are in one column.
 \references{
 Kloft, M., & Heck, D. W. (2024). Discriminant validity of interval
 response formats: Investigating the dimensional structure of interval widths.
-\strong{Educational and Psychological Measurement, 0} (0). https://doi.org/10.1177/00131644241283400
+\strong{Educational and Psychological Measurement, 0} (0). \doi{doi:10.1177/00131644241283400}
 }
 \keyword{datasets}

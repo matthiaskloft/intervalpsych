@@ -45,7 +45,7 @@ The model will reverse the padding when transforming results back to the origina
 
 \item{adapt_delta}{A numeric value specifying the target acceptance rate. Default is 0.9.}
 
-\item{...}{Additional arguments passed to the \code{\link[rstan:sampling]{rstan::sampling}} function.}
+\item{...}{Additional arguments passed to the \code{\link[rstan:stanmodel-method-sampling]{rstan::sampling()}} function.}
 }
 \value{
 A fitted Stan model object of class \code{icm_stanfit} containing the following components:
@@ -111,19 +111,19 @@ This function fits the Interval Consensus Model (ICM, Kloft et al., 2024) using 
 # Create minimal example data
 df_simplex <- data.frame(
   x1 = c(0.3, 0.4, 0.2, 0.5),
-  x2 = c(0.3, 0.2, 0.4, 0.2), 
+  x2 = c(0.3, 0.2, 0.4, 0.2),
   x3 = c(0.4, 0.4, 0.4, 0.3)
 )
 id_person <- c(1, 1, 2, 2)
 id_item <- c(1, 2, 1, 2)
 
 # Fit ICM model (reduce iterations for faster example)
-fit <- fit_icm(df_simplex, id_person, id_item, 
+fit <- fit_icm(df_simplex, id_person, id_item, chains = 1,
                iter_sampling = 100, iter_warmup = 100)
 }
 }
 \references{
 Kloft, M., Siepe, B. S., & Heck, D. W. (2024).
 The Interval Truth Model: A Consensus Model for Continuous Bounded Interval Responses.
-\doi{10.31234/osf.io/dzvw2}
+\doi{doi:10.31234/osf.io/dzvw2}
 }

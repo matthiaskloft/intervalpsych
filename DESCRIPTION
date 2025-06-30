@@ -1,12 +1,10 @@
 Package: intervalpsych
 Title: Analyzing Interval Data in Psychometrics
 Version: 0.0.0.9000
-Author: Matthias Kloft [aut, cre, cph] (<https://orcid.org/0000-0003-1845-6957>),
-  Björn S. Siepe [aut] (<https://orcid.org/0000-0002-9558-4648>)
-Maintainer: Matthias Kloft <kloft.marburg@gmail.com>
+Maintainer: Matthias Kloft <kloft.intervalpsych@gmail.com>
 Authors@R:
     c(person("Matthias", "Kloft",
-  email = "kloft.marburg@gmail.com",
+  email = "kloft.intervalpsych@gmail.com",
   role = c("aut", "cre", "cph"),
   comment = c(ORCID = "0000-0003-1845-6957")),
   person("Björn S.", "Siepe",
@@ -22,7 +20,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Biarch: true
 Depends:
-    R (>= 3.5)
+    R (>= 4.1)
 Imports:
     dplyr,
     ggdist,
