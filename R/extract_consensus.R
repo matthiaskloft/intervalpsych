@@ -38,9 +38,7 @@
 #' @importFrom dplyr reframe
 #' @export
 extract_consensus <-
-  function(icm_stanfit,
-           print_summary = TRUE
-           ) {
+  function(icm_stanfit, print_summary = TRUE) {
     # check: is class "icm_stanfit"?
     if (!inherits(icm_stanfit, "icm_stanfit")) {
       stop("Input must be an object of class 'icm_stanfit'")
@@ -89,12 +87,8 @@ extract_consensus <-
     }
 
     # output
-    ret_out <- list(df_rvar = df_rvar,
-                    summary = summary)
+    ret_out <- list(df_rvar = df_rvar, summary = summary)
 
     return(ret_out)
 
   }
-
-
-

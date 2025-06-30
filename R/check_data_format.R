@@ -68,10 +68,7 @@ check_bvn <- function(bvn) {
 #'
 #' @noRd
 #'
-check_interval_bounds <- function(raw_data,
-                                  min = NULL,
-                                  max = NULL) {
-
+check_interval_bounds <- function(raw_data, min = NULL, max = NULL) {
   # check numeric
   if (!is.numeric(raw_data)) {
     stop("Error: Input must be a numeric vector!")

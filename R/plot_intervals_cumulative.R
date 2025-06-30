@@ -203,7 +203,7 @@ ggplot_cumulative_intervals <-
     # add facet wrap ---------------------------------------------------------
 
     if (facet_wrap) {
-      plot <- plot + ggplot2::facet_wrap( ~ cluster_id, scales = "free", ncol = ncol)
+      plot <- plot + ggplot2::facet_wrap(~ cluster_id, scales = "free", ncol = ncol)
     }
 
     # add quantiles to the plot ------------------------------------------------
@@ -318,9 +318,7 @@ plot_intervals_cumulative <- function(lower,
   df_plot <-
     dplyr::full_join(
       df_samples,
-      data.frame(
-        truth = as.numeric(truth),
-        cluster_id = cluster_id) |>
+      data.frame(truth = as.numeric(truth), cluster_id = cluster_id) |>
         dplyr::distinct()
     ) |>
     dplyr::mutate(cluster_id = factor(cluster_id))
