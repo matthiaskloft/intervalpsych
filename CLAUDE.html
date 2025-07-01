@@ -24,7 +24,7 @@
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="articles/Interval-Consensus-Model.html">Interval Consensus Model</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="articles/01-Interval-Consensus-Model.html">Interval Consensus Model</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -90,26 +90,93 @@
 <span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co"># Build vignettes</span></span>
 <span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">"devtools::build_vignettes()"</span></span></code></pre></div>
 </div>
+<div class="section level3">
+<h3 id="vignette-less-articles-workflow">Vignette-less Articles Workflow<a class="anchor" aria-label="anchor" href="#vignette-less-articles-workflow"></a></h3>
+<p>This package uses a vignette-less articles workflow for pkgdown as described in: <a href="https://fml-fam.github.io/blog/2020/06/23/vignette-less-articles-with-pkgdown/" class="external-link uri">https://fml-fam.github.io/blog/2020/06/23/vignette-less-articles-with-pkgdown/</a></p>
+<p><strong>Key Components:</strong> - Source vignettes stored in <code>vignettes/src/</code> directory - <code>vignettes/</code> directory added to <code>.Rbuildignore</code> - Articles built manually using <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">rmarkdown::render()</a></code> with specific format settings - Provides complete control over when documents are rebuilt</p>
+<p><strong>Build Process:</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Rebuild vignette source files (if using Makefile)</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">make</span> vignettes</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co"># Generate pkgdown articles</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="fu">make</span> articles  </span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co"># Generate full site documentation</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="fu">make</span> docs</span></code></pre></div>
+<p><strong>Manual Vignette Building:</strong></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Example render configuration used in this package</span></span>
+<span><span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">render</a></span><span class="op">(</span></span>
+<span>  input <span class="op">=</span> <span class="st">"vignettes/src/_01-Interval-Consensus-Model.Rmd"</span>,</span>
+<span>  output_format <span class="op">=</span> <span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/md_document.html" class="external-link">md_document</a></span><span class="op">(</span></span>
+<span>    variant <span class="op">=</span> <span class="st">"gfm"</span>,</span>
+<span>    preserve_yaml <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    ext <span class="op">=</span> <span class="st">".Rmd"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="architecture">Architecture<a class="anchor" aria-label="anchor" href="#architecture"></a></h2>
 <div class="section level3">
 <h3 id="core-components">Core Components<a class="anchor" aria-label="anchor" href="#core-components"></a></h3>
-<ol style="list-style-type: decimal"><li><p><strong>Stan Model</strong> (<code>inst/stan/</code>): Implements the Interval Consensus Model with transformation functions between simplex and bivariate normal representations</p></li>
-<li><p><strong>Model Fitting</strong> (<code>R/fit_icm.R</code>): Main wrapper function <code><a href="reference/fit_icm.html">fit_icm()</a></code> for fitting ICM using rstan with ILR or SLR link function, returns <code>icm_stanfit</code> objects</p></li>
+<ol style="list-style-type: decimal"><li>
+<strong>Stan Models</strong> (<code>inst/stan/</code>): Two Stan model files implementing the Interval Consensus Model:
+<ul><li>
+<code>icm_ilr.stan</code>: ICM with Isometric Log-Ratio transformation</li>
 <li>
-<p><strong>Data Transformations</strong> (<code>R/transformation_functions.R</code>):</p>
+<code>icm_slr.stan</code>: ICM with Sum Log-Ratio transformation</li>
+<li>Both include transformation functions between simplex and bivariate normal representations</li>
+</ul></li>
+<li>
+<strong>Model Fitting</strong> (<code>R/fit_icm.R</code>): Main wrapper function <code><a href="reference/fit_icm.html">fit_icm()</a></code> for fitting ICM using rstan
+<ul><li>Supports both ILR and SLR link functions via <code>link</code> parameter</li>
+<li>Returns <code>icm_stanfit</code> objects with components: <code>stan_model</code>, <code>stan_fit</code>, <code>stan_data</code>, <code>item_labels</code>
+</li>
+<li>Comprehensive input validation and data checking</li>
+</ul></li>
+<li>
+<strong>Data Transformations</strong> (<code>R/transformation_functions.R</code>):
 <ul><li>
 <code><a href="reference/log_ratio_transformations.html">ilr()</a></code>/<code><a href="reference/inv_log_ratio_transformations.html">inv_ilr()</a></code>: Isometric log-ratio transformations</li>
 <li>
-<code><a href="reference/log_ratio_transformations.html">slr()</a></code>/<code><a href="reference/inv_log_ratio_transformations.html">inv_slr()</a></code>: Sum log-ratio transformations</li>
+<code><a href="reference/log_ratio_transformations.html">slr()</a></code>/<code><a href="reference/inv_log_ratio_transformations.html">inv_slr()</a></code>: Sum log-ratio transformations<br></li>
 <li>
-<code><a href="reference/itvl_to_splx.html">itvl_to_splx()</a></code>/<code><a href="reference/splx_to_itvl.html">splx_to_itvl()</a></code>: Interval to simplex conversions</li>
+<code><a href="reference/itvl_to_splx.html">itvl_to_splx()</a></code>/<code><a href="reference/splx_to_itvl.html">splx_to_itvl()</a></code>: Interval bounds to simplex conversions</li>
 <li>
-<code><a href="reference/remove_zeros.html">remove_zeros()</a></code>: Handle zero components in simplex data</li>
+<code><a href="reference/remove_zeros.html">remove_zeros()</a></code>: Handle zero components in simplex data with padding</li>
 </ul></li>
-<li><p><strong>Visualization</strong> (<code>R/plot_*.R</code>): Specialized plotting functions for interval data and model results using ggplot2/ggdist</p></li>
-<li><p><strong>Stan Integration</strong> (<code>R/stanmodels.R</code>, <code>src/</code>): Generated Stan model objects, uses <code>stanmodels$icm_ilr</code> and <code>stanmodels$icm_slr</code></p></li>
+<li>
+<strong>Analysis Functions</strong>:
+<ul><li>
+<code><a href="reference/extract_consensus.html">extract_consensus()</a></code> (<code>R/extract_consensus.R</code>): Extract consensus intervals from fitted models</li>
+<li>
+<code><a href="reference/summary.icm_stanfit.html">summary.icm_stanfit()</a></code> (<code>R/summary_icm_stanfit.R</code>): Summary method for model objects</li>
+</ul></li>
+<li>
+<strong>Visualization</strong> (<code>R/plot_*.R</code>): Specialized plotting functions using ggplot2/ggdist:
+<ul><li>
+<code><a href="reference/plot_consensus.html">plot_consensus()</a></code>: Plot consensus intervals from fitted ICM models</li>
+<li>
+<code><a href="reference/plot.icm_stanfit.html">plot.icm_stanfit()</a></code>: S3 method for plotting model results</li>
+<li>
+<code><a href="reference/plot_intervals.html">plot_intervals()</a></code>: General interval plotting</li>
+<li>
+<code><a href="reference/plot_intervals_cumulative.html">plot_intervals_cumulative()</a></code>: Cumulative interval plots</li>
+<li>
+<code><a href="reference/theme_icm.html">theme_icm()</a></code>: Custom ggplot2 theme</li>
+</ul></li>
+<li>
+<strong>Data Validation</strong> (<code>R/check_data_format.R</code>): Helper functions for input validation:
+<ul><li>
+<code>check_simplex()</code>: Validate simplex constraints</li>
+<li>
+<code>check_bvn()</code>: Validate bivariate normal vectors</li>
+<li>
+<code>check_interval_bounds()</code>: Validate interval bounds data</li>
+</ul></li>
+<li>
+<strong>Stan Integration</strong> (<code>R/stanmodels.R</code>, <code>src/</code>): Generated Stan model objects and compiled C++ code</li>
 </ol></div>
 <div class="section level3">
 <h3 id="data-flow">Data Flow<a class="anchor" aria-label="anchor" href="#data-flow"></a></h3>
@@ -121,14 +188,14 @@
 </ol></div>
 <div class="section level3">
 <h3 id="key-function-signatures">Key Function Signatures<a class="anchor" aria-label="anchor" href="#key-function-signatures"></a></h3>
-<ul><li><code>fit_icm(df_simplex, id_person, id_item, item_labels = NULL, link = "ilr", ...)</code></li>
-<li>Returns objects of class <code>icm_stanfit</code> with components: <code>stan_model</code>, <code>stan_fit</code>, <code>stan_data</code>, <code>item_labels</code>
-</li>
+<ul><li><code>fit_icm(df_simplex, id_person, id_item, item_labels = NULL, link = "ilr", padding = 0, iter_sampling = 500, iter_warmup = 500, n_chains = 4, n_cores = 1, adapt_delta = 0.9, ...)</code></li>
+<li><code>extract_consensus(icm_stanfit, print_summary = TRUE)</code></li>
+<li><code>plot_consensus(icm_stanfit, method = "median_bounds", CI = 0.95)</code></li>
 </ul></div>
 <div class="section level3">
 <h3 id="dependencies">Dependencies<a class="anchor" aria-label="anchor" href="#dependencies"></a></h3>
 <ul><li>
-<strong>Stan ecosystem</strong>: rstan, rstantools, StanHeaders for Bayesian modeling</li>
+<strong>Stan ecosystem</strong>: rstan, rstantools, StanHeaders, RcppParallel for Bayesian modeling</li>
 <li>
 <strong>Data manipulation</strong>: dplyr, purrr for data processing</li>
 <li>
@@ -136,34 +203,63 @@
 <li>
 <strong>Statistical</strong>: posterior for post-processing</li>
 <li>
-<strong>Suggested</strong>: extraDistr (for testing), kableExtra (for vignettes)</li>
+<strong>R Core</strong>: methods, Rcpp, RcppEigen, BH for C++ integration</li>
+<li>
+<strong>Suggested</strong>: testthat (&gt;= 3.0.0) for testing</li>
 </ul></div>
 </div>
 <div class="section level2">
 <h2 id="testing-framework">Testing Framework<a class="anchor" aria-label="anchor" href="#testing-framework"></a></h2>
-<p>Uses testthat (edition 3) with comprehensive input validation tests. Test files follow pattern <code>test-*.R</code> matching source files in <code>R/</code>. Tests include: - Model fitting with synthetic data - Input validation (data format, indices, NAs) - Simplex constraint checking</p>
-</div>
+<p>Uses testthat (edition 3) with comprehensive test coverage. Test files in <code>tests/testthat/</code> follow pattern <code>test-*.R</code> matching source files in <code>R/</code>:</p>
+<ul><li>
+<code>test-fit_icm.R</code>: Model fitting with synthetic data</li>
+<li>
+<code>test-transformation_functions.R</code>: Log-ratio and interval transformations</li>
+<li>
+<code>test-extract_consensus.R</code>: Consensus interval extraction</li>
+<li>
+<code>test-plot_*.R</code>: Visualization functions</li>
+<li>
+<code>test-check_data_format.R</code>: Input validation</li>
+<li>
+<code>test-remove_zeros.R</code>: Zero handling</li>
+<li>
+<code>test-summary_icm_stanfit.R</code>: Model summarization</li>
+<li>
+<code>test-theme_icm.R</code>: Custom plotting theme</li>
+</ul></div>
 <div class="section level2">
 <h2 id="package-structure">Package Structure<a class="anchor" aria-label="anchor" href="#package-structure"></a></h2>
 <ul><li>
-<code>R/</code>: Main package functions</li>
+<code>R/</code>: Main package functions (14 files)</li>
 <li>
-<code>inst/stan/</code>: Stan model files</li>
+<code>inst/stan/</code>: Stan model files (<code>icm_ilr.stan</code>, <code>icm_slr.stan</code>)</li>
 <li>
-<code>src/</code>: Generated C++ code from Stan models<br></li>
+<code>src/</code>: Generated C++ code from Stan models and RcppExports</li>
 <li>
-<code>data/</code>: Example datasets (quantifiers)</li>
+<code>data/</code>: Example datasets (<code>quantifiers.rda</code>, <code>quantifiers_original.rds</code>)</li>
 <li>
-<code>man/</code>: Generated documentation</li>
+<code>man/</code>: Generated documentation files</li>
 <li>
-<code>vignettes/articles/</code>: Package tutorials (Interval-Consensus-Model.Rmd)</li>
+<code>vignettes/src/</code>: Package vignette (<code>_01-Interval-Consensus-Model.Rmd</code>)</li>
 <li>
-<code>tests/testthat/</code>: Unit tests</li>
+<code>tests/testthat/</code>: Unit tests (11 test files)</li>
+<li>
+<code>docs/</code>: Generated pkgdown documentation website</li>
 </ul></div>
 <div class="section level2">
 <h2 id="stan-model-development">Stan Model Development<a class="anchor" aria-label="anchor" href="#stan-model-development"></a></h2>
-<p>When modifying Stan models: 1. Recompile with <code>devtools::load_all()</code> or reinstall package 2. Stan models are automatically compiled on package load 3. Use <code>stanmodels$icm_ilr</code> or <code>stanmodels$icm_slr</code> to access compiled model objects 4. Current implementation supports both ILR and SLR link functions</p>
+<p>When modifying Stan models: 1. Edit files in <code>inst/stan/</code> directory 2. Recompile with <code>devtools::load_all()</code> or reinstall package 3. Stan models are automatically compiled on package load 4. Access compiled model objects via <code>stanmodels$icm_ilr</code> or <code>stanmodels$icm_slr</code> 5. Both models support padding for zero-component handling 6. Models include posterior predictive checks and consensus parameter extraction</p>
 </div>
+<div class="section level2">
+<h2 id="development-workflow">Development Workflow<a class="anchor" aria-label="anchor" href="#development-workflow"></a></h2>
+<ul><li>
+<strong>Website and Article Build Workflow</strong>:
+<ul><li>To build the articles and the pkgdown website, I used this workflow: <a href="https://fml-fam.github.io/blog/2020/06/23/vignette-less-articles-with-pkgdown/" class="external-link uri">https://fml-fam.github.io/blog/2020/06/23/vignette-less-articles-with-pkgdown/</a>
+</li>
+<li>run the Makefile in “docs” directory to build the articles and the pkgdown website</li>
+</ul></li>
+</ul></div>
 </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
