@@ -7,9 +7,7 @@
 ^docs$
 ^pkgdown$
 ^\.github$
-^vignettes/articles$
 ^vignettes/
-^pkgdown$
 ^\.covrignore
 ^cran-comments\.md$
 ^CLAUDE\.md$
@@ -17,3 +15,4 @@
 ^.claude$
 ^package_inconsistencies\.txt$
 intervalpsych-manual.tex
+^Makefile$
