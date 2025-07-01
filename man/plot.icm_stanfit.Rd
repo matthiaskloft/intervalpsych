@@ -29,7 +29,7 @@ id_person <- c(1, 1, 2, 2)
 id_item <- c(1, 2, 1, 2)
 
 # Fit ICM model
-fit <- fit_icm(df_simplex, id_person, id_item, chains = 1,
+fit <- fit_icm(df_simplex, id_person, id_item, n_chains = 1,
                iter_sampling = 100, iter_warmup = 100)
 
 # Plot using S3 method

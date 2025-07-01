@@ -2,7 +2,14 @@
   "permissions": {
     "allow": [
       "Bash(find:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(Rscript:*)",
+      "Bash(R CMD build:*)",
+      "Bash(R CMD Rd2pdf:*)",
+      "Bash(R CMD INSTALL:*)",
+      "Bash(make:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)"
     ],
     "deny": []
   }

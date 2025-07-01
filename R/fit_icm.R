@@ -30,48 +30,46 @@
 #' \describe{
 #'   \item{Person Parameters:}{
 #'     \itemize{
-#'       \item `E_loc` - Person proficiency for location (I×1 vector)
-#'       \item `E_wid` - Person proficiency for width (I×1 vector)
-#'       \item `a_loc` - Person scaling bias for location (I×1 vector)
-#'       \item `b_loc` - Person shifting bias for location (I×1 vector)
-#'       \item `b_wid` - Person shifting bias for width (I×1 vector)
+#'       \item `E_loc` - Person proficiency for location
+#'       \item `E_wid` - Person proficiency for width
+#'       \item `a_loc` - Person scaling bias for location
+#'       \item `b_loc` - Person shifting bias for location
+#'       \item `b_wid` - Person shifting bias for width
 #'       \item `rho_E` - Correlation between person proficiencies for location and width
 #'     }
 #'   }
 #'   \item{Item Parameters:}{
 #'     \itemize{
-#'       \item `Tr_loc` - Item consensus location in transformed space (J×1 vector)
-#'       \item `Tr_wid` - Item consensus width in transformed space (J×1 vector)
-#'       \item `Tr_loc_splx` - Item consensus location in simplex space (J×1 vector)
-#'       \item `Tr_wid_splx` - Item consensus width in simplex space (J×1 vector)
-#'       \item `Tr_L` - Item consensus lower bound (J×1 vector)
-#'       \item `Tr_U` - Item consensus upper bound (J×1 vector)
-#'       \item `Tr_splx` - Item consensus simplex representation (J×3 matrix)
-#'       \item `lambda_loc` - Item discernibility for location (J×1 vector)
-#'       \item `lambda_wid` - Item discernibility for width (J×1 vector)
-#'       \item `omega` - Item residual correlations between location and width (J×1 vector)
+#'       \item `Tr_loc` - Item consensus location in the logit-transformed space
+#'       \item `Tr_wid` - Item consensus width in the logit-transformed space
+#'       \item `Tr_loc_splx` - Item consensus location in the simplex space
+#'       \item `Tr_wid_splx` - Item consensus width in the simplex space
+#'       \item `Tr_L` - Item consensus lower bound
+#'       \item `Tr_U` - Item consensus upper bound
+#'       \item `Tr_splx` - Item consensus simplex representation
+#'       \item `lambda_loc` - Item discernibility for location
+#'       \item `lambda_wid` - Item discernibility for width
+#'       \item `omega` - Item residual correlations between location and width
 #'       \item `rho_lambda` - Correlation between item discernibilities for location and width
 #'     }
 #'   }
 #'   \item{Hyperparameters:}{
 #'     \itemize{
-#'       \item `mu_E` - Hyperprior means for person proficiencies (2×1 vector)
-#'       \item `sigma_I` - Hyperprior scales for person parameters (5×1 vector)
-#'       \item `sigma_lambda` - Hyperprior scales for item discernibilities (2×1 vector)
+#'       \item `mu_E` - Means for person proficiencies
+#'       \item `sigma_I` - Standard deviations for person parameters
+#'       \item `sigma_lambda` - Standard deviations for item discernibilities
 #'     }
 #'   }
 #'   \item{Posterior Predictive Checks:}{
 #'     \itemize{
-#'       \item `Y_ppc_loc` - Predicted responses for location (N×1 vector)
-#'       \item `Y_ppc_wid` - Predicted responses for width (N×1 vector)
-#'       \item `Y_ppc_splx` - Predicted responses in simplex space (N×3 matrix)
-#'       \item `Y_ppc_loc_splx` - Predicted location responses in simplex space (N×1 vector)
-#'       \item `Y_ppc_wid_splx` - Predicted width responses in simplex space (N×1 vector)
+#'       \item `Y_ppc_loc` - Predicted responses for location in the logit-transformed space
+#'       \item `Y_ppc_wid` - Predicted responses for width in the logit-transformed space
+#'       \item `Y_ppc_splx` - Predicted responses in simplex space
+#'       \item `Y_ppc_loc_splx` - Predicted location responses in the simplex space (mean of lower and upper bound)
+#'       \item `Y_ppc_wid_splx` - Predicted width responses in the simplex space
 #'     }
 #'   }
 #' }
-#'
-#' Note. I = number of persons, J = number of items, N = number of observations.
 #'
 #' @export
 #' @references
@@ -91,7 +89,7 @@
 #' id_item <- c(1, 2, 1, 2)
 #'
 #' # Fit ICM model (reduce iterations for faster example)
-#' fit <- fit_icm(df_simplex, id_person, id_item, chains = 1,
+#' fit <- fit_icm(df_simplex, id_person, id_item, n_chains = 1,
 #'                iter_sampling = 100, iter_warmup = 100)
 #'
 #' # Print summary of the fit

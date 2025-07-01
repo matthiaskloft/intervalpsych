@@ -1,3 +1,112 @@
+#' Plot Cumulative Intervals
+#'
+#' This function generates a cumulative interval plot based on the provided lower and upper bounds, cluster IDs, and other optional parameters.
+#'
+#' @param lower A numeric vector of lower bounds.
+#' @param upper A numeric vector of upper bounds.
+#' @param cluster_id A vector of cluster IDs corresponding to the intervals.
+#' @param truth A numeric vector of ground truth values. Default is NA.
+#' @param min The minimum value for the x-axis.
+#' @param max The maximum value for the x-axis.
+#' @param facet_wrap A logical value indicating whether to use facet wrapping. Default is NULL.
+#' @param weighted An optional vector of weights for the intervals.
+#' @param show_quantiles A logical value indicating whether to show quantiles on the plot. Default is TRUE.
+#' @param ncol The number of columns for facet wrapping. Default is 3.
+#'
+#' @return A ggplot object representing the cumulative interval plot.
+#'
+#' @importFrom stats median
+#' @importFrom stats quantile
+#'
+#' @examples
+#' # Example data
+#' lower_bounds <- c(0.01, 0.3, 0.02, 0.4)
+#' upper_bounds <- c(0.5, 0.96, 0.6, 0.8)
+#' cluster_ids <- c(1, 1, 2, 2)
+#' truth_values <- c(0.3, 0.3, 0.6, 0.6)
+#'
+#' # Create cumulative interval plot
+#' plot_intervals_cumulative(
+#'   lower = lower_bounds,
+#'   upper = upper_bounds,
+#'   cluster_id = cluster_ids,
+#'   truth = truth_values,
+#'   min = 0,
+#'   max = 1,
+#'   weighted = FALSE
+#' )
+#'
+#' @export
+#'
+plot_intervals_cumulative <- function(lower,
+                                      upper,
+                                      cluster_id,
+                                      truth = NA,
+                                      min,
+                                      max,
+                                      facet_wrap = NULL,
+                                      weighted = NULL,
+                                      show_quantiles = TRUE,
+                                      ncol = 3) {
+  step_size <- min(max - min) / 1e3
+  n_samples <- 1e3
+
+  # if facet_wrap is NULL, use facet wrap option for multiple clusters
+  if (is.null(facet_wrap)) {
+    if (length(unique(cluster_id)) > 1) {
+      facet_wrap <- TRUE
+    } else {
+      facet_wrap <- FALSE
+    }
+  }
+
+  # gather values between bounds
+  df_samples <-
+    gather_values(
+      lower = lower,
+      upper = upper,
+      cluster_id = cluster_id,
+      weighted = weighted,
+      step_size = step_size,
+      n_samples = n_samples
+    ) |>
+    dplyr::group_by(cluster_id) |>
+    # compute the maximum density
+    dplyr::mutate(
+      median = median(.data$samples, na.rm = TRUE),
+      q_05 = quantile(.data$samples, probs = .05),
+      q_95 = quantile(.data$samples, probs = .95)
+    ) |>
+    dplyr::ungroup()
+
+  # join samples with ground truth
+  df_plot <-
+    dplyr::full_join(
+      df_samples,
+      data.frame(truth = as.numeric(truth), cluster_id = cluster_id) |>
+        dplyr::distinct()
+    ) |>
+    dplyr::mutate(cluster_id = factor(cluster_id))
+
+  # plot
+  plot <-
+    ggplot_cumulative_intervals(
+      data = df_plot,
+      binwidth = step_size,
+      min = min,
+      max = max,
+      facet_wrap = facet_wrap,
+      show_quantiles = show_quantiles,
+      ncol = ncol
+    )
+
+  return(plot)
+}
+
+
+#------------------------------------------------------------------------------>
+# Helper function to gather values from intervals
+
 #' Gather Values from Intervals
 #'
 #' This function gathers values from specified intervals, either weighted by interval width or not.
@@ -107,6 +216,9 @@ gather_values <- function(lower,
 }
 
 
+#------------------------------------------------------------------------------>
+# Helper function to create cumulative interval plot
+
 #' @title Plot Cumulative Intervals
 #' @description This function creates a cumulative interval plot using ggplot2.
 #' @param data A data frame containing the data to be plotted.
@@ -159,29 +271,6 @@ ggplot_cumulative_intervals <-
         color = ggokabeito::palette_okabe_ito(order = 1),
         linewidth = 1
       ) +
-      # ggplot2::geom_errorbarh(
-      #   ggplot2::aes(
-      #     xmin = lower_mean_logit,
-      #     xmax = upper_mean_logit,
-      #     y = max_density * 1.15,
-      #     height = max_density * .05
-      #   ),
-      #   col = "grey70",
-      #   height = 0,
-      #   linetype = 1,
-      #   linewidth = 8
-      # ) +
-      # ggplot2::geom_errorbarh(
-      #   ggplot2::aes(
-      #     xmin = lower_mean,
-      #     xmax = upper_mean,
-      #     y = max_density * 1.15,
-      #     height = max_density * .1
-      #   ),
-      #   col = "black",
-      #   linetype = 1,
-      #   linewidth = 1.5
-      # ) +
       ggplot2::scale_x_continuous(limits = c(scale_min, scale_max),
                                   expand = ggplot2::expansion()) +
       ggplot2::scale_y_continuous(
@@ -231,109 +320,3 @@ ggplot_cumulative_intervals <-
 
     return(plot)
   }
-
-
-#' Plot Cumulative Intervals
-#'
-#' This function generates a cumulative interval plot based on the provided lower and upper bounds, cluster IDs, and other optional parameters.
-#'
-#' @param lower A numeric vector of lower bounds.
-#' @param upper A numeric vector of upper bounds.
-#' @param cluster_id A vector of cluster IDs corresponding to the intervals.
-#' @param truth A numeric vector of ground truth values. Default is NA.
-#' @param min The minimum value for the x-axis.
-#' @param max The maximum value for the x-axis.
-#' @param facet_wrap A logical value indicating whether to use facet wrapping. Default is NULL.
-#' @param weighted An optional vector of weights for the intervals.
-#' @param show_quantiles A logical value indicating whether to show quantiles on the plot. Default is TRUE.
-#' @param ncol The number of columns for facet wrapping. Default is 3.
-#'
-#' @return A ggplot object representing the cumulative interval plot.
-#'
-#' @importFrom stats median
-#' @importFrom stats quantile
-#'
-#' @examples
-#' # Example data
-#' lower_bounds <- c(0.01, 0.3, 0.02, 0.4)
-#' upper_bounds <- c(0.5, 0.96, 0.6, 0.8)
-#' cluster_ids <- c(1, 1, 2, 2)
-#' truth_values <- c(0.3, 0.3, 0.6, 0.6)
-#'
-#' # Create cumulative interval plot
-#' plot_intervals_cumulative(
-#'   lower = lower_bounds,
-#'   upper = upper_bounds,
-#'   cluster_id = cluster_ids,
-#'   truth = truth_values,
-#'   min = 0,
-#'   max = 1,
-#'   weighted = FALSE
-#' )
-#'
-#' @export
-#'
-plot_intervals_cumulative <- function(lower,
-                                      upper,
-                                      cluster_id,
-                                      truth = NA,
-                                      min,
-                                      max,
-                                      facet_wrap = NULL,
-                                      weighted = NULL,
-                                      show_quantiles = TRUE,
-                                      ncol = 3) {
-  step_size <- min(max - min) / 1e3
-  n_samples <- 1e3
-
-  # if facet_wrap is NULL, use facet wrap option for multiple clusters
-  if (is.null(facet_wrap)) {
-    if (length(unique(cluster_id)) > 1) {
-      facet_wrap <- TRUE
-    } else {
-      facet_wrap <- FALSE
-    }
-  }
-
-  # gather values between bounds
-  df_samples <-
-    gather_values(
-      lower = lower,
-      upper = upper,
-      cluster_id = cluster_id,
-      weighted = weighted,
-      step_size = step_size,
-      n_samples = n_samples
-    ) |>
-    dplyr::group_by(cluster_id) |>
-    # compute the maximum density
-    dplyr::mutate(
-      median = median(.data$samples, na.rm = TRUE),
-      q_05 = quantile(.data$samples, probs = .05),
-      q_95 = quantile(.data$samples, probs = .95)
-    ) |>
-    dplyr::ungroup()
-
-  # join samples with ground truth
-  df_plot <-
-    dplyr::full_join(
-      df_samples,
-      data.frame(truth = as.numeric(truth), cluster_id = cluster_id) |>
-        dplyr::distinct()
-    ) |>
-    dplyr::mutate(cluster_id = factor(cluster_id))
-
-  # plot
-  plot <-
-    ggplot_cumulative_intervals(
-      data = df_plot,
-      binwidth = step_size,
-      min = min,
-      max = max,
-      facet_wrap = facet_wrap,
-      show_quantiles = show_quantiles,
-      ncol = ncol
-    )
-
-  return(plot)
-}

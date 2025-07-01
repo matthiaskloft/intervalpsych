@@ -147,12 +147,12 @@ NA
 
 <td style="text-align:right;">
 
-5
+20
 </td>
 
 <td style="text-align:right;">
 
-25
+56
 </td>
 
 </tr>
@@ -201,12 +201,12 @@ NA
 
 <td style="text-align:right;">
 
-10
+26
 </td>
 
 <td style="text-align:right;">
 
-65
+66
 </td>
 
 </tr>
@@ -255,12 +255,12 @@ NA
 
 <td style="text-align:right;">
 
-65
+74
 </td>
 
 <td style="text-align:right;">
 
-90
+92
 </td>
 
 </tr>
@@ -309,12 +309,12 @@ NA
 
 <td style="text-align:right;">
 
-1
+6
 </td>
 
 <td style="text-align:right;">
 
-3
+27
 </td>
 
 </tr>
@@ -363,12 +363,12 @@ NA
 
 <td style="text-align:right;">
 
-5
+20
 </td>
 
 <td style="text-align:right;">
 
-30
+60
 </td>
 
 </tr>
@@ -417,7 +417,7 @@ NA
 
 <td style="text-align:right;">
 
-50
+48
 </td>
 
 <td style="text-align:right;">
@@ -443,8 +443,8 @@ plot_intervals_cumulative(
   cluster_id = quantifiers$name_en,
   weighted = TRUE
 )
-#> Warning: Removed 388000 rows containing missing values or values outside the
-#> scale range (`geom_vline()`).
+#> Warning: Removed 390000 rows containing missing values or values outside the scale range
+#> (`geom_vline()`).
 ```
 
 <img src="../man/figures/README-unnamed-chunk-3-1.png" alt="Cumulative distribution of interval responses." width="90%" />
@@ -503,17 +503,12 @@ x_3
 
 <td style="text-align:right;">
 
-5
+20
 </td>
 
 <td style="text-align:right;">
 
-25
-</td>
-
-<td style="text-align:right;">
-
-0.05
+56
 </td>
 
 <td style="text-align:right;">
@@ -523,7 +518,12 @@ x_3
 
 <td style="text-align:right;">
 
-0.75
+0.36
+</td>
+
+<td style="text-align:right;">
+
+0.44
 </td>
 
 </tr>
@@ -532,56 +532,27 @@ x_3
 
 <td style="text-align:right;">
 
-10
+26
 </td>
 
 <td style="text-align:right;">
 
-65
+66
 </td>
 
 <td style="text-align:right;">
 
-0.10
+0.26
 </td>
 
 <td style="text-align:right;">
 
-0.55
+0.40
 </td>
 
 <td style="text-align:right;">
 
-0.35
-</td>
-
-</tr>
-
-<tr>
-
-<td style="text-align:right;">
-
-65
-</td>
-
-<td style="text-align:right;">
-
-90
-</td>
-
-<td style="text-align:right;">
-
-0.65
-</td>
-
-<td style="text-align:right;">
-
-0.25
-</td>
-
-<td style="text-align:right;">
-
-0.10
+0.34
 </td>
 
 </tr>
@@ -590,56 +561,27 @@ x_3
 
 <td style="text-align:right;">
 
-1
+74
 </td>
 
 <td style="text-align:right;">
 
-3
+92
 </td>
 
 <td style="text-align:right;">
 
-0.01
+0.74
 </td>
 
 <td style="text-align:right;">
 
-0.02
+0.18
 </td>
 
 <td style="text-align:right;">
 
-0.97
-</td>
-
-</tr>
-
-<tr>
-
-<td style="text-align:right;">
-
-5
-</td>
-
-<td style="text-align:right;">
-
-30
-</td>
-
-<td style="text-align:right;">
-
-0.05
-</td>
-
-<td style="text-align:right;">
-
-0.25
-</td>
-
-<td style="text-align:right;">
-
-0.70
+0.08
 </td>
 
 </tr>
@@ -648,7 +590,65 @@ x_3
 
 <td style="text-align:right;">
 
-50
+6
+</td>
+
+<td style="text-align:right;">
+
+27
+</td>
+
+<td style="text-align:right;">
+
+0.06
+</td>
+
+<td style="text-align:right;">
+
+0.21
+</td>
+
+<td style="text-align:right;">
+
+0.73
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+20
+</td>
+
+<td style="text-align:right;">
+
+60
+</td>
+
+<td style="text-align:right;">
+
+0.20
+</td>
+
+<td style="text-align:right;">
+
+0.40
+</td>
+
+<td style="text-align:right;">
+
+0.40
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+48
 </td>
 
 <td style="text-align:right;">
@@ -658,12 +658,12 @@ x_3
 
 <td style="text-align:right;">
 
-0.50
+0.48
 </td>
 
 <td style="text-align:right;">
 
-0.30
+0.32
 </td>
 
 <td style="text-align:right;">
@@ -740,17 +740,12 @@ x_3
 
 <td style="text-align:right;">
 
-5
+20
 </td>
 
 <td style="text-align:right;">
 
-25
-</td>
-
-<td style="text-align:right;">
-
-0.06
+56
 </td>
 
 <td style="text-align:right;">
@@ -760,7 +755,12 @@ x_3
 
 <td style="text-align:right;">
 
-0.74
+0.36
+</td>
+
+<td style="text-align:right;">
+
+0.44
 </td>
 
 </tr>
@@ -769,56 +769,27 @@ x_3
 
 <td style="text-align:right;">
 
-10
+26
 </td>
 
 <td style="text-align:right;">
 
-65
+66
 </td>
 
 <td style="text-align:right;">
 
-0.11
+0.26
 </td>
 
 <td style="text-align:right;">
 
-0.54
+0.40
 </td>
 
 <td style="text-align:right;">
 
-0.35
-</td>
-
-</tr>
-
-<tr>
-
-<td style="text-align:right;">
-
-65
-</td>
-
-<td style="text-align:right;">
-
-90
-</td>
-
-<td style="text-align:right;">
-
-0.64
-</td>
-
-<td style="text-align:right;">
-
-0.25
-</td>
-
-<td style="text-align:right;">
-
-0.11
+0.34
 </td>
 
 </tr>
@@ -827,56 +798,27 @@ x_3
 
 <td style="text-align:right;">
 
-1
+74
 </td>
 
 <td style="text-align:right;">
 
-3
+92
 </td>
 
 <td style="text-align:right;">
 
-0.02
+0.73
 </td>
 
 <td style="text-align:right;">
 
-0.03
+0.18
 </td>
 
 <td style="text-align:right;">
 
-0.95
-</td>
-
-</tr>
-
-<tr>
-
-<td style="text-align:right;">
-
-5
-</td>
-
-<td style="text-align:right;">
-
-30
-</td>
-
-<td style="text-align:right;">
-
-0.06
-</td>
-
-<td style="text-align:right;">
-
-0.25
-</td>
-
-<td style="text-align:right;">
-
-0.69
+0.09
 </td>
 
 </tr>
@@ -885,7 +827,65 @@ x_3
 
 <td style="text-align:right;">
 
-50
+6
+</td>
+
+<td style="text-align:right;">
+
+27
+</td>
+
+<td style="text-align:right;">
+
+0.07
+</td>
+
+<td style="text-align:right;">
+
+0.21
+</td>
+
+<td style="text-align:right;">
+
+0.72
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+20
+</td>
+
+<td style="text-align:right;">
+
+60
+</td>
+
+<td style="text-align:right;">
+
+0.20
+</td>
+
+<td style="text-align:right;">
+
+0.40
+</td>
+
+<td style="text-align:right;">
+
+0.40
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+48
 </td>
 
 <td style="text-align:right;">
@@ -895,12 +895,12 @@ x_3
 
 <td style="text-align:right;">
 
-0.50
+0.48
 </td>
 
 <td style="text-align:right;">
 
-0.30
+0.32
 </td>
 
 <td style="text-align:right;">
@@ -938,9 +938,6 @@ fit <-
 #> COMPILING MODEL 'icm_ilr' NOW.
 #> 
 #> STARTING SAMPLER FOR MODEL 'icm_ilr' NOW.
-#> Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
-#> Running the chains for more iterations may help. See
-#> https://mc-stan.org/misc/warnings.html#bulk-ess
 ```
 
 Now we can extract the estimated cosensus intervals from the fit object.
@@ -1021,32 +1018,32 @@ now and then
 
 <td style="text-align:right;">
 
-0.22
-</td>
-
-<td style="text-align:right;">
-
 0.17
 </td>
 
 <td style="text-align:right;">
 
-0.27
+0.13
 </td>
 
 <td style="text-align:right;">
 
-0.45
+0.21
 </td>
 
 <td style="text-align:right;">
 
-0.37
+0.41
 </td>
 
 <td style="text-align:right;">
 
-0.53
+0.34
+</td>
+
+<td style="text-align:right;">
+
+0.47
 </td>
 
 </tr>
@@ -1060,32 +1057,32 @@ possibly
 
 <td style="text-align:right;">
 
-0.24
+0.19
 </td>
 
 <td style="text-align:right;">
 
-0.16
+0.13
 </td>
 
 <td style="text-align:right;">
 
-0.33
+0.25
 </td>
 
 <td style="text-align:right;">
 
-0.50
+0.48
 </td>
 
 <td style="text-align:right;">
 
-0.41
+0.40
 </td>
 
 <td style="text-align:right;">
 
-0.59
+0.56
 </td>
 
 </tr>
@@ -1099,22 +1096,22 @@ almost always
 
 <td style="text-align:right;">
 
-0.85
+0.84
 </td>
 
 <td style="text-align:right;">
 
-0.81
+0.79
 </td>
 
 <td style="text-align:right;">
 
-0.88
+0.87
 </td>
 
 <td style="text-align:right;">
 
-0.98
+0.97
 </td>
 
 <td style="text-align:right;">
@@ -1124,7 +1121,7 @@ almost always
 
 <td style="text-align:right;">
 
-0.99
+0.98
 </td>
 
 </tr>
@@ -1138,32 +1135,32 @@ almost never
 
 <td style="text-align:right;">
 
-0.02
-</td>
-
-<td style="text-align:right;">
-
-0.01
-</td>
-
-<td style="text-align:right;">
-
 0.03
 </td>
 
 <td style="text-align:right;">
 
-0.11
+0.02
 </td>
 
 <td style="text-align:right;">
 
-0.08
+0.04
 </td>
 
 <td style="text-align:right;">
 
-0.15
+0.12
+</td>
+
+<td style="text-align:right;">
+
+0.10
+</td>
+
+<td style="text-align:right;">
+
+0.16
 </td>
 
 </tr>
@@ -1177,7 +1174,7 @@ occasionally
 
 <td style="text-align:right;">
 
-0.19
+0.18
 </td>
 
 <td style="text-align:right;">
@@ -1187,17 +1184,17 @@ occasionally
 
 <td style="text-align:right;">
 
-0.24
+0.22
 </td>
 
 <td style="text-align:right;">
 
-0.40
+0.42
 </td>
 
 <td style="text-align:right;">
 
-0.33
+0.36
 </td>
 
 <td style="text-align:right;">
@@ -1226,22 +1223,22 @@ frequently
 
 <td style="text-align:right;">
 
-0.65
+0.62
 </td>
 
 <td style="text-align:right;">
 
-0.89
+0.85
 </td>
 
 <td style="text-align:right;">
 
-0.84
+0.81
 </td>
 
 <td style="text-align:right;">
 
-0.92
+0.88
 </td>
 
 </tr>
@@ -1270,17 +1267,17 @@ hardly
 
 <td style="text-align:right;">
 
-0.17
+0.19
 </td>
 
 <td style="text-align:right;">
 
-0.14
+0.15
 </td>
 
 <td style="text-align:right;">
 
-0.21
+0.23
 </td>
 
 </tr>
@@ -1309,17 +1306,17 @@ sometimes
 
 <td style="text-align:right;">
 
-0.50
+0.51
 </td>
 
 <td style="text-align:right;">
 
-0.42
+0.44
 </td>
 
 <td style="text-align:right;">
 
-0.58
+0.57
 </td>
 
 </tr>
@@ -1333,32 +1330,32 @@ most of the time
 
 <td style="text-align:right;">
 
-0.71
-</td>
-
-<td style="text-align:right;">
-
 0.66
 </td>
 
 <td style="text-align:right;">
 
-0.76
+0.60
 </td>
 
 <td style="text-align:right;">
 
-0.93
+0.71
 </td>
 
 <td style="text-align:right;">
 
-0.90
+0.89
 </td>
 
 <td style="text-align:right;">
 
-0.96
+0.85
+</td>
+
+<td style="text-align:right;">
+
+0.92
 </td>
 
 </tr>
@@ -1372,32 +1369,32 @@ often
 
 <td style="text-align:right;">
 
-0.67
+0.64
 </td>
 
 <td style="text-align:right;">
 
-0.61
+0.58
 </td>
 
 <td style="text-align:right;">
 
-0.73
+0.70
 </td>
 
 <td style="text-align:right;">
 
-0.92
+0.88
 </td>
 
 <td style="text-align:right;">
 
-0.89
+0.84
 </td>
 
 <td style="text-align:right;">
 
-0.95
+0.91
 </td>
 
 </tr>
@@ -1411,32 +1408,32 @@ potentially
 
 <td style="text-align:right;">
 
-0.33
+0.25
 </td>
 
 <td style="text-align:right;">
 
-0.23
+0.17
 </td>
 
 <td style="text-align:right;">
 
-0.45
+0.34
 </td>
 
 <td style="text-align:right;">
 
-0.69
+0.61
 </td>
 
 <td style="text-align:right;">
 
-0.58
+0.49
 </td>
 
 <td style="text-align:right;">
 
-0.79
+0.72
 </td>
 
 </tr>
@@ -1465,17 +1462,17 @@ rarely
 
 <td style="text-align:right;">
 
-0.21
+0.22
 </td>
 
 <td style="text-align:right;">
 
-0.17
+0.18
 </td>
 
 <td style="text-align:right;">
 
-0.26
+0.27
 </td>
 
 </tr>
@@ -1489,27 +1486,27 @@ constantly
 
 <td style="text-align:right;">
 
-0.75
+0.77
 </td>
 
 <td style="text-align:right;">
 
-0.68
+0.70
 </td>
 
 <td style="text-align:right;">
 
-0.81
+0.82
 </td>
 
 <td style="text-align:right;">
 
-0.97
+0.96
 </td>
 
 <td style="text-align:right;">
 
-0.95
+0.94
 </td>
 
 <td style="text-align:right;">
