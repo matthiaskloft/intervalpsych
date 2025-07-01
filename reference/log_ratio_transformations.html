@@ -5,9 +5,10 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Log-Ratio transformations for interval responses — log_ratio_transformations"><meta name="description" content="Transform 2-simplex data to the unbounded space using either Isometric Log-Ratio (ILR)
-or Sum Log-Ratio (SLR) transformations so that they can be modeled by a bivariate-normal distribution.
+</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Log-Ratio transformations for interval responses — log_ratio_transformations"><meta name="description" content="Transform interval responses from the simplex space to the unbounded space using either Isometric Log-Ratio (ILR)
+or Sum Log-Ratio (SLR) transformations described in Smithson &amp;amp; Broomell (2024).
 These transformations preserve the dimensional conceptualization of the interval responses in terms of a location and a width.
+See also inv_ilr(), inv_slr() for the inverse transformations.
 ILR
 The ILR transformation equations are:
 $$x_{loc} = \sqrt{\frac{1}{2}} \log\left(\frac{x_1}{x_3}\right)$$
@@ -16,9 +17,11 @@ SLR
 The SLR transformation equations are:
 $$x_{loc} = \log\left(\frac{x_1}{x_3}\right)$$
 $$x_{wid} = \log\left(\frac{x_2}{x_1 + x_3}\right)$$
-where \((x_1, x_2, x_3)\) is a 2-simplex and \((x_{loc}, x_{wid})\) are the transformed values representing the unbounded location and width."><meta property="og:description" content="Transform 2-simplex data to the unbounded space using either Isometric Log-Ratio (ILR)
-or Sum Log-Ratio (SLR) transformations so that they can be modeled by a bivariate-normal distribution.
+where \((x_1, x_2, x_3)\) is the interval response in the simplex format
+and \((x_{loc}, x_{wid})\) are the transformed values representing the unbounded location and width."><meta property="og:description" content="Transform interval responses from the simplex space to the unbounded space using either Isometric Log-Ratio (ILR)
+or Sum Log-Ratio (SLR) transformations described in Smithson &amp;amp; Broomell (2024).
 These transformations preserve the dimensional conceptualization of the interval responses in terms of a location and a width.
+See also inv_ilr(), inv_slr() for the inverse transformations.
 ILR
 The ILR transformation equations are:
 $$x_{loc} = \sqrt{\frac{1}{2}} \log\left(\frac{x_1}{x_3}\right)$$
@@ -27,7 +30,8 @@ SLR
 The SLR transformation equations are:
 $$x_{loc} = \log\left(\frac{x_1}{x_3}\right)$$
 $$x_{wid} = \log\left(\frac{x_2}{x_1 + x_3}\right)$$
-where \((x_1, x_2, x_3)\) is a 2-simplex and \((x_{loc}, x_{wid})\) are the transformed values representing the unbounded location and width."></head><body>
+where \((x_1, x_2, x_3)\) is the interval response in the simplex format
+and \((x_{loc}, x_{wid})\) are the transformed values representing the unbounded location and width."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -72,10 +76,11 @@ where \((x_1, x_2, x_3)\) is a 2-simplex and \((x_{loc}, x_{wid})\) are the tran
     </div>
 
     <div class="ref-description section level2">
-    <p>Transform 2-simplex data to the unbounded space using either Isometric Log-Ratio (ILR)
-or Sum Log-Ratio (SLR) transformations so that they can be modeled by a bivariate-normal distribution.
-These transformations preserve the dimensional conceptualization of the interval responses in terms of a location and a width.</p>
-<p><strong>ILR</strong></p>
+    <p>Transform interval responses from the simplex space to the unbounded space using either Isometric Log-Ratio (ILR)
+or Sum Log-Ratio (SLR) transformations described in Smithson &amp; Broomell (2024).
+These transformations preserve the dimensional conceptualization of the interval responses in terms of a location and a width.
+See also <code><a href="inv_log_ratio_transformations.html">inv_ilr()</a></code>, <code><a href="inv_log_ratio_transformations.html">inv_slr()</a></code> for the inverse transformations.
+<strong>ILR</strong></p>
 <p>The ILR transformation equations are:
 $$x_{loc} = \sqrt{\frac{1}{2}} \log\left(\frac{x_1}{x_3}\right)$$
 $$x_{wid} = \sqrt{\frac{2}{3}} \log\left(\frac{x_2}{\sqrt{x_1 x_3}}\right)$$</p>
@@ -83,7 +88,8 @@ $$x_{wid} = \sqrt{\frac{2}{3}} \log\left(\frac{x_2}{\sqrt{x_1 x_3}}\right)$$</p>
 <p>The SLR transformation equations are:
 $$x_{loc} = \log\left(\frac{x_1}{x_3}\right)$$
 $$x_{wid} = \log\left(\frac{x_2}{x_1 + x_3}\right)$$</p>
-<p>where \((x_1, x_2, x_3)\) is a 2-simplex and \((x_{loc}, x_{wid})\) are the transformed values representing the unbounded location and width.</p>
+<p>where \((x_1, x_2, x_3)\) is the interval response in the simplex format
+and \((x_{loc}, x_{wid})\) are the transformed values representing the unbounded location and width.</p>
     </div>
 
     <div class="section level2">
@@ -111,13 +117,15 @@ $$x_{wid} = \log\left(\frac{x_2}{x_1 + x_3}\right)$$</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="inv_log_ratio_transformations.html">inv_ilr()</a></code>, <code><a href="inv_log_ratio_transformations.html">inv_slr()</a></code> for the inverse transformations.</p></div>
+    <div class="dont-index"><p><code><a href="inv_log_ratio_transformations.html">inv_ilr()</a></code>, <code><a href="inv_log_ratio_transformations.html">inv_slr()</a></code></p></div>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># ILR transformation</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Generate some simplex data</span></span></span>
 <span class="r-in"><span><span class="va">simplex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.1</span>, <span class="fl">.2</span>, <span class="fl">.7</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.4</span>, <span class="fl">.5</span>, <span class="fl">.1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># ILR transformation</span></span></span>
 <span class="r-in"><span><span class="fu">ilr</span><span class="op">(</span><span class="va">simplex</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        x_loc      x_wid</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 -1.3759663 -0.2284622</span>

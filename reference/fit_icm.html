@@ -143,48 +143,47 @@ The model will reverse the padding when transforming results back to the origina
 
 </dl><p>The <code>stan_fit</code> component contains posterior samples for these ICM parameters:</p><dl><dt>Person Parameters:</dt>
 <dd>
-<ul><li><p><code>E_loc</code> - Person proficiency for location (I×1 vector)</p></li>
-<li><p><code>E_wid</code> - Person proficiency for width (I×1 vector)</p></li>
-<li><p><code>a_loc</code> - Person scaling bias for location (I×1 vector)</p></li>
-<li><p><code>b_loc</code> - Person shifting bias for location (I×1 vector)</p></li>
-<li><p><code>b_wid</code> - Person shifting bias for width (I×1 vector)</p></li>
+<ul><li><p><code>E_loc</code> - Person proficiency for location</p></li>
+<li><p><code>E_wid</code> - Person proficiency for width</p></li>
+<li><p><code>a_loc</code> - Person scaling bias for location</p></li>
+<li><p><code>b_loc</code> - Person shifting bias for location</p></li>
+<li><p><code>b_wid</code> - Person shifting bias for width</p></li>
 <li><p><code>rho_E</code> - Correlation between person proficiencies for location and width</p></li>
 </ul></dd>
 
 <dt>Item Parameters:</dt>
 <dd>
-<ul><li><p><code>Tr_loc</code> - Item consensus location in transformed space (J×1 vector)</p></li>
-<li><p><code>Tr_wid</code> - Item consensus width in transformed space (J×1 vector)</p></li>
-<li><p><code>Tr_loc_splx</code> - Item consensus location in simplex space (J×1 vector)</p></li>
-<li><p><code>Tr_wid_splx</code> - Item consensus width in simplex space (J×1 vector)</p></li>
-<li><p><code>Tr_L</code> - Item consensus lower bound (J×1 vector)</p></li>
-<li><p><code>Tr_U</code> - Item consensus upper bound (J×1 vector)</p></li>
-<li><p><code>Tr_splx</code> - Item consensus simplex representation (J×3 matrix)</p></li>
-<li><p><code>lambda_loc</code> - Item discernibility for location (J×1 vector)</p></li>
-<li><p><code>lambda_wid</code> - Item discernibility for width (J×1 vector)</p></li>
-<li><p><code>omega</code> - Item residual correlations between location and width (J×1 vector)</p></li>
+<ul><li><p><code>Tr_loc</code> - Item consensus location in the logit-transformed space</p></li>
+<li><p><code>Tr_wid</code> - Item consensus width in the logit-transformed space</p></li>
+<li><p><code>Tr_loc_splx</code> - Item consensus location in the simplex space</p></li>
+<li><p><code>Tr_wid_splx</code> - Item consensus width in the simplex space</p></li>
+<li><p><code>Tr_L</code> - Item consensus lower bound</p></li>
+<li><p><code>Tr_U</code> - Item consensus upper bound</p></li>
+<li><p><code>Tr_splx</code> - Item consensus simplex representation</p></li>
+<li><p><code>lambda_loc</code> - Item discernibility for location</p></li>
+<li><p><code>lambda_wid</code> - Item discernibility for width</p></li>
+<li><p><code>omega</code> - Item residual correlations between location and width</p></li>
 <li><p><code>rho_lambda</code> - Correlation between item discernibilities for location and width</p></li>
 </ul></dd>
 
 <dt>Hyperparameters:</dt>
 <dd>
-<ul><li><p><code>mu_E</code> - Hyperprior means for person proficiencies (2×1 vector)</p></li>
-<li><p><code>sigma_I</code> - Hyperprior scales for person parameters (5×1 vector)</p></li>
-<li><p><code>sigma_lambda</code> - Hyperprior scales for item discernibilities (2×1 vector)</p></li>
+<ul><li><p><code>mu_E</code> - Means for person proficiencies</p></li>
+<li><p><code>sigma_I</code> - Standard deviations for person parameters</p></li>
+<li><p><code>sigma_lambda</code> - Standard deviations for item discernibilities</p></li>
 </ul></dd>
 
 <dt>Posterior Predictive Checks:</dt>
 <dd>
-<ul><li><p><code>Y_ppc_loc</code> - Predicted responses for location (N×1 vector)</p></li>
-<li><p><code>Y_ppc_wid</code> - Predicted responses for width (N×1 vector)</p></li>
-<li><p><code>Y_ppc_splx</code> - Predicted responses in simplex space (N×3 matrix)</p></li>
-<li><p><code>Y_ppc_loc_splx</code> - Predicted location responses in simplex space (N×1 vector)</p></li>
-<li><p><code>Y_ppc_wid_splx</code> - Predicted width responses in simplex space (N×1 vector)</p></li>
+<ul><li><p><code>Y_ppc_loc</code> - Predicted responses for location in the logit-transformed space</p></li>
+<li><p><code>Y_ppc_wid</code> - Predicted responses for width in the logit-transformed space</p></li>
+<li><p><code>Y_ppc_splx</code> - Predicted responses in simplex space</p></li>
+<li><p><code>Y_ppc_loc_splx</code> - Predicted location responses in the simplex space (mean of lower and upper bound)</p></li>
+<li><p><code>Y_ppc_wid_splx</code> - Predicted width responses in the simplex space</p></li>
 </ul></dd>
 
 
-</dl><p>Note. I = number of persons, J = number of items, N = number of observations.</p>
-    </div>
+</dl></div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Kloft, M., Siepe, B. S., &amp; Heck, D. W. (2024).
@@ -205,13 +204,13 @@ The Interval Truth Model: A Consensus Model for Continuous Bounded Interval Resp
 <span class="r-in"><span><span class="va">id_item</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Fit ICM model (reduce iterations for faster example)</span></span></span>
-<span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">fit_icm</span><span class="op">(</span><span class="va">df_simplex</span>, <span class="va">id_person</span>, <span class="va">id_item</span>, chains <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">fit_icm</span><span class="op">(</span><span class="va">df_simplex</span>, <span class="va">id_person</span>, <span class="va">id_item</span>, n_chains <span class="op">=</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>               iter_sampling <span class="op">=</span> <span class="fl">100</span>, iter_warmup <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> SAMPLING FOR MODEL 'icm_ilr' NOW (CHAIN 1).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Gradient evaluation took 4.1e-05 seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.41 seconds.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Gradient evaluation took 5.3e-05 seconds</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.53 seconds.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Adjust your expectations accordingly!</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
@@ -236,9 +235,9 @@ The Interval Truth Model: A Consensus Model for Continuous Bounded Interval Resp
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 180 / 200 [ 90%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 200 / 200 [100%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.146 seconds (Warm-up)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.109 seconds (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.255 seconds (Total)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.144 seconds (Warm-up)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.107 seconds (Sampling)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.251 seconds (Total)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 3 divergent transitions after warmup. See</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span>

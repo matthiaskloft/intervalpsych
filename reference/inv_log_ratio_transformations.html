@@ -5,10 +5,9 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Inverse Log-Ratio transformations for interval responses — inv_log_ratio_transformations"><meta name="description" content="Transform unbounded data back to the 2-simplex space using either Isometric Log-Ratio (ILR)
-or Sum Log-Ratio (SLR) inverse transformations.
-These transformations are the inverse of the ilr() and slr() transformations, respectively,
-and can be used to convert the unbounded location and width of intervals back to the compositional format.
+</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Inverse Log-Ratio transformations for interval responses — inv_log_ratio_transformations"><meta name="description" content="Transform unbounded data back to the simplex space using either Isometric Log-Ratio (ILR)
+or Sum Log-Ratio (SLR) inverse transformations as described in Smithson &amp;amp; Broomell (2024).
+These transformations are the inverse of the ilr() and slr() transformations.
 Inverse ILR
 The inverse ILR transformation equations are:
 $$x_1 = \frac{\exp(\sqrt{2} x_{loc})}{\exp(\sqrt{2} x_{loc}) + \exp(\sqrt{\frac{3}{2}} x_{wid} + \frac{x_{loc}}{\sqrt{2}}) + 1}$$
@@ -19,10 +18,10 @@ The inverse SLR transformation equations are:
 $$x_1 = \frac{\exp(x_{loc})}{(\exp(x_{loc}) + 1)(\exp(x_{wid}) + 1)}$$
 $$x_2 = \frac{\exp(x_{wid})}{\exp(x_{wid}) + 1}$$
 $$x_3 = \frac{1}{(\exp(x_{loc}) + 1)(\exp(x_{wid}) + 1)}$$
-where \((x_{loc}, x_{wid})\) are the unbounded coordinates and \((x_1, x_2, x_3)\) is the resulting 2-simplex."><meta property="og:description" content="Transform unbounded data back to the 2-simplex space using either Isometric Log-Ratio (ILR)
-or Sum Log-Ratio (SLR) inverse transformations.
-These transformations are the inverse of the ilr() and slr() transformations, respectively,
-and can be used to convert the unbounded location and width of intervals back to the compositional format.
+where \((x_{loc}, x_{wid})\) are the unbounded interval location and width
+and \((x_1, x_2, x_3)\) is the resulting interval response in the simplex format."><meta property="og:description" content="Transform unbounded data back to the simplex space using either Isometric Log-Ratio (ILR)
+or Sum Log-Ratio (SLR) inverse transformations as described in Smithson &amp;amp; Broomell (2024).
+These transformations are the inverse of the ilr() and slr() transformations.
 Inverse ILR
 The inverse ILR transformation equations are:
 $$x_1 = \frac{\exp(\sqrt{2} x_{loc})}{\exp(\sqrt{2} x_{loc}) + \exp(\sqrt{\frac{3}{2}} x_{wid} + \frac{x_{loc}}{\sqrt{2}}) + 1}$$
@@ -33,7 +32,8 @@ The inverse SLR transformation equations are:
 $$x_1 = \frac{\exp(x_{loc})}{(\exp(x_{loc}) + 1)(\exp(x_{wid}) + 1)}$$
 $$x_2 = \frac{\exp(x_{wid})}{\exp(x_{wid}) + 1}$$
 $$x_3 = \frac{1}{(\exp(x_{loc}) + 1)(\exp(x_{wid}) + 1)}$$
-where \((x_{loc}, x_{wid})\) are the unbounded coordinates and \((x_1, x_2, x_3)\) is the resulting 2-simplex."></head><body>
+where \((x_{loc}, x_{wid})\) are the unbounded interval location and width
+and \((x_1, x_2, x_3)\) is the resulting interval response in the simplex format."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -78,10 +78,9 @@ where \((x_{loc}, x_{wid})\) are the unbounded coordinates and \((x_1, x_2, x_3)
     </div>
 
     <div class="ref-description section level2">
-    <p>Transform unbounded data back to the 2-simplex space using either Isometric Log-Ratio (ILR)
-or Sum Log-Ratio (SLR) inverse transformations.
-These transformations are the inverse of the <code><a href="log_ratio_transformations.html">ilr()</a></code> and <code><a href="log_ratio_transformations.html">slr()</a></code> transformations, respectively,
-and can be used to convert the unbounded location and width of intervals back to the compositional format.</p>
+    <p>Transform unbounded data back to the simplex space using either Isometric Log-Ratio (ILR)
+or Sum Log-Ratio (SLR) inverse transformations as described in Smithson &amp; Broomell (2024).
+These transformations are the inverse of the <code><a href="log_ratio_transformations.html">ilr()</a></code> and <code><a href="log_ratio_transformations.html">slr()</a></code> transformations.</p>
 <p><strong>Inverse ILR</strong></p>
 <p>The inverse ILR transformation equations are:
 $$x_1 = \frac{\exp(\sqrt{2} x_{loc})}{\exp(\sqrt{2} x_{loc}) + \exp(\sqrt{\frac{3}{2}} x_{wid} + \frac{x_{loc}}{\sqrt{2}}) + 1}$$
@@ -92,7 +91,8 @@ $$x_3 = \frac{1}{\exp(\sqrt{2} x_{loc}) + \exp(\sqrt{\frac{3}{2}} x_{wid} + \fra
 $$x_1 = \frac{\exp(x_{loc})}{(\exp(x_{loc}) + 1)(\exp(x_{wid}) + 1)}$$
 $$x_2 = \frac{\exp(x_{wid})}{\exp(x_{wid}) + 1}$$
 $$x_3 = \frac{1}{(\exp(x_{loc}) + 1)(\exp(x_{wid}) + 1)}$$</p>
-<p>where \((x_{loc}, x_{wid})\) are the unbounded coordinates and \((x_1, x_2, x_3)\) is the resulting 2-simplex.</p>
+<p>where \((x_{loc}, x_{wid})\) are the unbounded interval location and width
+and \((x_1, x_2, x_3)\) is the resulting interval response in the simplex format.</p>
     </div>
 
     <div class="section level2">
@@ -122,7 +122,7 @@ the rows consists of such a vector.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="log_ratio_transformations.html">ilr()</a></code>, <code><a href="log_ratio_transformations.html">slr()</a></code> for the forward transformations.</p></div>
+    <div class="dont-index"><p><code><a href="log_ratio_transformations.html">ilr()</a></code>, <code><a href="log_ratio_transformations.html">slr()</a></code></p></div>
     </div>
 
     <div class="section level2">
