@@ -38,7 +38,6 @@ jobs:
           
       - name: Run Makefile
         run: |
-          cd docs
           make vignettes
           
       - name: Build site
@@ -47,7 +46,6 @@ jobs:
 
       - name: Run Makefile
         run: |
-          cd docs
           make delete_claude
           
       - name: Deploy to GitHub pages 🚀
