@@ -32,14 +32,14 @@ If the method is "draws_distribution", the function checks the number of draws a
 # Create minimal example data
 df_simplex <- data.frame(
   x1 = c(0.3, 0.4, 0.2, 0.5),
-  x2 = c(0.3, 0.2, 0.4, 0.2), 
+  x2 = c(0.3, 0.2, 0.4, 0.2),
   x3 = c(0.4, 0.4, 0.4, 0.3)
 )
 id_person <- c(1, 1, 2, 2)
 id_item <- c(1, 2, 1, 2)
 
 # Fit ICM model
-fit <- fit_icm(df_simplex, id_person, id_item, 
+fit <- fit_icm(df_simplex, id_person, id_item,
                iter_sampling = 100, iter_warmup = 100)
 
 # Plot consensus intervals using median bounds

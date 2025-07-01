@@ -32,7 +32,7 @@ gather_values <- function(lower,
   }
 
   # check that lower and upper are numeric
-  if (!is.numeric(lower) | !is.numeric(upper)) {
+  if (!is.numeric(lower) || !is.numeric(upper)) {
     stop("lower and upper must be numeric")
   }
 
@@ -67,7 +67,7 @@ gather_values <- function(lower,
     }
 
     # map over intervals
-    df_out <- purrr::map_dfr(1:length(lower), function(.x) {
+    df_out <- purrr::map_dfr(seq_along(lower), function(.x) {
       # if lower is equal to upper, return lower
       if (lower[.x] == upper[.x]) {
         samples <- rep(lower[.x], n_samples)
@@ -93,7 +93,7 @@ gather_values <- function(lower,
     }
 
     # map over intervals
-    df_out <- purrr::map_dfr(1:length(lower), function(.x) {
+    df_out <- purrr::map_dfr(seq_along(lower), function(.x) {
       # gather values between bounds by step size
       samples <- seq(lower[.x], upper[.x], by = step_size) |> as.double()
       id <- rep(cluster_id[.x], length(samples))
@@ -133,7 +133,7 @@ ggplot_cumulative_intervals <-
            show_quantiles = TRUE,
            ncol = 2) {
     # check that min and max are not NULL
-    if (is.null(min) | is.null(max)) {
+    if (is.null(min) || is.null(max)) {
       stop("min and max must be specified")
     }
 
@@ -203,7 +203,7 @@ ggplot_cumulative_intervals <-
     # add facet wrap ---------------------------------------------------------
 
     if (facet_wrap) {
-      plot <- plot + ggplot2::facet_wrap(~ cluster_id, scales = "free", ncol = ncol)
+      plot <- plot + ggplot2::facet_wrap( ~ cluster_id, scales = "free", ncol = ncol)
     }
 
     # add quantiles to the plot ------------------------------------------------

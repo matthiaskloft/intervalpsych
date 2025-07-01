@@ -18,7 +18,7 @@ check_simplex <- function(simplex) {
     stop("Error: (row-)vector must have exactly 3 elements!")
   }
   # check unit scale
-  if (any(simplex < 0) | any(simplex > 1)) {
+  if (any(simplex < 0) || any(simplex > 1)) {
     stop("Error: (row-)vector must be in the unit scale!")
   }
   # check that all elements sum to one, round the sum to prevent numerical issues

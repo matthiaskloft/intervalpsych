@@ -2,7 +2,7 @@
 % Please edit documentation in R/extract_consensus.R
 \name{extract_consensus}
 \alias{extract_consensus}
-\title{Extract Consensus intervals from ICM Stan Fit Object}
+\title{Extract consensus intervals from ICM Stan Fit Object}
 \usage{
 extract_consensus(icm_stanfit, print_summary = TRUE)
 }
@@ -13,7 +13,7 @@ extract_consensus(icm_stanfit, print_summary = TRUE)
 }
 \value{
 A list containing:
-\item{df_rvar}{A data frame with extracted posterior samples as random variables.}
+\item{df_rvar}{A data frame with extracted posterior samples in the random variable datatype (see \code{\link[posterior:rvar]{posterior::rvar()}}).}
 \item{summary}{A summary data frame with median and credible intervals for the extracted parameters.}
 }
 \description{

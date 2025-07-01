@@ -21,13 +21,13 @@
 remove_zeros <- function(simplex,
                          method = "rescaling",
                          padding = .01) {
-
   ### Check method
 
   available_methods <- c("rescaling")
 
   if (!method %in% available_methods) {
-    stop("Error: method must be one of ", paste(available_methods, collapse = ", "))
+    stop("Error: method must be one of ",
+         paste(available_methods, collapse = ", "))
   }
 
 
@@ -49,10 +49,9 @@ remove_zeros <- function(simplex,
     stop("Error: simplex must be numeric!")
   }
 
-  for (i in 1:nrow(simplex)) {
-
+  for (i in seq_len(nrow(simplex))) {
     # check that simplex is on the unit scale
-    if (any(simplex[i, ] < 0) | any(simplex[i, ] > 1)) {
+    if (any(simplex[i, ] < 0) || any(simplex[i, ] > 1)) {
       stop("Error: simplex must be in the unit scale!")
     }
 

@@ -1,4 +1,4 @@
-#' Extract Consensus intervals from ICM Stan Fit Object
+#' Extract consensus intervals from ICM Stan Fit Object
 #'
 #' This function extracts parameter estimates for the consensus intervals from a
 #' fitted Interval Consensus Model Stan fit object of class `icm_stanfit`.
@@ -7,7 +7,7 @@
 #' @param print_summary A logical value indicating whether to print a summary of the extracted parameters. Default is `TRUE`.
 #'
 #' @return A list containing:
-#' \item{df_rvar}{A data frame with extracted posterior samples as random variables.}
+#' \item{df_rvar}{A data frame with extracted posterior samples in the random variable datatype (see [posterior::rvar()]).}
 #' \item{summary}{A summary data frame with median and credible intervals for the extracted parameters.}
 #'
 #' @details

@@ -28,7 +28,6 @@
 #'
 #' @exportS3Method intervalpsych::summary
 summary.icm_stanfit <- function(object, ...) {
-
   list <- extract_consensus(object, print_summary = FALSE)
 
   return(list$summary)

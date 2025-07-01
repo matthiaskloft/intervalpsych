@@ -25,5 +25,3 @@
 #'
 #' @source <https://osf.io/67vyj/>
 "quantifiers"
-
-

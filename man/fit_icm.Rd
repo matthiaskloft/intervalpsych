@@ -2,7 +2,7 @@
 % Please edit documentation in R/fit_icm.R
 \name{fit_icm}
 \alias{fit_icm}
-\title{Fit Interval Consensus Model}
+\title{Fit the Interval Consensus Model}
 \usage{
 fit_icm(
   df_simplex,
@@ -35,37 +35,37 @@ See also \code{\link[=ilr]{ilr()}} and \code{\link[=slr]{slr()}} for details. De
 \item{padding}{Padding constant that was used to remove zero-components from the simplex. Default is 0.
 The model will reverse the padding when transforming results back to the original interval response scale. See also \code{\link[=remove_zeros]{remove_zeros()}} for details.}
 
-\item{iter_sampling}{An integer specifying the number of sampling iterations. Default is 500.}
+\item{iter_sampling}{An integer specifying the number of sampling iterations used by \code{\link[rstan:stanmodel-method-sampling]{rstan::sampling()}} Default is 500.}
 
-\item{iter_warmup}{An integer specifying the number of warmup iterations. Default is 500.}
+\item{iter_warmup}{An integer specifying the number of warmup iterations used by \code{\link[rstan:stanmodel-method-sampling]{rstan::sampling()}} Default is 500.}
 
-\item{n_chains}{An integer specifying the number of Markov chains. Default is 4.}
+\item{n_chains}{An integer specifying the number of Markov chains used by \code{\link[rstan:stanmodel-method-sampling]{rstan::sampling()}} Default is 4.}
 
-\item{n_cores}{An integer specifying the number of cores to use. Default is 1.}
+\item{n_cores}{An integer specifying the number of cores to use used by \code{\link[rstan:stanmodel-method-sampling]{rstan::sampling()}} Default is 1.}
 
-\item{adapt_delta}{A numeric value specifying the target acceptance rate. Default is 0.9.}
+\item{adapt_delta}{A numeric value specifying the target acceptance rate used by \code{\link[rstan:stanmodel-method-sampling]{rstan::sampling()}} Default is 0.9.}
 
 \item{...}{Additional arguments passed to the \code{\link[rstan:stanmodel-method-sampling]{rstan::sampling()}} function.}
 }
 \value{
 A fitted Stan model object of class \code{icm_stanfit} containing the following components:
 \describe{
-\item{stan_model}{The compiled Stan model object}
-\item{stan_fit}{The fitted Stan model with posterior samples for the following parameters:}
-\item{stan_data}{The data list passed to Stan}
-\item{item_labels}{Vector of item labels}
+\item{stan_model}{The compiled Stan model object.}
+\item{stan_fit}{The fitted Stan model with posterior samples for the model parameters (see below).}
+\item{stan_data}{The data list passed to Stan.}
+\item{item_labels}{A vector of item labels.}
 }
 
 The \code{stan_fit} component contains posterior samples for these ICM parameters:
 \describe{
 \item{Person Parameters:}{
 \itemize{
-\item \code{E_loc} - Person competence for location (I×1 vector)
-\item \code{E_wid} - Person competence for width (I×1 vector)
+\item \code{E_loc} - Person proficiency for location (I×1 vector)
+\item \code{E_wid} - Person proficiency for width (I×1 vector)
 \item \code{a_loc} - Person scaling bias for location (I×1 vector)
 \item \code{b_loc} - Person shifting bias for location (I×1 vector)
 \item \code{b_wid} - Person shifting bias for width (I×1 vector)
-\item \code{rho_E} - Correlation between person competences for location and width
+\item \code{rho_E} - Correlation between person proficiencies for location and width
 }
 }
 \item{Item Parameters:}{
@@ -77,17 +77,17 @@ The \code{stan_fit} component contains posterior samples for these ICM parameter
 \item \code{Tr_L} - Item consensus lower bound (J×1 vector)
 \item \code{Tr_U} - Item consensus upper bound (J×1 vector)
 \item \code{Tr_splx} - Item consensus simplex representation (J×3 matrix)
-\item \code{lambda_loc} - Item difficulty/discernibility for location (J×1 vector)
-\item \code{lambda_wid} - Item difficulty/discernibility for width (J×1 vector)
+\item \code{lambda_loc} - Item discernibility for location (J×1 vector)
+\item \code{lambda_wid} - Item discernibility for width (J×1 vector)
 \item \code{omega} - Item residual correlations between location and width (J×1 vector)
-\item \code{rho_lambda} - Correlation between item difficulties for location and width
+\item \code{rho_lambda} - Correlation between item discernibilities for location and width
 }
 }
 \item{Hyperparameters:}{
 \itemize{
-\item \code{mu_E} - Hyperprior means for person competences (2×1 vector)
+\item \code{mu_E} - Hyperprior means for person proficiencies (2×1 vector)
 \item \code{sigma_I} - Hyperprior scales for person parameters (5×1 vector)
-\item \code{sigma_lambda} - Hyperprior scales for item difficulties (2×1 vector)
+\item \code{sigma_lambda} - Hyperprior scales for item discernibilities (2×1 vector)
 }
 }
 \item{Posterior Predictive Checks:}{
@@ -101,7 +101,7 @@ The \code{stan_fit} component contains posterior samples for these ICM parameter
 }
 }
 
-Where I = number of persons, J = number of items, N = number of observations.
+Note. I = number of persons, J = number of items, N = number of observations.
 }
 \description{
 This function fits the Interval Consensus Model (ICM, Kloft et al., 2024) using Stan.
@@ -120,6 +120,9 @@ id_item <- c(1, 2, 1, 2)
 # Fit ICM model (reduce iterations for faster example)
 fit <- fit_icm(df_simplex, id_person, id_item, chains = 1,
                iter_sampling = 100, iter_warmup = 100)
+
+# Print summary of the fit
+summary(fit)
 }
 }
 \references{

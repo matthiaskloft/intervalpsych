@@ -44,7 +44,7 @@
 #'
 #'
 ilr <- function(simplex) {
-  if (!is.data.frame(simplex) & !is.matrix(simplex)) {
+  if (!is.data.frame(simplex) && !is.matrix(simplex)) {
     #### vector
 
     n_elements <- length(simplex)
@@ -80,7 +80,7 @@ ilr <- function(simplex) {
     }
 
     # run checks
-    for (i in 1:nrow(simplex)) {
+    for (i in seq_len(nrow(simplex))) {
       check_simplex(simplex[i, ])
     }
 
@@ -160,7 +160,7 @@ ilr <- function(simplex) {
 #'
 #'
 inv_ilr <- function(bvn) {
-  if (!is.data.frame(bvn) & !is.matrix(bvn)) {
+  if (!is.data.frame(bvn) && !is.matrix(bvn)) {
     #### vector
 
     # run checks
@@ -184,7 +184,7 @@ inv_ilr <- function(bvn) {
     bvn <- as.matrix(bvn)
 
     # run checks
-    for (i in 1:nrow(bvn)) {
+    for (i in seq_len(nrow(bvn))) {
       check_bvn(bvn[i, ])
     }
 
@@ -232,7 +232,7 @@ inv_ilr <- function(bvn) {
 #' @rdname log_ratio_transformations
 #' @export
 slr <- function(simplex) {
-  if (!is.data.frame(simplex) & !is.matrix(simplex)) {
+  if (!is.data.frame(simplex) && !is.matrix(simplex)) {
     #### vector
 
     n_elements <- length(simplex)
@@ -268,7 +268,7 @@ slr <- function(simplex) {
     }
 
     # run checks
-    for (i in 1:nrow(simplex)) {
+    for (i in seq_len(nrow(simplex))) {
       check_simplex(simplex[i, ])
     }
 
@@ -305,7 +305,7 @@ slr <- function(simplex) {
 #' @rdname inv_log_ratio_transformations
 #' @export
 inv_slr <- function(bvn) {
-  if (!is.data.frame(bvn) & !is.matrix(bvn)) {
+  if (!is.data.frame(bvn) && !is.matrix(bvn)) {
     #### vector
 
     # run checks
@@ -328,7 +328,7 @@ inv_slr <- function(bvn) {
     bvn <- as.matrix(bvn)
 
     # run checks
-    for (i in 1:nrow(bvn)) {
+    for (i in seq_len(nrow(bvn))) {
       check_bvn(bvn[i, ])
     }
 
@@ -397,9 +397,7 @@ inv_slr <- function(bvn) {
 itvl_to_splx <- function(interval_bounds,
                          min = NULL,
                          max = NULL) {
-  dims <- length(dim(interval_bounds))
-
-  if (!is.data.frame(interval_bounds) &
+  if (!is.data.frame(interval_bounds) &&
       !is.matrix(interval_bounds)) {
     ### vector
     check_interval_bounds(interval_bounds, min, max)
@@ -419,11 +417,13 @@ itvl_to_splx <- function(interval_bounds,
     ### dataframe / matrix
     # coerce to matrix
     interval_bounds <- as.matrix(interval_bounds)
-    if(length(min)==1) min <- rep(min, nrow(interval_bounds))
-    if(length(max)==1) max <- rep(max, nrow(interval_bounds))
+    if (length(min) == 1)
+      min <- rep(min, nrow(interval_bounds))
+    if (length(max) == 1)
+      max <- rep(max, nrow(interval_bounds))
 
     # run checks
-    for (i in 1:nrow(interval_bounds)) {
+    for (i in seq_len(nrow(interval_bounds))) {
       check_interval_bounds(interval_bounds[i, ], min[i], max[i])
     }
 
@@ -468,11 +468,7 @@ itvl_to_splx <- function(interval_bounds,
 #'
 #'
 splx_to_itvl <- function(simplex, min = NULL, max = NULL) {
-  # number of dimensions
-  dims <- length(dim(simplex))
-
-
-  if (!is.data.frame(simplex) & !is.matrix(simplex)) {
+  if (!is.data.frame(simplex) && !is.matrix(simplex)) {
     ### vector
 
     n_elements <- length(simplex)
@@ -506,7 +502,7 @@ splx_to_itvl <- function(simplex, min = NULL, max = NULL) {
     }
 
     # run checks
-    for (i in 1:nrow(simplex)) {
+    for (i in seq_len(nrow(simplex))) {
       check_simplex(simplex[i, ])
     }
 
@@ -523,4 +519,3 @@ splx_to_itvl <- function(simplex, min = NULL, max = NULL) {
 # splx_to_itvl(c(.1, .5, .4), min = 0, max = 1)
 # responses <- data.frame(rbind(c(.1,.5,.4), c(.3,.4,.3)))
 # splx_to_itvl(responses, min = 0, max = 1)
-

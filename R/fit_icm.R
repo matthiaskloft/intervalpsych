@@ -1,4 +1,4 @@
-#' Fit Interval Consensus Model
+#' Fit the Interval Consensus Model
 #'
 #' This function fits the Interval Consensus Model (ICM, Kloft et al., 2024) using Stan.
 #'
@@ -11,31 +11,31 @@
 #' See also [ilr()] and [slr()] for details. Default is "ilr".
 #' @param padding Padding constant that was used to remove zero-components from the simplex. Default is 0.
 #' The model will reverse the padding when transforming results back to the original interval response scale. See also [remove_zeros()] for details.
-#' @param iter_sampling An integer specifying the number of sampling iterations. Default is 500.
-#' @param iter_warmup An integer specifying the number of warmup iterations. Default is 500.
-#' @param n_chains An integer specifying the number of Markov chains. Default is 4.
-#' @param n_cores An integer specifying the number of cores to use. Default is 1.
-#' @param adapt_delta A numeric value specifying the target acceptance rate. Default is 0.9.
+#' @param iter_sampling An integer specifying the number of sampling iterations used by [rstan::sampling()] Default is 500.
+#' @param iter_warmup An integer specifying the number of warmup iterations used by [rstan::sampling()] Default is 500.
+#' @param n_chains An integer specifying the number of Markov chains used by [rstan::sampling()] Default is 4.
+#' @param n_cores An integer specifying the number of cores to use used by [rstan::sampling()] Default is 1.
+#' @param adapt_delta A numeric value specifying the target acceptance rate used by [rstan::sampling()] Default is 0.9.
 #' @param ... Additional arguments passed to the [rstan::sampling()] function.
 #'
 #' @return A fitted Stan model object of class `icm_stanfit` containing the following components:
 #' \describe{
-#'   \item{stan_model}{The compiled Stan model object}
-#'   \item{stan_fit}{The fitted Stan model with posterior samples for the following parameters:}
-#'   \item{stan_data}{The data list passed to Stan}
-#'   \item{item_labels}{Vector of item labels}
+#'   \item{stan_model}{The compiled Stan model object.}
+#'   \item{stan_fit}{The fitted Stan model with posterior samples for the model parameters (see below).}
+#'   \item{stan_data}{The data list passed to Stan.}
+#'   \item{item_labels}{A vector of item labels.}
 #' }
 #'
 #' The `stan_fit` component contains posterior samples for these ICM parameters:
 #' \describe{
 #'   \item{Person Parameters:}{
 #'     \itemize{
-#'       \item `E_loc` - Person competence for location (I×1 vector)
-#'       \item `E_wid` - Person competence for width (I×1 vector)
+#'       \item `E_loc` - Person proficiency for location (I×1 vector)
+#'       \item `E_wid` - Person proficiency for width (I×1 vector)
 #'       \item `a_loc` - Person scaling bias for location (I×1 vector)
 #'       \item `b_loc` - Person shifting bias for location (I×1 vector)
 #'       \item `b_wid` - Person shifting bias for width (I×1 vector)
-#'       \item `rho_E` - Correlation between person competences for location and width
+#'       \item `rho_E` - Correlation between person proficiencies for location and width
 #'     }
 #'   }
 #'   \item{Item Parameters:}{
@@ -47,17 +47,17 @@
 #'       \item `Tr_L` - Item consensus lower bound (J×1 vector)
 #'       \item `Tr_U` - Item consensus upper bound (J×1 vector)
 #'       \item `Tr_splx` - Item consensus simplex representation (J×3 matrix)
-#'       \item `lambda_loc` - Item difficulty/discernibility for location (J×1 vector)
-#'       \item `lambda_wid` - Item difficulty/discernibility for width (J×1 vector)
+#'       \item `lambda_loc` - Item discernibility for location (J×1 vector)
+#'       \item `lambda_wid` - Item discernibility for width (J×1 vector)
 #'       \item `omega` - Item residual correlations between location and width (J×1 vector)
-#'       \item `rho_lambda` - Correlation between item difficulties for location and width
+#'       \item `rho_lambda` - Correlation between item discernibilities for location and width
 #'     }
 #'   }
 #'   \item{Hyperparameters:}{
 #'     \itemize{
-#'       \item `mu_E` - Hyperprior means for person competences (2×1 vector)
+#'       \item `mu_E` - Hyperprior means for person proficiencies (2×1 vector)
 #'       \item `sigma_I` - Hyperprior scales for person parameters (5×1 vector)
-#'       \item `sigma_lambda` - Hyperprior scales for item difficulties (2×1 vector)
+#'       \item `sigma_lambda` - Hyperprior scales for item discernibilities (2×1 vector)
 #'     }
 #'   }
 #'   \item{Posterior Predictive Checks:}{
@@ -71,7 +71,8 @@
 #'   }
 #' }
 #'
-#' Where I = number of persons, J = number of items, N = number of observations.
+#' Note. I = number of persons, J = number of items, N = number of observations.
+#'
 #' @export
 #' @references
 #' Kloft, M., Siepe, B. S., & Heck, D. W. (2024).
@@ -92,6 +93,9 @@
 #' # Fit ICM model (reduce iterations for faster example)
 #' fit <- fit_icm(df_simplex, id_person, id_item, chains = 1,
 #'                iter_sampling = 100, iter_warmup = 100)
+#'
+#' # Print summary of the fit
+#' summary(fit)
 #' }
 fit_icm <-
   function(df_simplex,
@@ -106,7 +110,6 @@ fit_icm <-
            n_cores = 1,
            adapt_delta = 0.9,
            ...) {
-
     ### Data Checks ------------------------------------------------------------
 
     # check that a valid link was specified
@@ -132,8 +135,11 @@ fit_icm <-
 
     # if item_labels is not NULL, check that length of item_labels is either equal to the number of rows in the simplex or equal to the unique elements in id_item
     if (!is.null(item_labels)) {
-      if (length(item_labels) != nrow(df_simplex) & length(item_labels) != length(unique(id_item))) {
-        stop("Error: item_labels must have the same length as the number of rows in the simplex or the number of unique elements in id_item!")
+      if (length(item_labels) != nrow(df_simplex) &&
+          length(item_labels) != length(unique(id_item))) {
+        stop(
+          "Error: item_labels must have the same length as the number of rows in the simplex or the number of unique elements in id_item!"
+        )
       }
     }
 
@@ -160,12 +166,13 @@ fit_icm <-
     }
 
     # run log-ratio checks
-    for (i in 1:nrow(df_simplex)) {
+    for (i in seq_len(nrow(df_simplex))) {
       check_simplex(as.matrix(df_simplex)[i, ])
     }
 
     # check padding constant is a real number between 0 and 1
-    if (!is.numeric(padding) || length(padding) != 1 || padding < 0 || padding > 1) {
+    if (!is.numeric(padding) ||
+        length(padding) != 1 || padding < 0 || padding > 1) {
       stop("Error: padding must be a real number between 0 and 1!")
     }
 
@@ -173,8 +180,8 @@ fit_icm <-
     ### Recompute indices and labels -------------------------------------------
     id_person <- as.numeric(factor(id_person))
     id_item <- as.numeric(factor(id_item))
-    if(!is.null(item_labels)) {
-      if(length(item_labels) == nrow(df_simplex)) {
+    if (!is.null(item_labels)) {
+      if (length(item_labels) == nrow(df_simplex)) {
         item_labels <- unique(item_labels)
       }
     } else {
@@ -189,7 +196,7 @@ fit_icm <-
       N = nrow(df_simplex),
       ii = id_person,
       jj = id_item,
-      nn = 1:nrow(df_simplex),
+      nn = seq_len(nrow(df_simplex)),
       Y_splx = df_simplex,
       padding = padding
     )
@@ -210,12 +217,14 @@ fit_icm <-
     default_args <- list(
       object = stan_model,
       data = stan_data,
-      pars = c("Tr_loc_beta",
-               "Tr_wid_beta",
-               "I_raw",
-               "L_corr_E",
-               "J_raw",
-               "L_corr_lambda"),
+      pars = c(
+        "Tr_loc_beta",
+        "Tr_wid_beta",
+        "I_raw",
+        "L_corr_E",
+        "J_raw",
+        "L_corr_lambda"
+      ),
       include = FALSE,
       chains = n_chains,
       cores = n_cores,
@@ -226,8 +235,7 @@ fit_icm <-
     )
 
     # Run sampler
-    stan_fit <- do.call(rstan::sampling,
-                        utils::modifyList(default_args, list(...)))
+    stan_fit <- do.call(rstan::sampling, utils::modifyList(default_args, list(...)))
 
 
     ### Return Object ----------------------------------------------------------

@@ -34,7 +34,7 @@ plot_intervals <- function(df_interval_bounds, item_labels = NULL) {
   if (!is.null(item_labels)) {
     df_plot$item <- factor(item_labels)
   } else {
-    df_plot$item <- factor(1:nrow(df_interval_bounds))
+    df_plot$item <- factor(seq_len(nrow(df_interval_bounds)))
   }
 
   # plot
@@ -42,9 +42,14 @@ plot_intervals <- function(df_interval_bounds, item_labels = NULL) {
     df_plot |>
     ggplot2::ggplot() +
     ggplot2::geom_errorbarh(
-      ggplot2::aes(y = .data$item, xmin = .data$lower, xmax = .data$upper),
+      ggplot2::aes(
+        y = .data$item,
+        xmin = .data$lower,
+        xmax = .data$upper
+      ),
       height = .5,
-      linewidth = .5) +
+      linewidth = .5
+    ) +
     ggplot2::scale_x_continuous(
       limits = c(0, 1),
       breaks = seq(0, 1, .25),

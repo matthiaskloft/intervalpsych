@@ -6,6 +6,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/matthiaskloft/intervalpsych/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/matthiaskloft/intervalpsych/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/matthiaskloft/intervalpsych/graph/badge.svg)](https://app.codecov.io/gh/matthiaskloft/intervalpsych)
 <!-- badges: end -->
 
 The **intervalpsych** package provides a toolbox for the analysis of
