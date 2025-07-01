@@ -6,10 +6,12 @@
 #' @name log_ratio_transformations
 #' @rdname log_ratio_transformations
 #' @description
-#' Transform interval responses from the simplex space to the unbounded space using either Isometric Log-Ratio (ILR)
-#' or Sum Log-Ratio (SLR) transformations described in Smithson & Broomell (2024).
+#' Transform interval responses from the simplex space to the unbounded space using
+#' either the Isometric Log-Ratio (ILR) or the Sum Log-Ratio (SLR) transformation
+#' described in Smithson & Broomell (2024).
 #' These transformations preserve the dimensional conceptualization of the interval responses in terms of a location and a width.
 #' See also [inv_ilr()], [inv_slr()] for the inverse transformations.
+#'
 #' **ILR**
 #'
 #' The ILR transformation equations are:
@@ -154,8 +156,10 @@ ilr <- function(simplex) {
 #' Smithson, M., & Broomell, S. B. (2024). Compositional data analysis tutorial. Psychological Methods, 29(2), 362–378.
 #'
 #' @examples
-#' # Inverse ILR transformation
+#' # Generate some unbounded data
 #' bvn <- data.frame(rbind(c(0, .2), c(-2, .4)))
+#'
+#' # Inverse ILR transformation
 #' inv_ilr(bvn)
 #'
 #' # Inverse SLR transformation

@@ -25,8 +25,15 @@ We want to fit the Interval Consensus Model to the Verbal Quantifiers dataset.
 
 First, we load the verbal quantifiers dataset:
 ```{r}
-library(dplyr)
-library(kableExtra)
+packages <- c("dplyr", "kableExtra")
+# load packages and install if not available
+for (pkg in packages) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg)
+  }
+  library(pkg, character.only = TRUE)
+}
+
 
 data(quantifiers)
 

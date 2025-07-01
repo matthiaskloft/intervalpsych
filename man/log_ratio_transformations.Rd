@@ -17,10 +17,10 @@ slr(simplex)
 A numeric vector with 2 unbounded elements or a dataframe where each of the rows is a numeric vector with 2 unbounded elements
 }
 \description{
-Transform 2-simplex data to the unbounded space using either Isometric Log-Ratio (ILR)
-or Sum Log-Ratio (SLR) transformations so that they can be modeled by a bivariate-normal distribution.
+Transform interval responses from the simplex space to the unbounded space using either Isometric Log-Ratio (ILR)
+or Sum Log-Ratio (SLR) transformations described in Smithson & Broomell (2024).
 These transformations preserve the dimensional conceptualization of the interval responses in terms of a location and a width.
-
+See also \code{\link[=inv_ilr]{inv_ilr()}}, \code{\link[=inv_slr]{inv_slr()}} for the inverse transformations.
 \strong{ILR}
 
 The ILR transformation equations are:
@@ -33,11 +33,14 @@ The SLR transformation equations are:
 \deqn{x_{loc} = \log\left(\frac{x_1}{x_3}\right)}
 \deqn{x_{wid} = \log\left(\frac{x_2}{x_1 + x_3}\right)}
 
-where \eqn{(x_1, x_2, x_3)} is a 2-simplex and \eqn{(x_{loc}, x_{wid})} are the transformed values representing the unbounded location and width.
+where \eqn{(x_1, x_2, x_3)} is the interval response in the simplex format
+and \eqn{(x_{loc}, x_{wid})} are the transformed values representing the unbounded location and width.
 }
 \examples{
-# ILR transformation
+# Generate some simplex data
 simplex <- data.frame(rbind(c(.1, .2, .7), c(.4, .5, .1)))
+
+# ILR transformation
 ilr(simplex)
 
 # SLR transformation
@@ -49,5 +52,5 @@ slr(simplex)
 Smithson, M., & Broomell, S. B. (2024). Compositional data analysis tutorial. Psychological Methods, 29(2), 362–378.
 }
 \seealso{
-\code{\link[=inv_ilr]{inv_ilr()}}, \code{\link[=inv_slr]{inv_slr()}} for the inverse transformations.
+\code{\link[=inv_ilr]{inv_ilr()}}, \code{\link[=inv_slr]{inv_slr()}}
 }

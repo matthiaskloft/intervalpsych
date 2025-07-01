@@ -19,10 +19,9 @@ A numeric vector containing a 2-simplex or a dataframe where each of
 the rows consists of such a vector.
 }
 \description{
-Transform unbounded data back to the 2-simplex space using either Isometric Log-Ratio (ILR)
-or Sum Log-Ratio (SLR) inverse transformations.
-These transformations are the inverse of the \code{\link[=ilr]{ilr()}} and \code{\link[=slr]{slr()}} transformations, respectively,
-and can be used to convert the unbounded location and width of intervals back to the compositional format.
+Transform unbounded data back to the simplex space using either Isometric Log-Ratio (ILR)
+or Sum Log-Ratio (SLR) inverse transformations as described in Smithson & Broomell (2024).
+These transformations are the inverse of the \code{\link[=ilr]{ilr()}} and \code{\link[=slr]{slr()}} transformations.
 
 \strong{Inverse ILR}
 
@@ -38,7 +37,8 @@ The inverse SLR transformation equations are:
 \deqn{x_2 = \frac{\exp(x_{wid})}{\exp(x_{wid}) + 1}}
 \deqn{x_3 = \frac{1}{(\exp(x_{loc}) + 1)(\exp(x_{wid}) + 1)}}
 
-where \eqn{(x_{loc}, x_{wid})} are the unbounded coordinates and \eqn{(x_1, x_2, x_3)} is the resulting 2-simplex.
+where \eqn{(x_{loc}, x_{wid})} are the unbounded interval location and width
+and \eqn{(x_1, x_2, x_3)} is the resulting interval response in the simplex format.
 }
 \examples{
 # Inverse ILR transformation
@@ -54,5 +54,5 @@ inv_slr(bvn)
 Smithson, M., & Broomell, S. B. (2024). Compositional data analysis tutorial. Psychological Methods, 29(2), 362–378.
 }
 \seealso{
-\code{\link[=ilr]{ilr()}}, \code{\link[=slr]{slr()}} for the forward transformations.
+\code{\link[=ilr]{ilr()}}, \code{\link[=slr]{slr()}}
 }
