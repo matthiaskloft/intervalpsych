@@ -5,7 +5,9 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Plot ICM Consensus Intervals — plot_consensus"><meta name="description" content="This function generates plots for ICM Stanfit results using either the median bounds method or the draws gradient method."><meta property="og:description" content="This function generates plots for ICM Stanfit results using either the median bounds method or the draws gradient method."></head><body>
+</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Plot ICM Consensus Intervals — plot_consensus"><meta name="description" content="Plot consensus intervals estimated by the Interval Consensus Model (ICM) via
+fit_icm()."><meta property="og:description" content="Plot consensus intervals estimated by the Interval Consensus Model (ICM) via
+fit_icm()."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -50,7 +52,8 @@
     </div>
 
     <div class="ref-description section level2">
-    <p>This function generates plots for ICM Stanfit results using either the median bounds method or the draws gradient method.</p>
+    <p>Plot consensus intervals estimated by the Interval Consensus Model (ICM) via
+<code><a href="fit_icm.html">fit_icm()</a></code>.</p>
     </div>
 
     <div class="section level2">
@@ -63,27 +66,34 @@
 
 
 <dl><dt id="arg-icm-stanfit">icm_stanfit<a class="anchor" aria-label="anchor" href="#arg-icm-stanfit"></a></dt>
-<dd><p>An object of class 'icm_stanfit' containing the Stanfit results.</p></dd>
+<dd><p>An object of class <code>icm_stanfit</code> containing the Stanfit
+results.</p></dd>
 
 
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
-<dd><p>A character string specifying the plotting method. Options are "median_bounds" (default) or "draws_distribution".</p></dd>
+<dd><p>A character string specifying the plotting method.
+Options are "median_bounds" (default) or "draws_distribution".</p></dd>
 
 
 <dt id="arg-ci">CI<a class="anchor" aria-label="anchor" href="#arg-ci"></a></dt>
-<dd><p>A numeric value specifying the confidence interval for the "draws_distribution" method. Default is 0.95.
-This can also be a vector of length 2 for multiple confidence intervals.</p></dd>
+<dd><p>A numeric value specifying the confidence interval for the
+"draws_distribution" method. Default is 0.95. This can also be a vector of
+length 2 for multiple confidence intervals.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A ggplot2 object representing the interval plot.</p>
+    <p>A ggplot2 object depicting the consensus interval estimates.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The function checks if the input object is of class 'icm_stanfit'. It then extracts the draws for the lower and upper bounds (T_L and T_U) from the Stanfit object.</p>
-<p>If the method is "median_bounds", the function calculates the median of the lower and upper bounds and generates an interval plot using these medians.</p>
-<p>If the method is "draws_distribution", the function checks the number of draws and warns if it is less than 1000. It then computes a consensus distribution for each item and generates a gradient interval plot.</p>
+    <p>If the method is "median_bounds", the function uses posterior medians for
+the lower and upper bounds of the consensus intervals.</p>
+<p>If the method is "draws_distribution", the function computes a consensus
+distribution for each consensus interval by uniformly sampling one value from
+the interval range for each posterior draw.
+From this distribution, a density plot is generated.
+As a rough guideline, the number of draws for this method should be above 1000.</p>
     </div>
 
     <div class="section level2">
@@ -100,40 +110,8 @@ This can also be a vector of length 2 for multiple confidence intervals.</p></dd
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Fit ICM model</span></span></span>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="fit_icm.html">fit_icm</a></span><span class="op">(</span><span class="va">df_simplex</span>, <span class="va">id_person</span>, <span class="va">id_item</span>, n_chains <span class="op">=</span> <span class="fl">1</span>,</span></span>
-<span class="r-in"><span>               iter_sampling <span class="op">=</span> <span class="fl">100</span>, iter_warmup <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> SAMPLING FOR MODEL 'icm_ilr' NOW (CHAIN 1).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Gradient evaluation took 6.6e-05 seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.66 seconds.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Adjust your expectations accordingly!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: WARNING: There aren't enough warmup iterations to fit the</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:          three stages of adaptation as currently configured.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:          Reducing each adaptation stage to 15%/75%/10% of</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:          the given number of warmup iterations:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:            init_buffer = 15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:            adapt_window = 75</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:            term_buffer = 10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration:   1 / 200 [  0%]  (Warmup)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration:  20 / 200 [ 10%]  (Warmup)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration:  40 / 200 [ 20%]  (Warmup)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration:  60 / 200 [ 30%]  (Warmup)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration:  80 / 200 [ 40%]  (Warmup)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 100 / 200 [ 50%]  (Warmup)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 101 / 200 [ 50%]  (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 120 / 200 [ 60%]  (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 140 / 200 [ 70%]  (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 160 / 200 [ 80%]  (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 180 / 200 [ 90%]  (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 200 / 200 [100%]  (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.146 seconds (Warm-up)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.105 seconds (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.251 seconds (Total)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
+<span class="r-in"><span>               iter_sampling <span class="op">=</span> <span class="fl">100</span>, iter_warmup <span class="op">=</span> <span class="fl">100</span>,</span></span>
+<span class="r-in"><span>               refresh <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 8 divergent transitions after warmup. See</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> to find out why this is a problem and how to eliminate them.</span>
@@ -151,6 +129,7 @@ This can also be a vector of length 2 for multiple confidence intervals.</p></dd
 <span class="r-in"><span><span class="co"># Plot consensus intervals using median bounds</span></span></span>
 <span class="r-in"><span><span class="fu">plot_consensus</span><span class="op">(</span><span class="va">fit</span>, method <span class="op">=</span> <span class="st">"median_bounds"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot_consensus-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
