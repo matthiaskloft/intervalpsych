@@ -1,16 +1,21 @@
 #' Plot Intervals
 #'
-#' This function creates a plot of intervals using the provided data frame of interval bounds.
+#' Plot intervals from a data frame of interval bounds.
 #'
-#' @param df_interval_bounds A data frame with two columns: the lower and upper bounds of the intervals.
-#' @param item_labels An optional vector of labels for the items. If provided, its length must match the number of rows in `df_interval_bounds`.
+#' @param df_interval_bounds A data frame with two columns: the lower and upper
+#' bounds of the intervals.
 #'
-#' @return A ggplot object representing the intervals.
+#' @param item_labels An optional vector of labels for the items. Its length
+#' must match the number of rows in `df_interval_bounds`.
+#'
+#' @return A ggplot object depicting the intervals.
+#'
 #' @import ggplot2
 #'
 #' @examples
 #' df <- data.frame(lower = c(0.1, 0.3, 0.5), upper = c(0.4, 0.6, 0.8))
 #' labels <- c("Item 1", "Item 2", "Item 3")
+#'
 #' plot_intervals(df, item_labels = labels)
 #'
 #' @export

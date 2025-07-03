@@ -7,19 +7,22 @@
 plot_intervals(df_interval_bounds, item_labels = NULL)
 }
 \arguments{
-\item{df_interval_bounds}{A data frame with two columns: the lower and upper bounds of the intervals.}
+\item{df_interval_bounds}{A data frame with two columns: the lower and upper
+bounds of the intervals.}
 
-\item{item_labels}{An optional vector of labels for the items. If provided, its length must match the number of rows in \code{df_interval_bounds}.}
+\item{item_labels}{An optional vector of labels for the items. Its length
+must match the number of rows in \code{df_interval_bounds}.}
 }
 \value{
-A ggplot object representing the intervals.
+A ggplot object depicting the intervals.
 }
 \description{
-This function creates a plot of intervals using the provided data frame of interval bounds.
+Plot intervals from a data frame of interval bounds.
 }
 \examples{
 df <- data.frame(lower = c(0.1, 0.3, 0.5), upper = c(0.4, 0.6, 0.8))
 labels <- c("Item 1", "Item 2", "Item 3")
+
 plot_intervals(df, item_labels = labels)
 
 }

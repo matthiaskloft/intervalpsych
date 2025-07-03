@@ -2,7 +2,7 @@
 % Please edit documentation in R/summary_icm_stanfit.R
 \name{summary.icm_stanfit}
 \alias{summary.icm_stanfit}
-\title{Summarize Stanfit Object}
+\title{Summarize ICM Stanfit Object}
 \usage{
 \method{summary}{icm_stanfit}(object, ...)
 }
@@ -12,10 +12,12 @@
 \item{...}{Additional arguments (currently not used).}
 }
 \value{
-A summary of the \code{icm_stanfit} object.
+A table with posterior medians and credible intervals for the
+consensus intervals.
 }
 \description{
-This function provides a summary for an object of class \code{icm_stanfit}.
+This function provides a summary method for objects of class \code{icm_stanfit}.
+via a wrapper around the \code{\link[=extract_consensus]{extract_consensus()}} function.
 }
 \examples{
 \donttest{
@@ -30,10 +32,14 @@ id_item <- c(1, 2, 1, 2)
 
 # Fit ICM model
 fit <- fit_icm(df_simplex, id_person, id_item, n_chains = 1,
-               iter_sampling = 100, iter_warmup = 100)
+               iter_sampling = 100, iter_warmup = 100,
+               refresh = 0)
 
 # Get summary
 summary(fit)
 }
 
+}
+\seealso{
+\code{\link[=extract_consensus]{extract_consensus()}}
 }

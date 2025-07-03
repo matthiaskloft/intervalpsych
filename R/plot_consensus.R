@@ -1,20 +1,30 @@
 #' Plot ICM Consensus Intervals
 #'
-#' This function generates plots for ICM Stanfit results using either the median bounds method or the draws gradient method.
+#' Plot consensus intervals estimated by the Interval Consensus Model (ICM) via
+#' [`fit_icm()`].
 #'
-#' @param icm_stanfit An object of class 'icm_stanfit' containing the Stanfit results.
-#' @param method A character string specifying the plotting method. Options are "median_bounds" (default) or "draws_distribution".
-#' @param CI A numeric value specifying the confidence interval for the "draws_distribution" method. Default is 0.95.
-#' This can also be a vector of length 2 for multiple confidence intervals.
+#' @param icm_stanfit An object of class `icm_stanfit` containing the Stanfit
+#' results.
 #'
-#' @return A ggplot2 object representing the interval plot.
+#' @param method A character string specifying the plotting method.
+#' Options are "median_bounds" (default) or "draws_distribution".
+#'
+#' @param CI A numeric value specifying the confidence interval for the
+#' "draws_distribution" method. Default is 0.95. This can also be a vector of
+#' length 2 for multiple confidence intervals.
+#'
+#' @return A ggplot2 object depicting the consensus interval estimates.
 #'
 #' @details
-#' The function checks if the input object is of class 'icm_stanfit'. It then extracts the draws for the lower and upper bounds (T_L and T_U) from the Stanfit object.
 #'
-#' If the method is "median_bounds", the function calculates the median of the lower and upper bounds and generates an interval plot using these medians.
+#' If the method is "median_bounds", the function uses posterior medians for
+#' the lower and upper bounds of the consensus intervals.
 #'
-#' If the method is "draws_distribution", the function checks the number of draws and warns if it is less than 1000. It then computes a consensus distribution for each item and generates a gradient interval plot.
+#' If the method is "draws_distribution", the function computes a consensus
+#' distribution for each consensus interval by uniformly sampling one value from
+#' the interval range for each posterior draw.
+#' From this distribution, a density plot is generated.
+#' As a rough guideline, the number of draws for this method should be above 1000.
 #'
 #' @examples
 #' \donttest{
@@ -29,10 +39,12 @@
 #'
 #' # Fit ICM model
 #' fit <- fit_icm(df_simplex, id_person, id_item, n_chains = 1,
-#'                iter_sampling = 100, iter_warmup = 100)
+#'                iter_sampling = 100, iter_warmup = 100,
+#'                refresh = 0)
 #'
 #' # Plot consensus intervals using median bounds
 #' plot_consensus(fit, method = "median_bounds")
+#'
 #' }
 #'
 #' @export

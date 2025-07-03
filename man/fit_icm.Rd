@@ -117,7 +117,8 @@ id_item <- c(1, 2, 1, 2)
 
 # Fit ICM model (reduce iterations for faster example)
 fit <- fit_icm(df_simplex, id_person, id_item, n_chains = 1,
-               iter_sampling = 100, iter_warmup = 100)
+               iter_sampling = 100, iter_warmup = 100,
+               refresh = 0)
 
 # Print summary of the fit
 summary(fit)

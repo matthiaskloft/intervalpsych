@@ -1,16 +1,27 @@
 #' Remove Zeros from Simplex
 #'
-#' This function removes zeros from a simplex (a matrix or vector where each row sums to one and all elements are between 0 and 1) using a specified method.
+#' Remove zero-components from interval data in the simplex format.
 #'
-#' @param simplex A numeric matrix, data frame, or vector representing the simplex. Each row should sum to one and all elements should be between 0 and 1.
-#' @param method A character string specifying the method to remove zeros. Currently, only "rescaling" is supported. Default is "rescaling".
-#' @param padding A numeric value to add to each element of the simplex when using the "rescaling" method. Default is 0.01.
+#' @param simplex A numeric simplex vector of length 3 where the elements sum to
+#' 1, or a numeric matrix or data frame where each row is a simplex vector.
 #'
-#' @return A numeric matrix with the same dimensions as the input `simplex`, with zeros removed according to the specified method.
+#' @param method A character string specifying the method to remove zeros.
+#' Currently, only "rescaling" is supported. Default is "rescaling".
+#'
+#' @param padding A numeric value to add to each element of the simplex when
+#' using the "rescaling" method. Default is 0.01.
+#'
+#'
+#' @return A numeric matrix with the same dimensions as the input `simplex`,
+#' with zeros removed according to the specified method.
+#'
 #'
 #' @details
-#' The rescaling methods adds a small value (padding) to each element of the simplex and then rescales the rows so that they still sum to one:
-# \deqn{simplex' = \frac{simplex + padding}{rowSums(simplex + padding)}}
+#'
+#' **Rescaling**
+#'
+#' The rescaling methods adds a small value (`padding`) to each element of the
+#' `simplex` and then divides by the row sum to close the composition.
 #'
 #' @examples
 #' # Example usage:

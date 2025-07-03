@@ -1,11 +1,13 @@
-#' Summarize Stanfit Object
+#' Summarize ICM Stanfit Object
 #'
-#' This function provides a summary for an object of class `icm_stanfit`.
+#' This function provides a summary method for objects of class `icm_stanfit`.
+#' via a wrapper around the [extract_consensus()] function.
 #'
 #' @param object An object of class `icm_stanfit`.
 #' @param ... Additional arguments (currently not used).
 #'
-#' @return A summary of the `icm_stanfit` object.
+#' @return A table with posterior medians and credible intervals for the
+#' consensus intervals.
 #'
 #' @examples
 #' \donttest{
@@ -20,11 +22,14 @@
 #'
 #' # Fit ICM model
 #' fit <- fit_icm(df_simplex, id_person, id_item, n_chains = 1,
-#'                iter_sampling = 100, iter_warmup = 100)
+#'                iter_sampling = 100, iter_warmup = 100,
+#'                refresh = 0)
 #'
 #' # Get summary
 #' summary(fit)
 #' }
+#'
+#' @seealso [extract_consensus()]
 #'
 #' @exportS3Method intervalpsych::summary
 summary.icm_stanfit <- function(object, ...) {

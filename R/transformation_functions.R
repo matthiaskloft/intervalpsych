@@ -3,13 +3,13 @@
 #-------------------------------------------------------------------------------
 
 #' @title Log-Ratio transformations for interval responses
-#' @name log_ratio_transformations
 #' @rdname log_ratio_transformations
 #' @description
-#' Transform interval responses from the simplex space to the unbounded space using
-#' either the Isometric Log-Ratio (ILR) or the Sum Log-Ratio (SLR) transformation
-#' described in Smithson & Broomell (2024).
-#' These transformations preserve the dimensional conceptualization of the interval responses in terms of a location and a width.
+#' Transform interval responses from the simplex space to the unbounded space
+#' using either Isometric Log-Ratio (ILR) or Sum Log-Ratio (SLR)
+#' transformations, as described by Smithson & Broomell (2024).
+#' These transformations preserve the dimensional conceptualization of the
+#' interval responses in terms of a location and a width.
 #' See also [inv_ilr()], [inv_slr()] for the inverse transformations.
 #'
 #' **ILR**
@@ -25,19 +25,22 @@
 #' \deqn{x_{wid} = \log\left(\frac{x_2}{x_1 + x_3}\right)}
 #'
 #' where \eqn{(x_1, x_2, x_3)} is the interval response in the simplex format
-#' and \eqn{(x_{loc}, x_{wid})} are the transformed values representing the unbounded location and width.
+#' and \eqn{(x_{loc}, x_{wid})} are the transformed values representing the
+#' unbounded location and width.
 #'
 #' @param simplex A numeric vector that is a 2-simplex (3 elements that sum to 1)
-#' or a dataframe where each of the rows is a 2-simplex
+#' or a dataframe where each of the rows is a 2-simplex.
 #'
 #' @return A numeric vector with 2 elements, the unbounded interval location and
-#' width, or a dataframe where each of the rows is a numeric vector with these 2 elements
+#' width, or a dataframe where each of the rows is a numeric vector with these 2
+#' elements.
 #'
 #' @seealso [inv_ilr()], [inv_slr()]
 #'
 #' @export
 #' @references
-#' Smithson, M., & Broomell, S. B. (2024). Compositional data analysis tutorial. Psychological Methods, 29(2), 362–378.
+#' Smithson, M., & Broomell, S. B. (2024). Compositional data analysis tutorial.
+#' Psychological Methods, 29(2), 362–378.
 #'
 #' @examples
 #' # Generate some simplex data
@@ -121,12 +124,11 @@ ilr <- function(simplex) {
 
 
 #' @title Inverse Log-Ratio transformations for interval responses
-#' @name inv_log_ratio_transformations
 #' @rdname inv_log_ratio_transformations
 #' @description
 #' Transform unbounded data back to the simplex space using either Isometric Log-Ratio (ILR)
-#' or Sum Log-Ratio (SLR) inverse transformations as described in Smithson & Broomell (2024).
-#' These transformations are the inverse of the [ilr()] and [slr()] transformations.
+#' or Sum Log-Ratio (SLR) inverse transformations, as described by Smithson & Broomell (2024).
+#' These transformations are the inverse transformations of [ilr()] and [slr()].
 #'
 #' **Inverse ILR**
 #'
@@ -387,15 +389,20 @@ inv_slr <- function(bvn) {
 
 
 #' @title Convert from interval bounds to simplex
-#' @description Convert interval responses from interval bounds format to compostional/simplex format
-#' @param interval_bounds Data in the interval bounds format.
+#' @description Convert interval responses from interval bounds format to
+#' compostional/simplex format. See also [splx_to_itvl()] for the inverse
+#' transformation.
+#' @param interval_bounds A vector of length 2 representing the lower and upper
+#' bounds of an interval response or a data frame where each row contains such
+#' a vector.
 #'
 #' @param min Minimum of the original response scale.
 #' @param max Maximum of the original response scale.
 #'
-#' @return A numeric vector representing a 3-simplex if input is a vector, or a data frame where each row is a 3-simplex if input is a data frame.
+#' @return A numeric vector representing a 2-simplex if input is a vector, or a
+#' data frame where each row is a 2-simplex if input is a data frame.
 #'
-#' @seealso [splx_to_itvl()] for the inverse transformation.
+#' @seealso [splx_to_itvl()]
 #'
 #' @export
 #'
@@ -459,15 +466,20 @@ itvl_to_splx <- function(interval_bounds,
 
 
 #' @title Convert from simplex to interval bounds
-#' @description Convert from simplex/compostional format to interval bound format
-#' @param simplex Data in the simplex/compositional format.
+#' @description Convert from simplex/compostional format to interval bounds
+#' format. See also [itvl_to_splx()] for the inverse transformation.
+#'
+#' @param simplex A numeric vector that is a 2-simplex (3 elements that sum to 1)
+#' or a data frame where each of the rows is a 2-simplex.
 #'
 #' @param min Minimum of the original response scale.
 #' @param max Maximum of the original response scale.
 #'
-#' @return A numeric vector with 2 elements representing interval bounds if input is a vector, or a data frame where each row contains interval bounds if input is a data frame.
+#' @return A numeric vector with 2 elements representing the lower and upper
+#' bounds of the interval response, or a data frame where each of the rows
+#' contains such a vector.
 #'
-#' @seealso [itvl_to_splx()] for the inverse transformation.
+#' @seealso [itvl_to_splx()]
 #'
 #' @export
 #'

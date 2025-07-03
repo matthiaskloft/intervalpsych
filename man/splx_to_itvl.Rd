@@ -7,17 +7,21 @@
 splx_to_itvl(simplex, min = NULL, max = NULL)
 }
 \arguments{
-\item{simplex}{Data in the simplex/compositional format.}
+\item{simplex}{A numeric vector that is a 2-simplex (3 elements that sum to 1)
+or a data frame where each of the rows is a 2-simplex.}
 
 \item{min}{Minimum of the original response scale.}
 
 \item{max}{Maximum of the original response scale.}
 }
 \value{
-A numeric vector with 2 elements representing interval bounds if input is a vector, or a data frame where each row contains interval bounds if input is a data frame.
+A numeric vector with 2 elements representing the lower and upper
+bounds of the interval response, or a data frame where each of the rows
+contains such a vector.
 }
 \description{
-Convert from simplex/compostional format to interval bound format
+Convert from simplex/compostional format to interval bounds
+format. See also \code{\link[=itvl_to_splx]{itvl_to_splx()}} for the inverse transformation.
 }
 \examples{
 responses <- data.frame(rbind(c(.1,.5,.4), c(.3,.4,.3)))
@@ -26,5 +30,5 @@ splx_to_itvl(responses, min = 0, max = 1)
 
 }
 \seealso{
-\code{\link[=itvl_to_splx]{itvl_to_splx()}} for the inverse transformation.
+\code{\link[=itvl_to_splx]{itvl_to_splx()}}
 }

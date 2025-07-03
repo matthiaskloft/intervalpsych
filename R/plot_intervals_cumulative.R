@@ -1,19 +1,26 @@
 #' Plot Cumulative Intervals
 #'
-#' This function generates a cumulative interval plot based on the provided lower and upper bounds, cluster IDs, and other optional parameters.
+#' Generate a cumulative interval plot based on the provided lower and upper
+#' bounds, cluster IDs, and other optional parameters.
 #'
 #' @param lower A numeric vector of lower bounds.
 #' @param upper A numeric vector of upper bounds.
 #' @param cluster_id A vector of cluster IDs corresponding to the intervals.
 #' @param truth A numeric vector of ground truth values. Default is NA.
-#' @param min The minimum value for the x-axis.
-#' @param max The maximum value for the x-axis.
-#' @param facet_wrap A logical value indicating whether to use facet wrapping. Default is NULL.
-#' @param weighted An optional vector of weights for the intervals.
-#' @param show_quantiles A logical value indicating whether to show quantiles on the plot. Default is TRUE.
+#' @param min Numeric. The minimum value for the x-axis.
+#' @param max Numeric. The maximum value for the x-axis.
+#' @param facet_wrap A logical value indicating whether to use facet wrapping.
+#' Default is NULL.
+#' @param weighted A logical value indicating whether the intervals should be
+#' weighted by their width. If TRUE, values are sampled uniformly within each
+#' interval. If FALSE, values are gathered using the same step size for all
+#' intervals. Default is FALSE.
+#'
+#' @param show_quantiles A logical value indicating whether to show quantiles
+#' on the plot. Default is TRUE.
 #' @param ncol The number of columns for facet wrapping. Default is 3.
 #'
-#' @return A ggplot object representing the cumulative interval plot.
+#' @return A ggplot object depicting the cumulative intervals.
 #'
 #' @importFrom stats median
 #' @importFrom stats quantile
@@ -45,7 +52,7 @@ plot_intervals_cumulative <- function(lower,
                                       min,
                                       max,
                                       facet_wrap = NULL,
-                                      weighted = NULL,
+                                      weighted = FALSE,
                                       show_quantiles = TRUE,
                                       ncol = 3) {
   step_size <- min(max - min) / 1e3

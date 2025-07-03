@@ -2,7 +2,7 @@
 % Please edit documentation in R/theme_icm.R
 \name{theme_icm}
 \alias{theme_icm}
-\title{Custom ggplot2 Theme for intervalpsych}
+\title{Custom ggplot2 Theme for \code{intervalpsych}}
 \usage{
 theme_icm(hide_axis_text_y = FALSE, base_size = 12)
 }
@@ -15,7 +15,7 @@ theme_icm(hide_axis_text_y = FALSE, base_size = 12)
 A ggplot2 theme object.
 }
 \description{
-This function creates a custom ggplot2 theme for intervalpsych visualizations.
+Creates a custom ggplot2 theme for \code{intervalpsych} visualizations.
 }
 \examples{
 # Create sample interval data

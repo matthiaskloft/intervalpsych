@@ -12,7 +12,7 @@ plot_intervals_cumulative(
   min,
   max,
   facet_wrap = NULL,
-  weighted = NULL,
+  weighted = FALSE,
   show_quantiles = TRUE,
   ncol = 3
 )
@@ -26,23 +26,29 @@ plot_intervals_cumulative(
 
 \item{truth}{A numeric vector of ground truth values. Default is NA.}
 
-\item{min}{The minimum value for the x-axis.}
+\item{min}{Numeric. The minimum value for the x-axis.}
 
-\item{max}{The maximum value for the x-axis.}
+\item{max}{Numeric. The maximum value for the x-axis.}
 
-\item{facet_wrap}{A logical value indicating whether to use facet wrapping. Default is NULL.}
+\item{facet_wrap}{A logical value indicating whether to use facet wrapping.
+Default is NULL.}
 
-\item{weighted}{An optional vector of weights for the intervals.}
+\item{weighted}{A logical value indicating whether the intervals should be
+weighted by their width. If TRUE, values are sampled uniformly within each
+interval. If FALSE, values are gathered using the same step size for all
+intervals. Default is FALSE.}
 
-\item{show_quantiles}{A logical value indicating whether to show quantiles on the plot. Default is TRUE.}
+\item{show_quantiles}{A logical value indicating whether to show quantiles
+on the plot. Default is TRUE.}
 
 \item{ncol}{The number of columns for facet wrapping. Default is 3.}
 }
 \value{
-A ggplot object representing the cumulative interval plot.
+A ggplot object depicting the cumulative intervals.
 }
 \description{
-This function generates a cumulative interval plot based on the provided lower and upper bounds, cluster IDs, and other optional parameters.
+Generate a cumulative interval plot based on the provided lower and upper
+bounds, cluster IDs, and other optional parameters.
 }
 \examples{
 # Example data

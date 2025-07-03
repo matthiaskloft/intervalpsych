@@ -1,6 +1,6 @@
-#' Custom ggplot2 Theme for intervalpsych
+#' Custom ggplot2 Theme for `intervalpsych`
 #'
-#' This function creates a custom ggplot2 theme for intervalpsych visualizations.
+#' Creates a custom ggplot2 theme for `intervalpsych` visualizations.
 #'
 #' @param hide_axis_text_y Logical. If TRUE, the y-axis text and ticks will be hidden. Default is FALSE.
 #' @param base_size Numeric. Base font size for the theme. Default is 12.

@@ -3,12 +3,16 @@
 #' This function extracts parameter estimates for the consensus intervals from a
 #' fitted Interval Consensus Model Stan fit object of class `icm_stanfit`.
 #'
-#' @param icm_stanfit An object of class `icm_stanfit` containing the fitted Stan model.
-#' @param print_summary A logical value indicating whether to print a summary of the extracted parameters. Default is `TRUE`.
+#' @param icm_stanfit An object of class `icm_stanfit` containing the fitted
+#' Stan model.
+#' @param print_summary A logical value indicating whether to print a summary
+#' of the extracted parameters. Default is `TRUE`.
 #'
 #' @return A list containing:
-#' \item{df_rvar}{A data frame with extracted posterior samples in the random variable datatype (see [posterior::rvar()]).}
-#' \item{summary}{A summary data frame with median and credible intervals for the extracted parameters.}
+#' \item{df_rvar}{A data frame with extracted posterior samples in the random
+#' variable datatype (see [posterior::rvar()]).}
+#' \item{summary}{A table with posterior medians and credible intervals for the
+#' consensus intervals.}
 #'
 #' @details
 #' This function extracts parameter estimates for the consensus intervals from a
@@ -26,8 +30,9 @@
 #' id_item <- c(1, 2, 1, 2)
 #'
 #' # Fit ICM model
-#' fit <- fit_icm(df_simplex, id_person, id_item, chains = 1,
-#'                iter_sampling = 100, iter_warmup = 100)
+#' fit <- fit_icm(df_simplex, id_person, id_item, n_chains = 1,
+#'                iter_sampling = 100, iter_warmup = 100,
+#'                refresh = 0)
 #'
 #' # Extract consensus intervals
 #' consensus <- extract_consensus(fit)

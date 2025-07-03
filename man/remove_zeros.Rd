@@ -7,20 +7,27 @@
 remove_zeros(simplex, method = "rescaling", padding = 0.01)
 }
 \arguments{
-\item{simplex}{A numeric matrix, data frame, or vector representing the simplex. Each row should sum to one and all elements should be between 0 and 1.}
+\item{simplex}{A numeric simplex vector of length 3 where the elements sum to
+1, or a numeric matrix or data frame where each row is a simplex vector.}
 
-\item{method}{A character string specifying the method to remove zeros. Currently, only "rescaling" is supported. Default is "rescaling".}
+\item{method}{A character string specifying the method to remove zeros.
+Currently, only "rescaling" is supported. Default is "rescaling".}
 
-\item{padding}{A numeric value to add to each element of the simplex when using the "rescaling" method. Default is 0.01.}
+\item{padding}{A numeric value to add to each element of the simplex when
+using the "rescaling" method. Default is 0.01.}
 }
 \value{
-A numeric matrix with the same dimensions as the input \code{simplex}, with zeros removed according to the specified method.
+A numeric matrix with the same dimensions as the input \code{simplex},
+with zeros removed according to the specified method.
 }
 \description{
-This function removes zeros from a simplex (a matrix or vector where each row sums to one and all elements are between 0 and 1) using a specified method.
+Remove zero-components from interval data in the simplex format.
 }
 \details{
-The rescaling methods adds a small value (padding) to each element of the simplex and then rescales the rows so that they still sum to one:
+\strong{Rescaling}
+
+The rescaling methods adds a small value (\code{padding}) to each element of the
+\code{simplex} and then divides by the row sum to close the composition.
 }
 \examples{
 # Example usage:
