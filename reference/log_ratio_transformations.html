@@ -5,8 +5,9 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Log-Ratio transformations for interval responses — log_ratio_transformations"><meta name="description" content="Transform interval responses from the simplex space to the unbounded space using either Isometric Log-Ratio (ILR)
-or Sum Log-Ratio (SLR) transformations described in Smithson &amp;amp; Broomell (2024).
+</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Log-Ratio transformations for interval responses — log_ratio_transformations"><meta name="description" content="Transform interval responses from the simplex space to the unbounded space using
+either the Isometric Log-Ratio (ILR) or the Sum Log-Ratio (SLR) transformation
+described in Smithson &amp;amp; Broomell (2024).
 These transformations preserve the dimensional conceptualization of the interval responses in terms of a location and a width.
 See also inv_ilr(), inv_slr() for the inverse transformations.
 ILR
@@ -18,8 +19,9 @@ The SLR transformation equations are:
 $$x_{loc} = \log\left(\frac{x_1}{x_3}\right)$$
 $$x_{wid} = \log\left(\frac{x_2}{x_1 + x_3}\right)$$
 where \((x_1, x_2, x_3)\) is the interval response in the simplex format
-and \((x_{loc}, x_{wid})\) are the transformed values representing the unbounded location and width."><meta property="og:description" content="Transform interval responses from the simplex space to the unbounded space using either Isometric Log-Ratio (ILR)
-or Sum Log-Ratio (SLR) transformations described in Smithson &amp;amp; Broomell (2024).
+and \((x_{loc}, x_{wid})\) are the transformed values representing the unbounded location and width."><meta property="og:description" content="Transform interval responses from the simplex space to the unbounded space using
+either the Isometric Log-Ratio (ILR) or the Sum Log-Ratio (SLR) transformation
+described in Smithson &amp;amp; Broomell (2024).
 These transformations preserve the dimensional conceptualization of the interval responses in terms of a location and a width.
 See also inv_ilr(), inv_slr() for the inverse transformations.
 ILR
@@ -76,11 +78,12 @@ and \((x_{loc}, x_{wid})\) are the transformed values representing the unbounded
     </div>
 
     <div class="ref-description section level2">
-    <p>Transform interval responses from the simplex space to the unbounded space using either Isometric Log-Ratio (ILR)
-or Sum Log-Ratio (SLR) transformations described in Smithson &amp; Broomell (2024).
+    <p>Transform interval responses from the simplex space to the unbounded space using
+either the Isometric Log-Ratio (ILR) or the Sum Log-Ratio (SLR) transformation
+described in Smithson &amp; Broomell (2024).
 These transformations preserve the dimensional conceptualization of the interval responses in terms of a location and a width.
-See also <code><a href="inv_log_ratio_transformations.html">inv_ilr()</a></code>, <code><a href="inv_log_ratio_transformations.html">inv_slr()</a></code> for the inverse transformations.
-<strong>ILR</strong></p>
+See also <code><a href="inv_log_ratio_transformations.html">inv_ilr()</a></code>, <code><a href="inv_log_ratio_transformations.html">inv_slr()</a></code> for the inverse transformations.</p>
+<p><strong>ILR</strong></p>
 <p>The ILR transformation equations are:
 $$x_{loc} = \sqrt{\frac{1}{2}} \log\left(\frac{x_1}{x_3}\right)$$
 $$x_{wid} = \sqrt{\frac{2}{3}} \log\left(\frac{x_2}{\sqrt{x_1 x_3}}\right)$$</p>
@@ -104,12 +107,14 @@ and \((x_{loc}, x_{wid})\) are the transformed values representing the unbounded
 
 
 <dl><dt id="arg-simplex">simplex<a class="anchor" aria-label="anchor" href="#arg-simplex"></a></dt>
-<dd><p>A numeric vector that is a 2-simplex (3 elements that sum to 1) or a dataframe where each of the rows is a 2-simplex</p></dd>
+<dd><p>A numeric vector that is a 2-simplex (3 elements that sum to 1)
+or a dataframe where each of the rows is a 2-simplex</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A numeric vector with 2 unbounded elements or a dataframe where each of the rows is a numeric vector with 2 unbounded elements</p>
+    <p>A numeric vector with 2 elements, the unbounded interval location and
+width, or a dataframe where each of the rows is a numeric vector with these 2 elements</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
