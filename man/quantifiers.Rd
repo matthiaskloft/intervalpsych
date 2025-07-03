@@ -6,11 +6,12 @@
 \title{Verbal Quantifier Data}
 \format{
 A data frame with 3,344 rows and 10 columns:
+
 \describe{
 \item{id_person}{Unique identifier for each person}
 \item{id_item}{Unique identifier for each item}
 \item{name_ger}{German name of the quantifier}
-\item{name_eng}{English name of the quantifier}
+\item{name_en}{English name of the quantifier}
 \item{truth}{True value of the quantifier if applicable}
 \item{scale_min}{Minimum value of the response scale}
 \item{scale_max}{Maximum value of the response scale}
