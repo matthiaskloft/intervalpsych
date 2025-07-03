@@ -41,8 +41,10 @@ where \eqn{(x_{loc}, x_{wid})} are the unbounded interval location and width
 and \eqn{(x_1, x_2, x_3)} is the resulting interval response in the simplex format.
 }
 \examples{
-# Inverse ILR transformation
+# Generate some unbounded data
 bvn <- data.frame(rbind(c(0, .2), c(-2, .4)))
+
+# Inverse ILR transformation
 inv_ilr(bvn)
 
 # Inverse SLR transformation

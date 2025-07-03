@@ -1,43 +1,36 @@
 #!/usr/bin/env Rscript
 library(rmarkdown)
 
-rmf = function(f)
+rmf <- function(f)
 {
   if (file.exists(f))
     file.remove(f)
 }
 
-clean = function()
+clean <- function()
 {
-  files = dir(pattern="*.Rmd", recursive=FALSE)
+  files = dir(pattern = "*.Rmd", recursive = FALSE)
   for (f in files)
     rmf(f)
 }
 
-set_path = function()
-{
-  while (!file.exists("DESCRIPTION"))
-  {
-    setwd("..")
-    if (getwd() == "/home")
-      stop("couldn't find package!")
-  }
 
-  setwd("vignettes")
-}
-
-build_vignette = function(f)
+build_vignette <- function(f)
 {
-  f_Rmd = basename(f)
-  of = sub(f_Rmd, pattern="^_", replacement="")
+  f_Rmd <- basename(f)
+  of <- sub(f_Rmd, pattern = "^_", replacement = "")
   rmf(of)
 
-  fmt = rmarkdown::md_document(
-    variant="gfm",
-    preserve_yaml=TRUE,
-    ext=".Rmd"
+  fmt <- rmarkdown::md_document(variant = "gfm",
+                                preserve_yaml = TRUE,
+                                ext = ".Rmd")
+
+  rmarkdown::render(
+    f,
+    output_file = of,
+    output_dir = getwd(),
+    output_format = fmt
   )
-  rmarkdown::render(f, output_file=of, output_dir=getwd(), output_format=fmt)
 
   invisible(TRUE)
 }
@@ -45,10 +38,7 @@ build_vignette = function(f)
 
 
 # ------------------------------------------------------------------------------
-set_path()
 
 clean()
 
 build_vignette("./src/_01-Interval-Consensus-Model.Rmd")
-
-

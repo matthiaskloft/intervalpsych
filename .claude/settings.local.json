@@ -9,7 +9,8 @@
       "Bash(R CMD INSTALL:*)",
       "Bash(make:*)",
       "Bash(mkdir:*)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "Bash(R CMD check:*)"
     ],
     "deny": []
   }

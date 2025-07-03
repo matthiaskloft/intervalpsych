@@ -27,9 +27,11 @@
 #' where \eqn{(x_1, x_2, x_3)} is the interval response in the simplex format
 #' and \eqn{(x_{loc}, x_{wid})} are the transformed values representing the unbounded location and width.
 #'
-#' @param simplex A numeric vector that is a 2-simplex (3 elements that sum to 1) or a dataframe where each of the rows is a 2-simplex
+#' @param simplex A numeric vector that is a 2-simplex (3 elements that sum to 1)
+#' or a dataframe where each of the rows is a 2-simplex
 #'
-#' @return A numeric vector with 2 unbounded elements or a dataframe where each of the rows is a numeric vector with 2 unbounded elements
+#' @return A numeric vector with 2 elements, the unbounded interval location and
+#' width, or a dataframe where each of the rows is a numeric vector with these 2 elements
 #'
 #' @seealso [inv_ilr()], [inv_slr()]
 #'
@@ -63,8 +65,8 @@ ilr <- function(simplex) {
 
     # calculate ILR
     Y <- rep(NA, 2)
-    Y[1] = sqrt(1 / 2) * log(simplex[1] / simplex[3])
-    Y[2] = sqrt(2 / 3) * log(simplex[2] / sqrt(simplex[1] * simplex[3]))
+    Y[1] <- sqrt(1 / 2) * log(simplex[1] / simplex[3])
+    Y[2] <- sqrt(2 / 3) * log(simplex[2] / sqrt(simplex[1] * simplex[3]))
 
     names(Y) <- c("x_loc", "x_wid")
 
@@ -95,8 +97,8 @@ ilr <- function(simplex) {
       MARGIN = 1,
       FUN = function(X) {
         Y <- rep(NA, 2)
-        Y[1] = sqrt(1 / 2) * log(X[1] / X[3])
-        Y[2] = sqrt(2 / 3) * log(X[2] / sqrt(X[1] * X[3]))
+        Y[1] <- sqrt(1 / 2) * log(X[1] / X[3])
+        Y[2] <- sqrt(2 / 3) * log(X[2] / sqrt(X[1] * X[3]))
 
         return(Y)
       },
@@ -253,8 +255,8 @@ slr <- function(simplex) {
 
     # calculate SLR
     Y <- rep(NA, 2)
-    Y[1] = log(simplex[1] / simplex[3])
-    Y[2] = log(simplex[2] / (simplex[1] + simplex[3]))
+    Y[1] <- log(simplex[1] / simplex[3])
+    Y[2] <- log(simplex[2] / (simplex[1] + simplex[3]))
 
     names(Y) <- c("x_loc", "x_wid")
 
@@ -285,8 +287,8 @@ slr <- function(simplex) {
       MARGIN = 1,
       FUN = function(X) {
         Y <- rep(NA, 2)
-        Y[1] = log(X[1] / X[3])
-        Y[2] = log(X[2] / (X[1] + X[3]))
+        Y[1] <- log(X[1] / X[3])
+        Y[2] <- log(X[2] / (X[1] + X[3]))
 
         return(Y)
       },

@@ -11,16 +11,20 @@ ilr(simplex)
 slr(simplex)
 }
 \arguments{
-\item{simplex}{A numeric vector that is a 2-simplex (3 elements that sum to 1) or a dataframe where each of the rows is a 2-simplex}
+\item{simplex}{A numeric vector that is a 2-simplex (3 elements that sum to 1)
+or a dataframe where each of the rows is a 2-simplex}
 }
 \value{
-A numeric vector with 2 unbounded elements or a dataframe where each of the rows is a numeric vector with 2 unbounded elements
+A numeric vector with 2 elements, the unbounded interval location and
+width, or a dataframe where each of the rows is a numeric vector with these 2 elements
 }
 \description{
-Transform interval responses from the simplex space to the unbounded space using either Isometric Log-Ratio (ILR)
-or Sum Log-Ratio (SLR) transformations described in Smithson & Broomell (2024).
+Transform interval responses from the simplex space to the unbounded space using
+either the Isometric Log-Ratio (ILR) or the Sum Log-Ratio (SLR) transformation
+described in Smithson & Broomell (2024).
 These transformations preserve the dimensional conceptualization of the interval responses in terms of a location and a width.
 See also \code{\link[=inv_ilr]{inv_ilr()}}, \code{\link[=inv_slr]{inv_slr()}} for the inverse transformations.
+
 \strong{ILR}
 
 The ILR transformation equations are:

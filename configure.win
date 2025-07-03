@@ -6,4 +6,4 @@
 
 
 # Add configuration needed for big object files (remove this for CRAN submission)
-echo "PKG_CXXFLAGS += -Wa,-mbig-obj" >> ./src/Makevars.win
+#echo "PKG_CXXFLAGS += -Wa,-mbig-obj" >> ./src/Makevars.win
