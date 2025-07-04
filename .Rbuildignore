@@ -16,3 +16,4 @@
 ^package_inconsistencies\.txt$
 intervalpsych-manual.tex
 ^Makefile$
+^CRAN-SUBMISSION$
