@@ -50,3 +50,33 @@ test_that("remove_zeros throws an error for input rows not summing to one", {
     simplex <- matrix(c(0.2, 0.3, 0.4, 0, 0.5, 0.5), nrow = 2, byrow = TRUE)
     expect_error(remove_zeros(simplex), "Error: simplex must sum to 1!")
 })
+
+
+### Output format preservation tests ###########################################
+
+test_that("remove_zeros returns vector when given vector input", {
+  simplex <- c(0.2, 0.3, 0.5)
+  result <- remove_zeros(simplex, method = method)
+  expect_true(is.vector(result))
+  expect_false(is.matrix(result))
+  expect_false(is.data.frame(result))
+  expect_equal(length(result), 3)
+})
+
+test_that("remove_zeros returns matrix when given matrix input", {
+  simplex <- matrix(c(0.2, 0.3, 0.5, 0, 0.5, 0.5), nrow = 2, byrow = TRUE)
+  result <- remove_zeros(simplex, method = method)
+  expect_true(is.matrix(result))
+  expect_false(is.data.frame(result))
+  expect_equal(nrow(result), 2)
+  expect_equal(ncol(result), 3)
+})
+
+test_that("remove_zeros returns data frame when given data frame input", {
+  simplex <- data.frame(a = c(0.2, 0), b = c(0.3, 0.5), c = c(0.5, 0.5))
+  result <- remove_zeros(simplex, method = method)
+  expect_true(is.data.frame(result))
+  expect_false(is.matrix(result))
+  expect_equal(nrow(result), 2)
+  expect_equal(ncol(result), 3)
+})

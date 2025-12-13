@@ -17,8 +17,11 @@ Currently, only "rescaling" is supported. Default is "rescaling".}
 using the "rescaling" method. Default is 0.01.}
 }
 \value{
-A numeric matrix with the same dimensions as the input \code{simplex},
-with zeros removed according to the specified method.
+A numeric vector, matrix, or data frame with the same dimensions and
+format as the input \code{simplex}, with zeros removed according to the specified
+method. The output format mirrors the input format: vector input returns a
+vector, matrix input returns a matrix, and data frame input returns a data
+frame.
 }
 \description{
 Remove zero-components from interval data in the simplex format.

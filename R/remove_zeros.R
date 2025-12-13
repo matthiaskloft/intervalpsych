@@ -12,8 +12,11 @@
 #' using the "rescaling" method. Default is 0.01.
 #'
 #'
-#' @return A numeric matrix with the same dimensions as the input `simplex`,
-#' with zeros removed according to the specified method.
+#' @return A numeric vector, matrix, or data frame with the same dimensions and
+#' format as the input `simplex`, with zeros removed according to the specified
+#' method. The output format mirrors the input format: vector input returns a
+#' vector, matrix input returns a matrix, and data frame input returns a data
+#' frame.
 #'
 #'
 #' @details
@@ -42,13 +45,19 @@ remove_zeros <- function(simplex,
   }
 
 
+  ### Track input format -------------------------------------------------------
+
+  input_is_vector <- is.vector(simplex) && !is.list(simplex)
+  input_is_dataframe <- is.data.frame(simplex)
+
+
   ### Coerce to Matrix ---------------------------------------------------------
 
-  if (is.vector(simplex)) {
+  if (input_is_vector) {
     simplex <- t(as.matrix(simplex))
   }
 
-  if (is.data.frame(simplex)) {
+  if (input_is_dataframe) {
     simplex <- as.matrix(simplex)
   }
 
@@ -81,6 +90,15 @@ remove_zeros <- function(simplex,
     simplex <- (simplex + padding)
     simplex <- simplex / rowSums(simplex)
 
-    return(simplex)
+    ### Convert back to original format ----------------------------------------
+    if (input_is_vector) {
+      result <- as.vector(simplex[1, ])
+      names(result) <- colnames(simplex)
+      return(result)
+    } else if (input_is_dataframe) {
+      return(as.data.frame(simplex))
+    } else {
+      return(simplex)
+    }
   }
 }
