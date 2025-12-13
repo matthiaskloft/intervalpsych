@@ -77,7 +77,10 @@ ilr <- function(simplex) {
 
 
   } else{
-    ### dataframe
+    ### dataframe or matrix
+    
+    # preserve input type
+    input_is_matrix <- is.matrix(simplex)
 
     # coerce to matrix
     simplex <- as.matrix(simplex)
@@ -108,8 +111,14 @@ ilr <- function(simplex) {
       simplify = FALSE
     )
     Y <- do.call(what = "rbind", args = Y)
-
-    return(data.frame(x_loc = Y[, 1], x_wid = Y[, 2]))
+    
+    # return in the same format as input
+    if (input_is_matrix) {
+      colnames(Y) <- c("x_loc", "x_wid")
+      return(Y)
+    } else {
+      return(data.frame(x_loc = Y[, 1], x_wid = Y[, 2]))
+    }
   }
 }
 
@@ -189,7 +198,10 @@ inv_ilr <- function(bvn) {
     return(Y)
 
   } else {
-    ### dataframe
+    ### dataframe or matrix
+    
+    # preserve input type
+    input_is_matrix <- is.matrix(bvn)
 
     # coerce to matrix
     bvn <- as.matrix(bvn)
@@ -218,11 +230,17 @@ inv_ilr <- function(bvn) {
     )
     Y <- do.call(what = "rbind", args = Y)
 
-    return(data.frame(
-      x_1 = Y[, 1],
-      x_2 = Y[, 2],
-      x_3 = Y[, 3]
-    ))
+    # return in the same format as input
+    if (input_is_matrix) {
+      colnames(Y) <- c("x_1", "x_2", "x_3")
+      return(Y)
+    } else {
+      return(data.frame(
+        x_1 = Y[, 1],
+        x_2 = Y[, 2],
+        x_3 = Y[, 3]
+      ))
+    }
   }
 }
 
@@ -266,7 +284,10 @@ slr <- function(simplex) {
 
 
   } else{
-    ### dataframe
+    ### dataframe or matrix
+    
+    # preserve input type
+    input_is_matrix <- is.matrix(simplex)
 
     # coerce to matrix
     simplex <- as.matrix(simplex)
@@ -298,7 +319,13 @@ slr <- function(simplex) {
     )
     Y <- do.call(what = "rbind", args = Y)
 
-    return(data.frame(x_loc = Y[, 1], x_wid = Y[, 2]))
+    # return in the same format as input
+    if (input_is_matrix) {
+      colnames(Y) <- c("x_loc", "x_wid")
+      return(Y)
+    } else {
+      return(data.frame(x_loc = Y[, 1], x_wid = Y[, 2]))
+    }
   }
 }
 
@@ -333,7 +360,10 @@ inv_slr <- function(bvn) {
     return(Y)
 
   } else {
-    ### dataframe
+    ### dataframe or matrix
+    
+    # preserve input type
+    input_is_matrix <- is.matrix(bvn)
 
     # coerce to matrix
     bvn <- as.matrix(bvn)
@@ -361,11 +391,17 @@ inv_slr <- function(bvn) {
     )
     Y <- do.call(what = "rbind", args = Y)
 
-    return(data.frame(
-      x_1 = Y[, 1],
-      x_2 = Y[, 2],
-      x_3 = Y[, 3]
-    ))
+    # return in the same format as input
+    if (input_is_matrix) {
+      colnames(Y) <- c("x_1", "x_2", "x_3")
+      return(Y)
+    } else {
+      return(data.frame(
+        x_1 = Y[, 1],
+        x_2 = Y[, 2],
+        x_3 = Y[, 3]
+      ))
+    }
   }
 }
 
@@ -431,6 +467,10 @@ itvl_to_splx <- function(interval_bounds,
 
   } else{
     ### dataframe / matrix
+    
+    # preserve input type
+    input_is_matrix <- is.matrix(interval_bounds)
+    
     # coerce to matrix
     interval_bounds <- as.matrix(interval_bounds)
     if (length(min) == 1)
@@ -445,14 +485,19 @@ itvl_to_splx <- function(interval_bounds,
 
     # compute simplex
     if (ncol(interval_bounds) == 2) {
-      comp <- data.frame(
+      comp <- cbind(
         x_1 = (interval_bounds[, 1] - min) / max,
         x_2 = (interval_bounds[, 2] - interval_bounds[, 1]) / max,
         x_3 = (max - interval_bounds[, 2]) / max
       )
     }
 
-    return(comp)
+    # return in the same format as input
+    if (input_is_matrix) {
+      return(comp)
+    } else {
+      return(data.frame(comp))
+    }
   }
 }
 
@@ -511,6 +556,9 @@ splx_to_itvl <- function(simplex, min = NULL, max = NULL) {
 
   } else{
     ### dataframe / matrix
+    
+    # preserve input type
+    input_is_matrix <- is.matrix(simplex)
 
     # coerce to matrix
     simplex <- as.matrix(simplex)
@@ -529,10 +577,15 @@ splx_to_itvl <- function(simplex, min = NULL, max = NULL) {
 
     # compute simplex
     if (ncol(simplex) == 3) {
-      interval <- data.frame(x_lo = simplex[, 1] + min, x_up = max - simplex[, 3])
+      interval <- cbind(x_lo = simplex[, 1] + min, x_up = max - simplex[, 3])
     }
 
-    return(interval)
+    # return in the same format as input
+    if (input_is_matrix) {
+      return(interval)
+    } else {
+      return(data.frame(interval))
+    }
   }
 }
 

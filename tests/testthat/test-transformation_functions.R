@@ -155,9 +155,10 @@ test_that("slr transformation works for dataframe input", {
 test_that("slr transformation works for matrix input", {
   simplex <- matrix(c(0.1, 0.2, 0.7, 0.4, 0.5, 0.1), nrow = 2, byrow = TRUE)
   result <- slr(simplex)
+  expect_true(is.matrix(result))
   expect_equal(ncol(result), 2)
   expect_equal(nrow(result), 2)
-  expect_named(result, c("x_loc", "x_wid"))
+  expect_equal(colnames(result), c("x_loc", "x_wid"))
 })
 
 # Test for invalid input - wrong number of elements
@@ -227,9 +228,10 @@ test_that("inv_slr transformation works for dataframe input", {
 test_that("inv_slr transformation works for matrix input", {
   bvn <- matrix(c(0, 0.2, -2, 0.4), nrow = 2, byrow = TRUE)
   result <- inv_slr(bvn)
+  expect_true(is.matrix(result))
   expect_equal(ncol(result), 3)
   expect_equal(nrow(result), 2)
-  expect_named(result, c("x_1", "x_2", "x_3"))
+  expect_equal(colnames(result), c("x_1", "x_2", "x_3"))
   # Each row should sum to 1
   expect_equal(rowSums(result), c(1, 1), tolerance = 1e-10)
 })
@@ -334,4 +336,127 @@ test_that("inv_slr always produces valid simplices", {
     expect_true(all(result <= 1), info = paste("Values > 1 for bvn:", paste(bvn, collapse = ", ")))
     expect_equal(sum(result), 1, tolerance = 1e-10, info = paste("Sum != 1 for bvn:", paste(bvn, collapse = ", ")))
   }
+})
+
+
+### Matrix Input/Output Consistency Tests ######################################
+
+# Test that ilr preserves matrix input type
+test_that("ilr returns matrix when input is matrix", {
+  simplex_matrix <- matrix(c(0.1, 0.2, 0.7, 0.4, 0.5, 0.1), nrow = 2, byrow = TRUE)
+  result <- ilr(simplex_matrix)
+  expect_true(is.matrix(result))
+  expect_equal(ncol(result), 2)
+  expect_equal(nrow(result), 2)
+  expect_equal(colnames(result), c("x_loc", "x_wid"))
+})
+
+# Test that ilr preserves dataframe input type
+test_that("ilr returns dataframe when input is dataframe", {
+  simplex_df <- data.frame(rbind(c(0.1, 0.2, 0.7), c(0.4, 0.5, 0.1)))
+  result <- ilr(simplex_df)
+  expect_true(is.data.frame(result))
+  expect_equal(ncol(result), 2)
+  expect_equal(nrow(result), 2)
+  expect_named(result, c("x_loc", "x_wid"))
+})
+
+# Test that inv_ilr preserves matrix input type
+test_that("inv_ilr returns matrix when input is matrix", {
+  bvn_matrix <- matrix(c(0, 0.2, -2, 0.4), nrow = 2, byrow = TRUE)
+  result <- inv_ilr(bvn_matrix)
+  expect_true(is.matrix(result))
+  expect_equal(ncol(result), 3)
+  expect_equal(nrow(result), 2)
+  expect_equal(colnames(result), c("x_1", "x_2", "x_3"))
+})
+
+# Test that inv_ilr preserves dataframe input type
+test_that("inv_ilr returns dataframe when input is dataframe", {
+  bvn_df <- data.frame(rbind(c(0, 0.2), c(-2, 0.4)))
+  result <- inv_ilr(bvn_df)
+  expect_true(is.data.frame(result))
+  expect_equal(ncol(result), 3)
+  expect_equal(nrow(result), 2)
+  expect_named(result, c("x_1", "x_2", "x_3"))
+})
+
+# Test that slr preserves matrix input type
+test_that("slr returns matrix when input is matrix", {
+  simplex_matrix <- matrix(c(0.1, 0.2, 0.7, 0.4, 0.5, 0.1), nrow = 2, byrow = TRUE)
+  result <- slr(simplex_matrix)
+  expect_true(is.matrix(result))
+  expect_equal(ncol(result), 2)
+  expect_equal(nrow(result), 2)
+  expect_equal(colnames(result), c("x_loc", "x_wid"))
+})
+
+# Test that slr preserves dataframe input type
+test_that("slr returns dataframe when input is dataframe", {
+  simplex_df <- data.frame(rbind(c(0.1, 0.2, 0.7), c(0.4, 0.5, 0.1)))
+  result <- slr(simplex_df)
+  expect_true(is.data.frame(result))
+  expect_equal(ncol(result), 2)
+  expect_equal(nrow(result), 2)
+  expect_named(result, c("x_loc", "x_wid"))
+})
+
+# Test that inv_slr preserves matrix input type
+test_that("inv_slr returns matrix when input is matrix", {
+  bvn_matrix <- matrix(c(0, 0.2, -2, 0.4), nrow = 2, byrow = TRUE)
+  result <- inv_slr(bvn_matrix)
+  expect_true(is.matrix(result))
+  expect_equal(ncol(result), 3)
+  expect_equal(nrow(result), 2)
+  expect_equal(colnames(result), c("x_1", "x_2", "x_3"))
+})
+
+# Test that inv_slr preserves dataframe input type
+test_that("inv_slr returns dataframe when input is dataframe", {
+  bvn_df <- data.frame(rbind(c(0, 0.2), c(-2, 0.4)))
+  result <- inv_slr(bvn_df)
+  expect_true(is.data.frame(result))
+  expect_equal(ncol(result), 3)
+  expect_equal(nrow(result), 2)
+  expect_named(result, c("x_1", "x_2", "x_3"))
+})
+
+# Test that itvl_to_splx preserves matrix input type
+test_that("itvl_to_splx returns matrix when input is matrix", {
+  interval_matrix <- matrix(c(0.1, 0.5, 0.2, 0.6), nrow = 2, byrow = TRUE)
+  result <- itvl_to_splx(interval_matrix, min = 0, max = 1)
+  expect_true(is.matrix(result))
+  expect_equal(ncol(result), 3)
+  expect_equal(nrow(result), 2)
+  expect_equal(colnames(result), c("x_1", "x_2", "x_3"))
+})
+
+# Test that itvl_to_splx preserves dataframe input type
+test_that("itvl_to_splx returns dataframe when input is dataframe", {
+  interval_df <- data.frame(rbind(c(0.1, 0.5), c(0.2, 0.6)))
+  result <- itvl_to_splx(interval_df, min = 0, max = 1)
+  expect_true(is.data.frame(result))
+  expect_equal(ncol(result), 3)
+  expect_equal(nrow(result), 2)
+  expect_named(result, c("x_1", "x_2", "x_3"))
+})
+
+# Test that splx_to_itvl preserves matrix input type
+test_that("splx_to_itvl returns matrix when input is matrix", {
+  simplex_matrix <- matrix(c(0.1, 0.5, 0.4, 0.2, 0.3, 0.5), nrow = 2, byrow = TRUE)
+  result <- splx_to_itvl(simplex_matrix, min = 0, max = 1)
+  expect_true(is.matrix(result))
+  expect_equal(ncol(result), 2)
+  expect_equal(nrow(result), 2)
+  expect_equal(colnames(result), c("x_lo", "x_up"))
+})
+
+# Test that splx_to_itvl preserves dataframe input type
+test_that("splx_to_itvl returns dataframe when input is dataframe", {
+  simplex_df <- data.frame(rbind(c(0.1, 0.5, 0.4), c(0.2, 0.3, 0.5)))
+  result <- splx_to_itvl(simplex_df, min = 0, max = 1)
+  expect_true(is.data.frame(result))
+  expect_equal(ncol(result), 2)
+  expect_equal(nrow(result), 2)
+  expect_named(result, c("x_lo", "x_up"))
 })
