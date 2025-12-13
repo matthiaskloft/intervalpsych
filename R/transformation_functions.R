@@ -491,10 +491,11 @@ itvl_to_splx <- function(interval_bounds,
     # compute simplex
     if (ncol(interval_bounds) == 2) {
       comp <- cbind(
-        x_1 = (interval_bounds[, 1] - min) / max,
-        x_2 = (interval_bounds[, 2] - interval_bounds[, 1]) / max,
-        x_3 = (max - interval_bounds[, 2]) / max
+        (interval_bounds[, 1] - min) / max,
+        (interval_bounds[, 2] - interval_bounds[, 1]) / max,
+        (max - interval_bounds[, 2]) / max
       )
+      colnames(comp) <- c("x_1", "x_2", "x_3")
     }
 
     # return in the same format as input
@@ -584,7 +585,8 @@ splx_to_itvl <- function(simplex, min = NULL, max = NULL) {
 
     # compute simplex
     if (ncol(simplex) == 3) {
-      interval <- cbind(x_lo = simplex[, 1] + min, x_up = max - simplex[, 3])
+      interval <- cbind(simplex[, 1] + min, max - simplex[, 3])
+      colnames(interval) <- c("x_lo", "x_up")
     }
 
     # return in the same format as input
