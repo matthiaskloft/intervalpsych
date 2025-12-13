@@ -178,3 +178,10 @@ When modifying Stan models:
 - **Website and Article Build Workflow**:
   - To build the articles and the pkgdown website, I used this workflow: https://fml-fam.github.io/blog/2020/06/23/vignette-less-articles-with-pkgdown/
   - run the Makefile in "docs" directory to build the articles and the pkgdown website
+
+
+# Open Issues
+
+- make output format of transformation functions mirror the expected input of potential downstream functions
+
+
