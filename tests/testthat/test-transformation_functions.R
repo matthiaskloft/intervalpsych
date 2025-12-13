@@ -460,3 +460,31 @@ test_that("splx_to_itvl returns dataframe when input is dataframe", {
   expect_equal(nrow(result), 2)
   expect_named(result, c("x_lo", "x_up"))
 })
+
+# Test roundtrip transformations preserve matrix type
+test_that("ilr and inv_ilr roundtrip preserves matrix type", {
+  simplex_matrix <- matrix(c(0.1, 0.2, 0.7, 0.4, 0.5, 0.1), nrow = 2, byrow = TRUE)
+  ilr_result <- ilr(simplex_matrix)
+  expect_true(is.matrix(ilr_result))
+  roundtrip <- inv_ilr(ilr_result)
+  expect_true(is.matrix(roundtrip))
+  expect_equal(unname(roundtrip), unname(simplex_matrix), tolerance = 1e-10)
+})
+
+test_that("slr and inv_slr roundtrip preserves matrix type", {
+  simplex_matrix <- matrix(c(0.1, 0.2, 0.7, 0.4, 0.5, 0.1), nrow = 2, byrow = TRUE)
+  slr_result <- slr(simplex_matrix)
+  expect_true(is.matrix(slr_result))
+  roundtrip <- inv_slr(slr_result)
+  expect_true(is.matrix(roundtrip))
+  expect_equal(unname(roundtrip), unname(simplex_matrix), tolerance = 1e-10)
+})
+
+test_that("itvl_to_splx and splx_to_itvl roundtrip preserves matrix type", {
+  interval_matrix <- matrix(c(0.1, 0.5, 0.2, 0.6), nrow = 2, byrow = TRUE)
+  splx_result <- itvl_to_splx(interval_matrix, min = 0, max = 1)
+  expect_true(is.matrix(splx_result))
+  roundtrip <- splx_to_itvl(splx_result, min = 0, max = 1)
+  expect_true(is.matrix(roundtrip))
+  expect_equal(unname(roundtrip), unname(interval_matrix), tolerance = 1e-10)
+})

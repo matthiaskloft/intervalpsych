@@ -28,12 +28,14 @@
 #' and \eqn{(x_{loc}, x_{wid})} are the transformed values representing the
 #' unbounded location and width.
 #'
-#' @param simplex A numeric vector that is a 2-simplex (3 elements that sum to 1)
-#' or a dataframe where each of the rows is a 2-simplex.
+#' @param simplex A numeric vector that is a 2-simplex (3 elements that sum to 1),
+#' a dataframe where each of the rows is a 2-simplex, or a matrix where each row
+#' is a 2-simplex.
 #'
 #' @return A numeric vector with 2 elements, the unbounded interval location and
-#' width, or a dataframe where each of the rows is a numeric vector with these 2
-#' elements.
+#' width. If the input is a dataframe, returns a dataframe where each row contains
+#' these 2 elements. If the input is a matrix, returns a matrix where each row
+#' contains these 2 elements.
 #'
 #' @seealso [inv_ilr()], [inv_slr()]
 #'
@@ -156,11 +158,13 @@ ilr <- function(simplex) {
 #' where \eqn{(x_{loc}, x_{wid})} are the unbounded interval location and width
 #' and \eqn{(x_1, x_2, x_3)} is the resulting interval response in the simplex format.
 #'
-#' @param bvn A numeric vector containing an unbounded interval location and width or
-#' a dataframe where each of the rows consists of such a vector.
+#' @param bvn A numeric vector containing an unbounded interval location and width,
+#' a dataframe where each row consists of such a vector, or a matrix where each
+#' row consists of such a vector.
 #'
-#' @return A numeric vector containing a 2-simplex or a dataframe where each of
-#' the rows consists of such a vector.
+#' @return A numeric vector containing a 2-simplex. If the input is a dataframe,
+#' returns a dataframe where each row consists of such a vector. If the input is
+#' a matrix, returns a matrix where each row consists of such a vector.
 #'
 #' @seealso [ilr()], [slr()]
 #'
@@ -429,14 +433,15 @@ inv_slr <- function(bvn) {
 #' compostional/simplex format. See also [splx_to_itvl()] for the inverse
 #' transformation.
 #' @param interval_bounds A vector of length 2 representing the lower and upper
-#' bounds of an interval response or a data frame where each row contains such
-#' a vector.
+#' bounds of an interval response, a data frame where each row contains such
+#' a vector, or a matrix where each row contains such a vector.
 #'
 #' @param min Minimum of the original response scale.
 #' @param max Maximum of the original response scale.
 #'
-#' @return A numeric vector representing a 2-simplex if input is a vector, or a
-#' data frame where each row is a 2-simplex if input is a data frame.
+#' @return A numeric vector representing a 2-simplex if input is a vector. If
+#' input is a data frame, returns a data frame where each row is a 2-simplex.
+#' If input is a matrix, returns a matrix where each row is a 2-simplex.
 #'
 #' @seealso [splx_to_itvl()]
 #'
@@ -514,15 +519,17 @@ itvl_to_splx <- function(interval_bounds,
 #' @description Convert from simplex/compostional format to interval bounds
 #' format. See also [itvl_to_splx()] for the inverse transformation.
 #'
-#' @param simplex A numeric vector that is a 2-simplex (3 elements that sum to 1)
-#' or a data frame where each of the rows is a 2-simplex.
+#' @param simplex A numeric vector that is a 2-simplex (3 elements that sum to 1),
+#' a data frame where each row is a 2-simplex, or a matrix where each row is a
+#' 2-simplex.
 #'
 #' @param min Minimum of the original response scale.
 #' @param max Maximum of the original response scale.
 #'
 #' @return A numeric vector with 2 elements representing the lower and upper
-#' bounds of the interval response, or a data frame where each of the rows
-#' contains such a vector.
+#' bounds of the interval response. If input is a data frame, returns a data frame
+#' where each row contains such a vector. If input is a matrix, returns a matrix
+#' where each row contains such a vector.
 #'
 #' @seealso [itvl_to_splx()]
 #'
